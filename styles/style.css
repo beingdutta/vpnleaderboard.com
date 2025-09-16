@@ -129,6 +129,13 @@ html[data-theme="dark"] .hero {
   color: var(--chip-text);
 }
 
+.chip-promoted {
+  background: #facc15; /* Golden yellow */
+  color: #422006;
+  border-color: #facc15;
+  font-weight: 600;
+}
+
 .score-badge {
   background: var(--score-badge-bg);
   border: 1px solid var(--score-badge-border);

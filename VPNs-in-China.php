@@ -12,12 +12,23 @@ SELECT
 FROM vpns_china v
 LEFT JOIN votes_china vt ON vt.vpn_id = v.id
 GROUP BY v.id
-ORDER BY score DESC, v.speed_mbps DESC, v.name ASC
+ORDER BY score DESC, v.name ASC
 LIMIT 15;
 ";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $vpns = $stmt->fetchAll();
+
+// Assign true rank before re-sorting for display
+foreach ($vpns as $key => &$vpn) {
+    $vpn['true_rank'] = $key + 1;
+}
+unset($vpn);
+
+usort($vpns, function($a, $b) {
+    if ($a['is_promoted'] != $b['is_promoted']) return $b['is_promoted'] <=> $a['is_promoted'];
+    return $a['true_rank'] <=> $b['true_rank'];
+});
 
 $votedStmt = $pdo->prepare("SELECT vpn_id FROM votes_china WHERE user_id = ? OR ip_address = ?");
 $votedStmt->execute([$user_id, client_ip_bin()]);
@@ -97,41 +108,49 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
           <tr>
             <th>#</th>
             <th>VPN</th>
-            <th class="hide-sm">Speed</th>
+            <th class="hide-sm">Starting Price</th>
             <th>Suitable for</th>
             <th class="hide-sm">Countries</th>
-            <th class="hide-sm">Bandwidth</th>
             <th>Features</th>
+            <th></th>
             <th class="text-center">Votes</th>
             <th class="text-center">Score</th>
           </tr>
         </thead>
         <tbody>
           <?php
-          $rank = 1;
           foreach ($vpns as $v):
             $voted = in_array($v['id'], $votedIds, true);
             $features = array_slice(array_map('trim', explode(';', str_replace([',',';'], ';', (string)$v['features']))),0,3);
           ?>
-          <tr data-vpn-id="<?= (int)$v['id'] ?>" data-score="<?= (int)$v['score'] ?>">
-            <td class="text-secondary"><?= $rank++ ?></td>
+          <tr data-vpn-id="<?= (int)$v['id'] ?>" data-score="<?= (int)$v['score'] ?>" data-promoted="<?= (int)$v['is_promoted'] ?>">
+            <td class="text-secondary"><?= (int)$v['true_rank'] ?></td>
             <td>
               <div class="d-flex align-items-center gap-2">
-                <img src="<?= htmlspecialchars($v['logo_url'] ?: 'https://via.placeholder.com/28x28?text=VPN') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded">
+                <img data-vpn-name="<?= htmlspecialchars($v['name']) ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded vpn-logo" src="https://via.placeholder.com/28x28?text=...">
                 <div class="d-flex flex-column" style="min-width: 150px;">
-                  <a class="fw-semibold text-decoration-none" href="<?= htmlspecialchars($v['website_url'] ?: '#') ?>" target="_blank" rel="nofollow noopener"><?= htmlspecialchars($v['name']) ?></a>
+                  <div class="d-flex align-items-center">
+                    <span class="fw-semibold"><?= htmlspecialchars($v['name']) ?></span>
+                    <?php if (!empty($v['is_promoted'])): ?>
+                      <span class="chip chip-promoted ms-2">Promoted</span>
+                    <?php endif; ?>
+                  </div>
                   <small class="text-secondary">Trusted VPN provider</small>
                 </div>
               </div>
             </td>
-            <td class="hide-sm"><?= (int)$v['speed_mbps'] ?></td>
+            <td class="hide-sm">$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></td>
             <td><?= htmlspecialchars($v['suitable_for']) ?></td>
             <td class="hide-sm"><?= (int)$v['supported_countries'] ?></td>
-            <td class="hide-sm"><?= htmlspecialchars($v['bandwidth']) ?></td>
             <td>
               <?php foreach ($features as $f): ?>
                 <span class="chip me-1"><?= htmlspecialchars($f) ?></span>
               <?php endforeach; ?>
+            </td>
+            <td>
+              <?php if (!empty($v['affiliate_link'])): ?>
+                <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn btn-sm btn-success">Get Deal</a>
+              <?php endif; ?>
             </td>
             <td class="text-center">
               <div class="d-flex justify-content-center align-items-center gap-2 <?= $voted ? 'voted':'' ?>">

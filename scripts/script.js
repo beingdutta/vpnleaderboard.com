@@ -29,6 +29,37 @@
   applyTheme(savedTheme);
 })();
 
+// --- Dynamic Logo Path Generation ---
+document.addEventListener('DOMContentLoaded', () => {
+  const vpnLogos = document.querySelectorAll('.vpn-logo');
+  const placeholder = 'https://via.placeholder.com/28x28?text=...';
+
+  vpnLogos.forEach(img => {
+    const vpnName = img.dataset.vpnName;
+    if (!vpnName) {
+      img.src = placeholder;
+      return;
+    }
+
+    // 1. Lowercase, remove spaces and all non-alphanumeric characters
+    let processedName = vpnName.toLowerCase().replace(/[^a-z0-9]/gi, '');
+
+    // 2. If name doesn't end with 'vpn', append it (e.g., 'hideme' -> 'hidemevpn')
+    if (!processedName.endsWith('vpn')) {
+      processedName += 'vpn';
+    }
+
+    // 3. Construct the final path
+    img.src = `assets/${processedName}.png`;
+
+    // 4. Fallback to placeholder if the image fails to load
+    img.onerror = () => {
+      img.src = placeholder;
+      img.onerror = null; // Prevent infinite loops if placeholder also fails
+    };
+  });
+});
+
 
 // Vote handler (AJAX, no reload)
 document.querySelectorAll('.vote-btn').forEach(btn => {
@@ -93,14 +124,16 @@ function resortTable() {
   if (!tbody) return;
   const rows = Array.from(tbody.querySelectorAll('tr'));
   rows.sort((a,b) => {
+    const pa = parseInt(a.dataset.promoted,10)||0;
+    const pb = parseInt(b.dataset.promoted,10)||0;
+    if (pb !== pa) return pb - pa;
+
     const sa = parseInt(a.dataset.score,10)||0;
     const sb = parseInt(b.dataset.score,10)||0;
     if (sb !== sa) return sb - sa;
-    const speedA = parseInt(a.children[2]?.textContent || '0',10);
-    const speedB = parseInt(b.children[2]?.textContent || '0',10);
-    if (speedB !== speedA) return speedB - speedA;
-    const nameA = a.querySelector('td:nth-child(2) a').textContent.trim().toLowerCase();
-    const nameB = b.querySelector('td:nth-child(2) a').textContent.trim().toLowerCase();
+
+    const nameA = a.querySelector('td:nth-child(2) .fw-semibold').textContent.trim().toLowerCase();
+    const nameB = b.querySelector('td:nth-child(2) .fw-semibold').textContent.trim().toLowerCase();
     return nameA.localeCompare(nameB);
   });
   rows.forEach((r,i) => { r.querySelector('td:first-child').textContent = (i+1); tbody.appendChild(r); });
