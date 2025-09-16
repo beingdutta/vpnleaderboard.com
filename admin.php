@@ -122,8 +122,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'features' => $_POST['features'] ?? '', 'starting_price' => (float)($_POST['starting_price'] ?? 0),
                 'affiliate_link' => $_POST['affiliate_link'] ?? ''
             ];
-            $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, suitable_for, supported_countries, features, starting_price, affiliate_link) VALUES (:vpn_id, :is_promoted, :speed_mbps, :suitable_for, :supported_countries, :features, :starting_price, :affiliate_link)
-                    ON DUPLICATE KEY UPDATE is_promoted=:is_promoted, speed_mbps=:speed_mbps, suitable_for=:suitable_for, supported_countries=:supported_countries, features=:features, starting_price=:starting_price, affiliate_link=:affiliate_link";
+            $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, suitable_for, supported_countries, features, starting_price, affiliate_link) 
+                    VALUES (:vpn_id, :is_promoted, :speed_mbps, :suitable_for, :supported_countries, :features, :starting_price, :affiliate_link)
+                    ON DUPLICATE KEY UPDATE 
+                        is_promoted = VALUES(is_promoted), speed_mbps = VALUES(speed_mbps), suitable_for = VALUES(suitable_for), 
+                        supported_countries = VALUES(supported_countries), features = VALUES(features), starting_price = VALUES(starting_price), affiliate_link = VALUES(affiliate_link)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute($regional_params);
             }
@@ -204,7 +207,7 @@ if ($view === 'vpns') {
 
     <main class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3">Manage <?= $view === 'master' ? 'Master List' : ($view === 'vpns' ? 'Regional Data' : ucfirst($view)) ?> <?php if($region): ?>(Region: <?= strtoupper($region) ?>)<?php endif; ?></h1>
+            <h1 class="h3">Manage <?= $view === 'master' ? 'Master VPN List' : ($view === 'vpns' ? 'Regional Data' : ucfirst($view)) ?> <?php if($region): ?>(Region: <?= strtoupper($region) ?>)<?php endif; ?></h1>
             <?php if ($view === 'master'): ?>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vpnModal" onclick="prepareModal()">Add New Master VPN</button>
             <?php endif; ?>
@@ -214,7 +217,7 @@ if ($view === 'vpns') {
         <ul class="nav nav-pills mb-3">
             <?php foreach ($allowed_regions as $r): ?>
             <li class="nav-item">
-                <a class="nav-link <?= ($view !== 'master' && $region === $r) ? 'active' : '' ?>" href="?region=<?= $r ?>&view=vpns"><?= ucfirst($r) ?></a>
+                <a class="nav-link <?= ($view !== 'master' && $region === $r) ? 'active' : '' ?>" href="?view=vpns&region=<?= $r ?>"><?= ucfirst($r) ?></a>
             </li>
             <?php endforeach; ?>
             <li class="nav-item">
@@ -234,117 +237,118 @@ if ($view === 'vpns') {
         </ul>
 
         <?php if ($view === 'vpns'): ?>
-            <!-- VPN Table -->
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th>VPN</th>
-                            <th>Promoted</th>
-                            <th>Price</th>
-                            <th>Total Votes</th>
-                            <th class="text-end">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($vpns as $v): ?>
-                        <tr id="vpn-row-<?= (int)$v['id'] ?>" data-vpn='<?= htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8') ?>'>
-                            <td>
-                                <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded me-2">
-                                <?= htmlspecialchars($v['name']) ?>
-                            </td>
-                            <td><?= $v['is_promoted'] ? 'Yes' : 'No' ?></td>
-                            <td><?= $v['starting_price'] ? '$' . htmlspecialchars(number_format($v['starting_price'], 2)) : 'N/A' ?></td>
-                            <td><?= (int)$v['total_votes'] ?></td>
-                            <td class="text-end">
-                                <button class="btn btn-sm btn-secondary" onclick="prepareModal(<?= (int)$v['id'] ?>)">Edit</button>
-                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to reset votes for this VPN in this region?');">
-                                    <input type="hidden" name="action" value="reset_votes">
-                                    <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
-                                    <input type="hidden" name="region" value="<?= $region ?>">
-                                    <button type="submit" class="btn btn-sm btn-warning">Reset Votes</button>
-                                </form>
-                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to remove this VPN from the <?= strtoupper($region) ?> region?');">
-                                    <input type="hidden" name="action" value="remove_from_region">
-                                    <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
-                                    <input type="hidden" name="region" value="<?= $region ?>">
-                                    <button type="submit" class="btn btn-sm btn-danger">Remove from Region</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php elseif ($view === 'master'): ?>
-            <!-- Master VPN Table -->
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>VPN Name</th>
-                            <th>Website</th>
-                            <th class="text-end">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($master_vpns as $v): ?>
-                        <tr id="vpn-row-<?= (int)$v['id'] ?>" data-vpn='<?= htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8') ?>'>
-                            <td><?= (int)$v['id'] ?></td>
-                            <td>
-                                <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded me-2">
-                                <?= htmlspecialchars($v['name']) ?>
-                            </td>
-                            <td><a href="<?= htmlspecialchars($v['website_url']) ?>" target="_blank"><?= htmlspecialchars($v['website_url']) ?></a></td>
-                            <td class="text-end">
-                                <button class="btn btn-sm btn-secondary" onclick="prepareModal(<?= (int)$v['id'] ?>, 'master')">Edit</button>
-                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('DANGER: This will delete the VPN from ALL regions and remove all associated votes. This cannot be undone. Are you sure?');">
-                                    <input type="hidden" name="action" value="delete_vpn">
-                                    <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
-                                    <input type="hidden" name="region" value="<?= $region ?>">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+        <!-- VPN Table -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>VPN</th>
+                        <th>Promoted</th>
+                        <th>Price</th>
+                        <th>Total Votes</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($vpns as $v): ?>
+                    <tr id="vpn-row-<?= (int)$v['id'] ?>" data-vpn='<?= htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8') ?>'>
+                        <td>
+                            <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded me-2">
+                            <?= htmlspecialchars($v['name']) ?>
+                        </td>
+                        <td><?= $v['is_promoted'] ? 'Yes' : 'No' ?></td>
+                        <td><?= $v['starting_price'] ? '$' . htmlspecialchars(number_format($v['starting_price'], 2)) : 'N/A' ?></td>
+                        <td><?= (int)$v['total_votes'] ?></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-secondary" onclick="prepareModal(<?= (int)$v['id'] ?>)">Edit</button>
+                            <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to reset votes for this VPN in this region?');">
+                                <input type="hidden" name="action" value="reset_votes">
+                                <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
+                                <input type="hidden" name="region" value="<?= $region ?>">
+                                <button type="submit" class="btn btn-sm btn-warning">Reset Votes</button>
+                            </form>
+                            <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to remove this VPN from the <?= strtoupper($region) ?> region?');">
+                                <input type="hidden" name="action" value="remove_from_region">
+                                <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
+                                <input type="hidden" name="region" value="<?= $region ?>">
+                                <button type="submit" class="btn btn-sm btn-danger">Remove from Region</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
         <?php else: ?>
-            <!-- Votes Table -->
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th>Vote ID</th>
-                            <th>VPN Name</th>
-                            <th>Vote</th>
-                            <th>User ID</th>
-                            <th class="text-end">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($votes as $vote): ?>
-                        <tr>
-                            <td><?= (int)$vote['id'] ?></td>
-                            <td><?= htmlspecialchars($vote['vpn_name'] ?? 'N/A') ?></td>
-                            <td><?= htmlspecialchars(strtoupper($vote['vote'])) ?></td>
-                            <td><small><?= htmlspecialchars($vote['user_id']) ?></small></td>
-                            <td class="text-end">
-                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this vote?');">
-                                    <input type="hidden" name="action" value="delete_vote">
-                                    <input type="hidden" name="id" value="<?= (int)$vote['id'] ?>">
-                                    <input type="hidden" name="region" value="<?= $region ?>">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+        <!-- Votes Table -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Vote ID</th>
+                        <th>VPN Name</th>
+                        <th>Vote</th>
+                        <th>User ID</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($votes as $vote): ?>
+                    <tr>
+                        <td><?= (int)$vote['id'] ?></td>
+                        <td><?= htmlspecialchars($vote['vpn_name'] ?? 'N/A') ?></td>
+                        <td><?= htmlspecialchars(strtoupper($vote['vote'])) ?></td>
+                        <td><small><?= htmlspecialchars($vote['user_id']) ?></small></td>
+                        <td class="text-end">
+                            <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this vote?');">
+                                <input type="hidden" name="action" value="delete_vote">
+                                <input type="hidden" name="id" value="<?= (int)$vote['id'] ?>">
+                                <input type="hidden" name="region" value="<?= $region ?>">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
         <?php endif; ?>
+    <?php else: // This handles the 'master' view ?>
+        <!-- Master VPN Table -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>VPN Name</th>
+                        <th>Website</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($master_vpns as $v): ?>
+                    <tr id="vpn-row-<?= (int)$v['id'] ?>" data-vpn='<?= htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8') ?>'>
+                        <td><?= (int)$v['id'] ?></td>
+                        <td>
+                            <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded me-2">
+                            <?= htmlspecialchars($v['name']) ?>
+                        </td>
+                        <td><a href="<?= htmlspecialchars($v['website_url']) ?>" target="_blank"><?= htmlspecialchars($v['website_url']) ?></a></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-secondary" onclick="prepareModal(<?= (int)$v['id'] ?>, 'master')">Edit</button>
+                            <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('DANGER: This will delete the VPN from ALL regions and remove all associated votes. This cannot be undone. Are you sure?');">
+                                <input type="hidden" name="action" value="delete_vpn">
+                                <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
+                                <input type="hidden" name="region" value="<?= $region ?>">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
 
     </main>
 
