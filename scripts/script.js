@@ -3,10 +3,14 @@
   const themeToggle = document.getElementById('theme-toggle');
   const htmlEl = document.documentElement;
 
+  const moonIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+  const sunIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+
   function applyTheme(theme) {
     htmlEl.setAttribute('data-theme', theme);
     if (themeToggle) {
-      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      // Use SVG icons for a cleaner, material look
+      themeToggle.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
     }
     localStorage.setItem('vpnlb_theme', theme);
   }
@@ -48,6 +52,12 @@ document.querySelectorAll('.vote-btn').forEach(btn => {
       });
       const json = await res.json();
       if (!json || json.ok === undefined) throw new Error('Invalid server response');
+
+      // Add a class to animate the row, then remove it when done.
+      row.classList.add('row-pop');
+      row.addEventListener('animationend', () => {
+        row.classList.remove('row-pop');
+      }, { once: true });
 
       const upEl = row.querySelector('.upcount');
       const downEl = row.querySelector('.downcount');
