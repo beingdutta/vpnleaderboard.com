@@ -146,6 +146,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             // This only removes the regional data, not the master VPN
             $stmt = $pdo->prepare("DELETE FROM `$action_vpns_table` WHERE vpn_id = ?");
             $stmt->execute([$id]);
+        } elseif ($_POST['action'] === 'add_vpn_to_region') {
+            $vpn_id = (int)($_POST['vpn_id'] ?? 0);
+            if ($vpn_id > 0) {
+                $regional_params = [
+                    'vpn_id' => $vpn_id,
+                    'is_promoted' => isset($_POST['is_promoted']) ? 1 : 0,
+                    'speed_mbps' => (int)($_POST['speed_mbps'] ?? 0),
+                    'suitable_for' => $_POST['suitable_for'] ?? '', 
+                    'supported_countries' => (int)($_POST['supported_countries'] ?? 0),
+                    'features' => $_POST['features'] ?? '', 
+                    'starting_price' => (float)($_POST['starting_price'] ?? 0),
+                    'affiliate_link' => $_POST['affiliate_link'] ?? ''
+                ];
+                $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, suitable_for, supported_countries, features, starting_price, affiliate_link) VALUES (:vpn_id, :is_promoted, :speed_mbps, :suitable_for, :supported_countries, :features, :starting_price, :affiliate_link)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($regional_params);
+            }
         }
     } catch (Exception $e) {
         // In a real app, log this error
@@ -171,6 +188,10 @@ if ($view === 'vpns') {
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $vpns = $stmt->fetchAll();
+
+    $vpns_to_add_stmt = $pdo->prepare("SELECT id, name FROM vpns_all WHERE id NOT IN (SELECT vpn_id FROM `$vpns_table`) ORDER BY name ASC");
+    $vpns_to_add_stmt->execute();
+    $vpns_to_add = $vpns_to_add_stmt->fetchAll();
 } elseif ($view === 'master') {
     $stmt = $pdo->prepare("SELECT * FROM `vpns_all` ORDER BY name ASC");
     $stmt->execute();
@@ -208,7 +229,9 @@ if ($view === 'vpns') {
     <main class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Manage <?= $view === 'master' ? 'Master VPN List' : ($view === 'vpns' ? 'Regional Data' : ucfirst($view)) ?> <?php if($region): ?>(Region: <?= strtoupper($region) ?>)<?php endif; ?></h1>
-            <?php if ($view === 'master'): ?>
+            <?php if ($view === 'vpns'): ?>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRegionalVpnModal">Add VPN to Region</button>
+            <?php elseif ($view === 'master'): ?>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vpnModal" onclick="prepareModal()">Add New Master VPN</button>
             <?php endif; ?>
         </div>
@@ -426,6 +449,76 @@ if ($view === 'vpns') {
                     <div class="modal-footer" style="border-top-color: var(--border-color);">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add VPN to Region Modal -->
+    <div class="modal fade" id="addRegionalVpnModal" tabindex="-1" aria-labelledby="addRegionalVpnModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background: var(--background-secondary);">
+                <form method="POST" action="admin.php">
+                    <input type="hidden" name="action" value="add_vpn_to_region">
+                    <input type="hidden" name="region" value="<?= $region ?>">
+
+                    <div class="modal-header" style="border-bottom-color: var(--border-color);">
+                        <h5 class="modal-title" id="addRegionalVpnModalLabel">Add VPN to <?= strtoupper($region) ?> Region</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="vpn-id-select" class="form-label">Select VPN</label>
+                            <select class="form-select" id="vpn-id-select" name="vpn_id" required>
+                                <option value="" disabled selected>Choose a VPN to add...</option>
+                                <?php foreach ($vpns_to_add as $vpn_item): ?>
+                                    <option value="<?= (int)$vpn_item['id'] ?>"><?= htmlspecialchars($vpn_item['name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <hr>
+                        <fieldset>
+                            <legend class="h6">Regional Details</legend>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="add-speed_mbps" class="form-label">Speed (Mbps)</label>
+                                    <input type="number" class="form-control" id="add-speed_mbps" name="speed_mbps">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="add-starting_price" class="form-label">Starting Price ($)</label>
+                                    <input type="number" step="0.01" class="form-control" id="add-starting_price" name="starting_price">
+                                </div>
+                            </div>
+                            <div class="row">
+                                 <div class="col-md-6 mb-3">
+                                    <label for="add-suitable_for" class="form-label">Suitable For</label>
+                                    <input type="text" class="form-control" id="add-suitable_for" name="suitable_for">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="add-supported_countries" class="form-label">Countries</label>
+                                    <input type="number" class="form-control" id="add-supported_countries" name="supported_countries">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="add-features" class="form-label">Features (semicolon-separated)</label>
+                                <input type="text" class="form-control" id="add-features" name="features">
+                            </div>
+                            <div class="mb-3">
+                                <label for="add-affiliate_link" class="form-label">Affiliate Link</label>
+                                <input type="url" class="form-control" id="add-affiliate_link" name="affiliate_link">
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="add-is_promoted" name="is_promoted">
+                                <label class="form-check-label" for="add-is_promoted">
+                                    Is Promoted?
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer" style="border-top-color: var(--border-color);">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add to Region</button>
                     </div>
                 </form>
             </div>
