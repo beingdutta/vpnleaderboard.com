@@ -12,18 +12,25 @@ $raw = file_get_contents('php://input');
 $data = json_decode($raw, true);
 $vpn_id = isset($data['vpn_id']) ? (int)$data['vpn_id'] : 0;
 $type = isset($data['vote']) ? strtolower($data['vote']) : '';
+$region = isset($data['region']) ? strtolower($data['region']) : 'global';
 
-if (!$vpn_id || !in_array($type, ['up','down'], true)) {
+// Validate region to prevent SQL injection
+$allowed_regions = ['global', 'india', 'us', 'china'];
+if (!$vpn_id || !in_array($type, ['up','down'], true) || !in_array($region, $allowed_regions, true)) {
   http_response_code(422);
   echo json_encode(['ok'=>false,'error'=>'Invalid payload']);
   exit;
 }
 
+$vpns_table = "vpns_" . $region;
+$votes_table = "votes_" . $region;
+
 $user_id = ensure_user_cookie();
 $ip_bin = client_ip_bin();
 
 // Check VPN exists
-$chk = $pdo->prepare("SELECT id FROM vpns WHERE id = ?");
+// Use prepared statements for table names is not possible, so we use a whitelist.
+$chk = $pdo->prepare("SELECT id FROM `$vpns_table` WHERE id = ?");
 $chk->execute([$vpn_id]);
 if (!$chk->fetch()) {
   http_response_code(404);
@@ -35,17 +42,17 @@ try {
   $pdo->beginTransaction();
 
   // Prevent multiple votes: either same user_id OR same IP for the same VPN
-  $exists = $pdo->prepare("SELECT id, vote FROM votes WHERE vpn_id = ? AND (user_id = ? OR ip_address = ?)");
+  $exists = $pdo->prepare("SELECT id, vote FROM `$votes_table` WHERE vpn_id = ? AND (user_id = ? OR ip_address = ?)");
   $exists->execute([$vpn_id, $user_id, $ip_bin]);
   $prev = $exists->fetch();
 
   if ($prev) {
     // Already voted — MVP rule: only once (no switching). Return current tallies.
     $pdo->commit();
-    $agg = $pdo->prepare("SELECT 
-        SUM(vote='up') AS upvotes, 
-        SUM(vote='down') AS downvotes 
-      FROM votes WHERE vpn_id = ?");
+    $agg = $pdo->prepare("SELECT
+        SUM(vote='up') AS upvotes,
+        SUM(vote='down') AS downvotes
+      FROM `$votes_table` WHERE vpn_id = ?");
     $agg->execute([$vpn_id]);
     $row = $agg->fetch();
     echo json_encode([
@@ -57,15 +64,15 @@ try {
     exit;
   }
 
-  $ins = $pdo->prepare("INSERT INTO votes (vpn_id, user_id, ip_address, vote) VALUES (?,?,?,?)");
+  $ins = $pdo->prepare("INSERT INTO `$votes_table` (vpn_id, user_id, ip_address, vote) VALUES (?,?,?,?)");
   $ins->execute([$vpn_id, $user_id, $ip_bin, $type]);
   $pdo->commit();
 
   // Return updated counts
-  $agg = $pdo->prepare("SELECT 
-      SUM(vote='up') AS upvotes, 
-      SUM(vote='down') AS downvotes 
-    FROM votes WHERE vpn_id = ?");
+  $agg = $pdo->prepare("SELECT
+      SUM(vote='up') AS upvotes,
+      SUM(vote='down') AS downvotes
+    FROM `$votes_table` WHERE vpn_id = ?");
   $agg->execute([$vpn_id]);
   $row = $agg->fetch();
 

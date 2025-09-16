@@ -2,11 +2,6 @@
 require_once __DIR__ . '/db.php';
 
 $user_id = ensure_user_cookie();
-$region = isset($_GET['region']) ? strtoupper($_GET['region']) : 'GLOBAL';
-$validRegions = ['GLOBAL','IN','US','CN'];
-if (!in_array($region, $validRegions, true)) $region = 'GLOBAL';
-
-$regionCond = $region === 'GLOBAL' ? "1=1" : "FIND_IN_SET(:region, regions)";
 
 $sql = "
 SELECT 
@@ -14,19 +9,17 @@ SELECT
   COALESCE(SUM(vt.vote='up'),0) AS upvotes,
   COALESCE(SUM(vt.vote='down'),0) AS downvotes,
   COALESCE(SUM(vt.vote='up'),0) - COALESCE(SUM(vt.vote='down'),0) AS score
-FROM vpns_global v
-LEFT JOIN votes_global vt ON vt.vpn_id = v.id
-WHERE $regionCond
+FROM vpns_china v
+LEFT JOIN votes_china vt ON vt.vpn_id = v.id
 GROUP BY v.id
 ORDER BY score DESC, v.speed_mbps DESC, v.name ASC
 LIMIT 15;
 ";
 $stmt = $pdo->prepare($sql);
-if ($region !== 'GLOBAL') $stmt->bindValue(':region', $region, PDO::PARAM_STR);
 $stmt->execute();
 $vpns = $stmt->fetchAll();
 
-$votedStmt = $pdo->prepare("SELECT vpn_id FROM votes_global WHERE user_id = ? OR ip_address = ?");
+$votedStmt = $pdo->prepare("SELECT vpn_id FROM votes_china WHERE user_id = ? OR ip_address = ?");
 $votedStmt->execute([$user_id, client_ip_bin()]);
 $votedIds = array_column($votedStmt->fetchAll(), 'vpn_id');
 
@@ -36,14 +29,14 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>VPN Leaderboard 2025: Your VPN, Your Vote</title>
+    <title>Best VPNs in China 2025: Your VPN, Your Vote</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Compare and vote the best VPN services for streaming, gaming, privacy & work. Live community ranking of top VPNs in India, USA, China & worldwide.">
+    <meta name="description" content="Compare and vote for the best VPN services in China. Live community ranking of top VPNs for users in China.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="index,follow">
-    <meta name="keywords" content="best vpn, vpn for pc, vpn for android, fastest vpn, secure vpn, vpn india, vpn usa, vpn china, vpn comparison, vpn ranking">
-    <meta property="og:title" content="Global Ranking 2025: Your VPN, Your Vote">
-    <meta property="og:description" content="Real-time VPN leaderboard powered by community votes. Upvote or downvote your favorite VPNs.">
+    <meta name="keywords" content="best vpn china, vpn for china, fastest vpn china, secure vpn, vpn comparison, vpn ranking china">
+    <meta property="og:title" content="Best VPNs in China 2025: Your VPN, Your Vote">
+    <meta property="og:description" content="Real-time VPN leaderboard for China, powered by community votes. Upvote or downvote your favorite VPNs.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
     <meta property="og:image" content="<?= htmlspecialchars((isset($_SERVER['HTTPS'])?'https':'http').'://'.$_SERVER['HTTP_HOST']) ?>/og-image.jpg">
@@ -51,17 +44,16 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     {
         "@context":"https://schema.org",
         "@type":"WebSite",
-        "name":"VPN Leaderboard",
+        "name":"VPN Leaderboard - China",
         "url":"<?= htmlspecialchars($canonical) ?>",
-        "potentialAction":{"@type":"SearchAction","target":"<?= htmlspecialchars($canonical) ?>?q={search_term_string}","query-input":"required name=search_term_string"},
-        "about":"Community-powered rankings of the best VPN providers"
+        "about":"Community-powered rankings of the best VPN providers for China"
     }
   </script>
   <!-- Bootstrap 5 (CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
 </head>
-<body data-region="<?= strtolower($region) ?>">
+<body data-region="china">
   <!-- NAV -->
   <nav class="navbar navbar-expand-lg border-bottom" style="--bs-border-color: var(--border-color);">
     <div class="container">
@@ -73,8 +65,8 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="VPNs-in-India.php" title="Best VPNs in India">Ranking in India</a></li>
           <li class="nav-item"><a class="nav-link" href="VPNs-in-US.php" title="Best VPNs in the USA">Ranking in USA</a></li>
-          <li class="nav-item"><a class="nav-link" href="VPNs-in-China.php" title="Best VPNs in China">Ranking in China</a></li>
-          <li class="nav-item"><a class="nav-link<?= $region==='GLOBAL'?' active':'' ?>" href="?region=GLOBAL" title="Global VPN Ranking">Global</a></li>
+          <li class="nav-item"><a class="nav-link active" href="VPNs-in-China.php" title="Best VPNs in China">Ranking in China</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php?region=GLOBAL" title="Global VPN Ranking">Global</a></li>
           <li class="nav-item ms-lg-3">
             <a href="#" id="theme-toggle" class="nav-link" title="Toggle light/dark theme">🌙</a>
           </li>
@@ -86,7 +78,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <!-- HERO -->
   <header class="py-5 hero">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Global Ranking 2025: <span class="tagline">Your VPN, Your Vote</span></h1>
+      <h1 class="display-5 fw-bold">China Ranking 2025: <span class="tagline">Your VPN, Your Vote</span></h1>
       <p class="text-secondary" style="font-size: 1.1rem;">Because Security Matters, You Matters.</p>
       <div class="d-flex flex-wrap gap-2 justify-content-center">
         <span class="chip">Fastest VPN</span>
