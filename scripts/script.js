@@ -29,37 +29,6 @@
   applyTheme(savedTheme);
 })();
 
-// --- Dynamic Logo Path Generation ---
-document.addEventListener('DOMContentLoaded', () => {
-  const vpnLogos = document.querySelectorAll('.vpn-logo');
-  const placeholder = 'https://via.placeholder.com/28x28?text=...';
-
-  vpnLogos.forEach(img => {
-    const vpnName = img.dataset.vpnName;
-    if (!vpnName) {
-      img.src = placeholder;
-      return;
-    }
-
-    // 1. Lowercase, remove spaces and all non-alphanumeric characters
-    let processedName = vpnName.toLowerCase().replace(/[^a-z0-9]/gi, '');
-
-    // 2. If name doesn't end with 'vpn', append it (e.g., 'hideme' -> 'hidemevpn')
-    if (!processedName.endsWith('vpn')) {
-      processedName += 'vpn';
-    }
-
-    // 3. Construct the final path
-    img.src = `assets/${processedName}.png`;
-
-    // 4. Fallback to placeholder if the image fails to load
-    img.onerror = () => {
-      img.src = placeholder;
-      img.onerror = null; // Prevent infinite loops if placeholder also fails
-    };
-  });
-});
-
 
 // Vote handler (AJAX, no reload)
 document.querySelectorAll('.vote-btn').forEach(btn => {

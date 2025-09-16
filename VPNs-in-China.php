@@ -5,14 +5,15 @@ $user_id = ensure_user_cookie();
 
 $sql = "
 SELECT 
-  v.*,
+  v_reg.*, v_all.name, v_all.website_url, v_all.logo_path,
   COALESCE(SUM(vt.vote='up'),0) AS upvotes,
   COALESCE(SUM(vt.vote='down'),0) AS downvotes,
   COALESCE(SUM(vt.vote='up'),0) - COALESCE(SUM(vt.vote='down'),0) AS score
-FROM vpns_china v
-LEFT JOIN votes_china vt ON vt.vpn_id = v.id
-GROUP BY v.id
-ORDER BY score DESC, v.name ASC
+FROM vpns_china v_reg
+JOIN vpns_all v_all ON v_reg.vpn_id = v_all.id
+LEFT JOIN votes_china vt ON vt.vpn_id = v_reg.vpn_id
+GROUP BY v_reg.vpn_id
+ORDER BY score DESC, v_all.name ASC
 LIMIT 15;
 ";
 $stmt = $pdo->prepare($sql);
@@ -120,14 +121,14 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         <tbody>
           <?php
           foreach ($vpns as $v):
-            $voted = in_array($v['id'], $votedIds, true);
+            $voted = in_array($v['vpn_id'], $votedIds, true);
             $features = array_slice(array_map('trim', explode(';', str_replace([',',';'], ';', (string)$v['features']))),0,3);
           ?>
-          <tr data-vpn-id="<?= (int)$v['id'] ?>" data-score="<?= (int)$v['score'] ?>" data-promoted="<?= (int)$v['is_promoted'] ?>">
+          <tr data-vpn-id="<?= (int)$v['vpn_id'] ?>" data-score="<?= (int)$v['score'] ?>" data-promoted="<?= (int)$v['is_promoted'] ?>">
             <td class="text-secondary"><?= (int)$v['true_rank'] ?></td>
             <td>
               <div class="d-flex align-items-center gap-2">
-                <img data-vpn-name="<?= htmlspecialchars($v['name']) ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded vpn-logo" src="https://via.placeholder.com/28x28?text=...">
+                <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded">
                 <div class="d-flex flex-column" style="min-width: 150px;">
                   <div class="d-flex align-items-center">
                     <span class="fw-semibold"><?= htmlspecialchars($v['name']) ?></span>
