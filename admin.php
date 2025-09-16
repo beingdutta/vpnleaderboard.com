@@ -70,11 +70,18 @@ endif;
 
 // --- ADMIN LOGIC (if logged in) ---
 $allowed_regions = ['global', 'india', 'us', 'china'];
-$region = isset($_GET['region']) && in_array($_GET['region'], $allowed_regions) ? $_GET['region'] : 'global';
-$view = isset($_GET['view']) && $_GET['view'] === 'votes' ? 'votes' : 'vpns';
+$current_view_param = isset($_GET['view']) ? $_GET['view'] : 'vpns';
 
-$vpns_table = "vpns_" . $region;
-$votes_table = "votes_" . $region;
+if ($current_view_param === 'master') {
+    $region = null;
+    $view = 'master';
+} else {
+    $region = isset($_GET['region']) && in_array($_GET['region'], $allowed_regions) ? $_GET['region'] : 'global';
+    $view = in_array($current_view_param, ['votes', 'vpns']) ? $current_view_param : 'vpns';
+}
+
+$vpns_table = $region ? "vpns_" . $region : null;
+$votes_table = $region ? "votes_" . $region : null;
 
 // Handle POST actions (Save, Delete, Reset)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -85,21 +92,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     try {
         if ($_POST['action'] === 'save_vpn') {
-            // Master VPN data
-            $master_params = ['name' => $_POST['name'] ?? '', 'website_url' => $_POST['website_url'] ?? '', 'logo_path' => $_POST['logo_path'] ?: null, 'details' => $_POST['details'] ?: null];
-            
-            if ($id > 0) { // Update existing master VPN
-                $master_params['id'] = $id;
-                $sql = "UPDATE `vpns_all` SET name=:name, website_url=:website_url, logo_path=:logo_path, details=:details WHERE id=:id";
-            } else { // Insert new master VPN
-                $sql = "INSERT INTO `vpns_all` (name, website_url, logo_path, details) VALUES (:name, :website_url, :logo_path, :details)";
+            $mode = $_POST['mode'] ?? 'regional';
+
+            // Only save master data if not in regional-only edit mode.
+            if ($mode !== 'regional') {
+                $master_params = ['name' => $_POST['name'] ?? '', 'website_url' => $_POST['website_url'] ?? '', 'logo_path' => $_POST['logo_path'] ?: null];
+                
+                if ($id > 0) { // Update existing master VPN
+                    $master_params['id'] = $id;
+                    $sql = "UPDATE `vpns_all` SET name=:name, website_url=:website_url, logo_path=:logo_path WHERE id=:id";
+                } else { // Insert new master VPN
+                    $sql = "INSERT INTO `vpns_all` (name, website_url, logo_path) VALUES (:name, :website_url, :logo_path)";
+                }
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($master_params);
             }
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute($master_params);
             
             // Get the ID of the VPN we just saved
             $vpn_id = ($id > 0) ? $id : $pdo->lastInsertId();
 
+            // Always save regional data unless we are in master-only edit mode.
+            if ($mode !== 'master') {
             // Regional VPN data (UPSERT logic)
             $regional_params = [
                 'vpn_id' => $vpn_id,
@@ -113,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     ON DUPLICATE KEY UPDATE is_promoted=:is_promoted, speed_mbps=:speed_mbps, suitable_for=:suitable_for, supported_countries=:supported_countries, features=:features, starting_price=:starting_price, affiliate_link=:affiliate_link";
             $stmt = $pdo->prepare($sql);
             $stmt->execute($regional_params);
+            }
 
         } elseif ($_POST['action'] === 'delete_vpn' && $id > 0) {
             // Deleting from vpns_all will cascade and delete from all regional and votes tables.
@@ -124,6 +138,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         } elseif ($_POST['action'] === 'delete_vote' && $id > 0) {
             // Note: $id here is the vote ID, not vpn_id
             $stmt = $pdo->prepare("DELETE FROM `$action_votes_table` WHERE id = ?");
+            $stmt->execute([$id]);
+        } elseif ($_POST['action'] === 'remove_from_region' && $id > 0) {
+            // This only removes the regional data, not the master VPN
+            $stmt = $pdo->prepare("DELETE FROM `$action_vpns_table` WHERE vpn_id = ?");
             $stmt->execute([$id]);
         }
     } catch (Exception $e) {
@@ -137,19 +155,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // Fetch data for the current region/view
 if ($view === 'vpns') {
-    // Show all master VPNs, and join the regional data if it exists for the selected region
+    // Show only VPNs that exist in the current region's table
     $sql = "
         SELECT 
             va.*, 
             vr.is_promoted, vr.speed_mbps, vr.suitable_for, vr.supported_countries, vr.features, vr.starting_price, vr.affiliate_link,
             (SELECT COUNT(*) FROM `$votes_table` vt WHERE vt.vpn_id = va.id) as total_votes
         FROM `vpns_all` va
-        LEFT JOIN `$vpns_table` vr ON va.id = vr.vpn_id
+        JOIN `$vpns_table` vr ON va.id = vr.vpn_id
         ORDER BY va.name ASC
     ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $vpns = $stmt->fetchAll();
+} elseif ($view === 'master') {
+    $stmt = $pdo->prepare("SELECT * FROM `vpns_all` ORDER BY name ASC");
+    $stmt->execute();
+    $master_vpns = $stmt->fetchAll();
 } else { // 'votes' view
     $stmt = $pdo->prepare("SELECT vt.*, v.name as vpn_name FROM `$votes_table` vt LEFT JOIN `vpns_all` v ON vt.vpn_id = v.id ORDER BY vt.id DESC LIMIT 100");
     $stmt->execute();
@@ -182,25 +204,29 @@ if ($view === 'vpns') {
 
     <main class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3">Manage <?= ucfirst($view) ?> (Region: <?= strtoupper($region) ?>)</h1>
-            <?php if ($view === 'vpns'): ?>
+            <h1 class="h3">Manage <?= $view === 'master' ? 'Master List' : ($view === 'vpns' ? 'Regional Data' : ucfirst($view)) ?> <?php if($region): ?>(Region: <?= strtoupper($region) ?>)<?php endif; ?></h1>
+            <?php if ($view === 'master'): ?>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vpnModal" onclick="prepareModal()">Add New Master VPN</button>
             <?php endif; ?>
         </div>
 
-        <!-- Region Tabs -->
+        <!-- Main Navigation -->
         <ul class="nav nav-pills mb-3">
             <?php foreach ($allowed_regions as $r): ?>
             <li class="nav-item">
-                <a class="nav-link <?= $region === $r ? 'active' : '' ?>" href="?region=<?= $r ?>&view=<?= $view ?>"><?= ucfirst($r) ?></a>
+                <a class="nav-link <?= ($view !== 'master' && $region === $r) ? 'active' : '' ?>" href="?region=<?= $r ?>&view=vpns"><?= ucfirst($r) ?></a>
             </li>
             <?php endforeach; ?>
+            <li class="nav-item">
+                <a class="nav-link <?= $view === 'master' ? 'active' : '' ?>" href="?view=master">Master List</a>
+            </li>
         </ul>
 
-        <!-- View Toggle -->
+        <?php if ($view !== 'master'): ?>
+        <!-- View Toggle for Regions -->
         <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
-                <a class="nav-link <?= $view === 'vpns' ? 'active' : '' ?>" href="?view=vpns&region=<?= $region ?>">VPNs</a>
+                <a class="nav-link <?= $view === 'vpns' ? 'active' : '' ?>" href="?view=vpns&region=<?= $region ?>">Regional Data</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <?= $view === 'votes' ? 'active' : '' ?>" href="?view=votes&region=<?= $region ?>">Votes</a>
@@ -238,7 +264,42 @@ if ($view === 'vpns') {
                                     <input type="hidden" name="region" value="<?= $region ?>">
                                     <button type="submit" class="btn btn-sm btn-warning">Reset Votes</button>
                                 </form>
-                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this VPN from ALL regions? This cannot be undone.');">
+                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('Are you sure you want to remove this VPN from the <?= strtoupper($region) ?> region?');">
+                                    <input type="hidden" name="action" value="remove_from_region">
+                                    <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
+                                    <input type="hidden" name="region" value="<?= $region ?>">
+                                    <button type="submit" class="btn btn-sm btn-danger">Remove from Region</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php elseif ($view === 'master'): ?>
+            <!-- Master VPN Table -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>VPN Name</th>
+                            <th>Website</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($master_vpns as $v): ?>
+                        <tr id="vpn-row-<?= (int)$v['id'] ?>" data-vpn='<?= htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8') ?>'>
+                            <td><?= (int)$v['id'] ?></td>
+                            <td>
+                                <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded me-2">
+                                <?= htmlspecialchars($v['name']) ?>
+                            </td>
+                            <td><a href="<?= htmlspecialchars($v['website_url']) ?>" target="_blank"><?= htmlspecialchars($v['website_url']) ?></a></td>
+                            <td class="text-end">
+                                <button class="btn btn-sm btn-secondary" onclick="prepareModal(<?= (int)$v['id'] ?>, 'master')">Edit</button>
+                                <form method="POST" action="admin.php" class="d-inline" onsubmit="return confirm('DANGER: This will delete the VPN from ALL regions and remove all associated votes. This cannot be undone. Are you sure?');">
                                     <input type="hidden" name="action" value="delete_vpn">
                                     <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
                                     <input type="hidden" name="region" value="<?= $region ?>">
@@ -294,6 +355,7 @@ if ($view === 'vpns') {
                 <form method="POST" action="admin.php">
                     <input type="hidden" name="action" value="save_vpn">
                     <input type="hidden" name="id" id="vpn-id">
+                    <input type="hidden" name="mode" id="form-mode">
                     <input type="hidden" name="region" value="<?= $region ?>">
 
                     <div class="modal-header" style="border-bottom-color: var(--border-color);">
@@ -312,21 +374,15 @@ if ($view === 'vpns') {
                                     <label for="vpn-website_url" class="form-label">Website URL</label>
                                     <input type="url" class="form-control" id="vpn-website_url" name="website_url">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="vpn-logo_path" class="form-label">Logo Path</label>
                                     <input type="text" class="form-control" id="vpn-logo_path" name="logo_path" placeholder="e.g., assets/nordvpn.png">
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="vpn-details" class="form-label">Details (Markdown supported)</label>
-                                    <textarea class="form-control" id="vpn-details" name="details" rows="3"></textarea>
                                 </div>
                             </div>
                         </fieldset>
                         <hr>
                         <fieldset>
-                            <legend class="h6">Regional Details (<?= strtoupper($region) ?>)</legend>
+                            <legend class="h6">Regional Details (<?= $region ? strtoupper($region) : 'N/A' ?>)</legend>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="vpn-speed_mbps" class="form-label">Speed (Mbps)</label>
@@ -378,10 +434,29 @@ if ($view === 'vpns') {
         const vpnModal = new bootstrap.Modal(document.getElementById('vpnModal'));
         const form = document.querySelector('#vpnModal form');
 
-        function prepareModal(vpnId = null) {
+        function prepareModal(vpnId = null, mode = 'regional') {
             form.reset();
             document.getElementById('vpn-id').value = '';
+            document.getElementById('form-mode').value = mode;
             document.getElementById('vpnModalLabel').textContent = 'Add New Master VPN';
+
+            // Get fieldsets
+            const masterFieldset = form.querySelector('fieldset:nth-of-type(1)');
+            const regionalFieldset = form.querySelector('fieldset:nth-of-type(2)');
+
+            // Default state
+            masterFieldset.style.display = 'block';
+            regionalFieldset.style.display = 'block';
+            form.querySelectorAll('fieldset:nth-of-type(1) input').forEach(el => el.disabled = false);
+            
+            // When adding a new VPN, we must add both master and regional data
+            if (!vpnId) {
+                mode = 'full';
+            }
+
+            if (mode === 'master') {
+                regionalFieldset.style.display = 'none'; // Hide regional fields when editing master
+            }
 
             if (vpnId) {
                 document.getElementById('vpnModalLabel').textContent = 'Edit VPN';
@@ -393,7 +468,11 @@ if ($view === 'vpns') {
                 document.getElementById('vpn-name').value = data.name || '';
                 document.getElementById('vpn-website_url').value = data.website_url || '';
                 document.getElementById('vpn-logo_path').value = data.logo_path || '';
-                document.getElementById('vpn-details').value = data.details || '';
+
+                // When editing regional data, disable master fields to prevent accidental changes
+                if (mode === 'regional') {
+                    form.querySelectorAll('fieldset:nth-of-type(1) input').forEach(el => el.disabled = true);
+                }
 
                 // Regional data
                 document.getElementById('vpn-is_promoted').checked = data.is_promoted == 1;

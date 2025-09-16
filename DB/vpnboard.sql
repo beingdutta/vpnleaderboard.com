@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2025 at 07:36 AM
+-- Generation Time: Sep 16, 2025 at 12:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,10 +63,7 @@ CREATE TABLE `votes_global` (
 --
 
 INSERT INTO `votes_global` (`id`, `vpn_id`, `user_id`, `ip_address`, `vote`, `created_at`) VALUES
-(14, 2, '46db61b317a816c0-819f8c7a', 0x00000000000000000000000000000001, 'up', '2025-09-16 04:04:33'),
-(16, 3, '46db61b317a816c0-819f8c7a', 0x00000000000000000000000000000001, 'up', '2025-09-16 04:06:35'),
-(17, 6, '46db61b317a816c0-819f8c7a', 0x00000000000000000000000000000001, 'up', '2025-09-16 04:06:38'),
-(18, 11, '46db61b317a816c0-819f8c7a', 0x00000000000000000000000000000001, 'up', '2025-09-16 04:06:41');
+(16, 3, '46db61b317a816c0-819f8c7a', 0x00000000000000000000000000000001, 'up', '2025-09-16 04:06:35');
 
 -- --------------------------------------------------------
 
@@ -122,6 +119,7 @@ CREATE TABLE `vpns_all` (
   `id` int(11) NOT NULL,
   `name` varchar(120) NOT NULL,
   `website_url` varchar(255) DEFAULT NULL,
+  `logo_path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,22 +127,17 @@ CREATE TABLE `vpns_all` (
 -- Dumping data for table `vpns_all`
 --
 
-INSERT INTO `vpns_all` (`id`, `name`, `website_url`, `created_at`) VALUES
-(1, 'ExpressVPN', 'https://www.expressvpn.com', '2025-09-16 05:33:48'),
-(2, 'NordVPN', 'https://nordvpn.com', '2025-09-16 05:33:48'),
-(3, 'Surfshark', 'https://surfshark.com', '2025-09-16 05:33:48'),
-(4, 'CyberGhost', 'https://www.cyberghostvpn.com', '2025-09-16 05:33:48'),
-(5, 'PIA', 'https://www.privateinternetaccess.com', '2025-09-16 05:33:48'),
-(6, 'Proton VPN', 'https://protonvpn.com', '2025-09-16 05:33:48'),
-(7, 'IPVanish', 'https://www.ipvanish.com', '2025-09-16 05:33:48'),
-(8, 'Mullvad', 'https://mullvad.net', '2025-09-16 05:33:48'),
-(9, 'Hotspot Shield', 'https://www.hotspotshield.com', '2025-09-16 05:33:48'),
-(10, 'TunnelBear', 'https://www.tunnelbear.com', '2025-09-16 05:33:48'),
-(11, 'Windscribe', 'https://windscribe.com', '2025-09-16 05:33:48'),
-(12, 'Atlas VPN', 'https://atlasvpn.com', '2025-09-16 05:33:48'),
-(13, 'PrivadoVPN', 'https://privadovpn.com', '2025-09-16 05:33:48'),
-(14, 'Hide.me', 'https://hide.me', '2025-09-16 05:33:48'),
-(15, 'VyprVPN', 'https://www.vyprvpn.com', '2025-09-16 05:33:48');
+INSERT INTO `vpns_all` (`id`, `name`, `website_url`, `logo_path`, `created_at`) VALUES
+(1, 'ExpressVPN', 'https://www.expressvpn.com', 'assets/expressvpn.png', '2025-09-16 05:33:48'),
+(2, 'NordVPN', 'https://nordvpn.com', NULL, '2025-09-16 05:33:48'),
+(3, 'Surfshark', 'https://surfshark.com', NULL, '2025-09-16 05:33:48'),
+(6, 'Proton VPN', 'https://protonvpn.com', NULL, '2025-09-16 05:33:48'),
+(10, 'TunnelBear', 'https://www.tunnelbear.com', NULL, '2025-09-16 05:33:48'),
+(14, 'Hide.me', 'https://hide.me', 'assets\\hidemevpn.png', '2025-09-16 05:33:48'),
+(16, 'CyberGhost', 'https://www.cyberghostvpn.com', 'assets/cyberghostvpn.png', '2025-09-16 10:00:26'),
+(17, 'Atlas VPN', 'https://atlasvpn.com', 'assets/atlasvpn.png', '2025-09-16 10:00:26'),
+(18, 'PureVPN', 'https://purevpn.com', 'assetspurevpn.png', '2025-09-16 10:00:26'),
+(19, 'Avast SecureLine VPN', 'https://www.avast.com/secureline-vpn', 'assets/tunnelbearvpn.png', '2025-09-16 10:00:26');
 
 -- --------------------------------------------------------
 
@@ -197,18 +190,9 @@ INSERT INTO `vpns_global` (`vpn_id`, `speed_mbps`, `suitable_for`, `supported_co
 (1, 580, 'Streaming, Privacy, Gaming', 105, 'AES-256; No-logs; Kill Switch; 24/7 support', 0, 'https://www.expressvpn.com/?srsltid=AfmBOorK8GTDgq751xnsKqdndaGTpXjZKPfOhLaOQWfhBj3QOxbBI0bk', 5.00),
 (2, 560, 'Streaming, Security', 111, 'Double VPN; Threat Protection; Meshnet', 0, '', 0.00),
 (3, 520, 'Budget, Unlimited devices', 100, 'CleanWeb; No-logs; Kill Switch', 0, NULL, NULL),
-(4, 510, 'Streaming, Ease of use', 100, 'Dedicated streaming servers; No-logs', 0, NULL, NULL),
-(5, 470, 'Customization, Torrenting', 90, 'Open-source; Port forwarding', 1, NULL, NULL),
 (6, 490, 'Privacy, Journalists', 85, 'Swiss-based; Secure Core', 0, '', 0.00),
-(7, 450, 'Power users', 75, 'WireGuard; SOCKS5', 0, NULL, NULL),
-(8, 430, 'Privacy, Anon signup', 40, 'Cash payments; No email needed', 0, NULL, NULL),
-(9, 420, 'Casual streaming', 80, 'Catapult Hydra protocol', 0, NULL, NULL),
 (10, 410, 'Beginners', 45, 'Cute UI; Independent audits', 0, NULL, NULL),
-(11, 400, 'Free tier, Adblock', 69, 'ROBERT; Config generators', 0, NULL, NULL),
-(12, 395, 'Budget', 40, 'Data breach monitor', 0, NULL, NULL),
-(13, 370, 'Free tier focus', 48, 'SOCKS5; No-logs', 0, NULL, NULL),
-(14, 360, 'Privacy', 47, 'Stealth Guard; Split tunneling', 1, '', 0.00),
-(15, 350, 'Bypass censorship', 70, 'Chameleon protocol', 0, NULL, NULL);
+(14, 360, 'Privacy', 47, 'Stealth Guard; Split tunneling', 1, '', 0.00);
 
 -- --------------------------------------------------------
 
@@ -358,7 +342,7 @@ ALTER TABLE `votes_us`
 -- AUTO_INCREMENT for table `vpns_all`
 --
 ALTER TABLE `vpns_all`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
