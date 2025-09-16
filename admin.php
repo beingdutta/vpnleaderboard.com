@@ -37,7 +37,7 @@ if (!isset($_SESSION[ADMIN_SESSION_KEY]) || !$_SESSION[ADMIN_SESSION_KEY]):
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -212,7 +212,7 @@ if ($view === 'vpns') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
 <body>
     <!-- NAV -->

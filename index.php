@@ -72,7 +72,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   </script>
   <!-- Bootstrap 5 (CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="styles/style.css" rel="stylesheet">
+  <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
 <body data-region="<?= strtolower($region) ?>">
   <!-- NAV -->
@@ -159,7 +159,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             </td>
             <td>
               <?php if (!empty($v['affiliate_link'])): ?>
-                <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn btn-sm btn-success">Get Deal</a>
+                <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn-get-deal">Get Deal</a>
               <?php endif; ?>
             </td>
             <td class="text-center">

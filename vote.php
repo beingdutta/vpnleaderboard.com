@@ -30,7 +30,7 @@ $ip_bin = client_ip_bin();
 
 // Check VPN exists
 // Use prepared statements for table names is not possible, so we use a whitelist.
-$chk = $pdo->prepare("SELECT id FROM `$vpns_table` WHERE id = ?");
+$chk = $pdo->prepare("SELECT vpn_id FROM `$vpns_table` WHERE vpn_id = ?");
 $chk->execute([$vpn_id]);
 if (!$chk->fetch()) {
   http_response_code(404);
