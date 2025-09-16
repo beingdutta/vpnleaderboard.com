@@ -112,7 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $vpn_id = ($id > 0) ? $id : $pdo->lastInsertId();
 
             // Always save regional data unless we are in master-only edit mode.
-            if ($mode !== 'master') {
+            // We only want to save regional data when we are specifically in regional edit mode.
+            if ($mode === 'regional') {
             // Regional VPN data (UPSERT logic)
             $regional_params = [
                 'vpn_id' => $vpn_id,
@@ -534,6 +535,12 @@ if ($view === 'vpns') {
         function prepareModal(vpnId = null, mode = 'regional') {
             form.reset();
             document.getElementById('vpn-id').value = '';
+            
+            // When adding a new VPN, we must add both master and regional data
+            if (!vpnId) {
+                mode = 'full';
+            }
+
             document.getElementById('form-mode').value = mode;
             document.getElementById('vpnModalLabel').textContent = 'Add New Master VPN';
 
@@ -545,13 +552,8 @@ if ($view === 'vpns') {
             masterFieldset.style.display = 'block';
             regionalFieldset.style.display = 'block';
             form.querySelectorAll('fieldset:nth-of-type(1) input').forEach(el => el.disabled = false);
-            
-            // When adding a new VPN, we must add both master and regional data
-            if (!vpnId) {
-                mode = 'full';
-            }
 
-            if (mode === 'master') {
+            if (mode === 'master' || mode === 'full') {
                 regionalFieldset.style.display = 'none'; // Hide regional fields when editing master
             }
 
