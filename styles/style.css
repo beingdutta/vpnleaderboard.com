@@ -29,7 +29,7 @@ html[data-theme="dark"] {
   --background-primary: #0b1220;
   --background-secondary: #0f172a;
   --text-primary: #e5e7eb;
-  --text-secondary: #9ca3af;
+  --text-secondary: #d1d5db; /* Lighter grey for better contrast */
   --border-color: #334155;
   --table-header-color: #9ca3af;
 
@@ -219,6 +219,14 @@ html[data-theme="dark"] .article-card-horizontal:hover {
 .article-card-horizontal .img-fluid {
   height: 100%;
   object-fit: cover;
+}
+
+.article-card-horizontal .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.article-card-horizontal .card-title {
+  color: var(--text-primary);
 }
 
 /* Article Page Specific Styles */

@@ -70,10 +70,10 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
       <?php foreach ($reviews as $review): ?>
       <div class="card article-card-horizontal">
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <img src="<?= htmlspecialchars($review['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($review['title']) ?>">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <div class="card-body d-flex flex-column h-100">
               <h5 class="card-title mb-2"><?= htmlspecialchars($review['title']) ?></h5>
               <p class="card-text text-secondary small flex-grow-1"><?= htmlspecialchars($review['excerpt']) ?></p>
