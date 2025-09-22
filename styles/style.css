@@ -199,9 +199,161 @@ html[data-theme="dark"] .hero {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.08);
 }
 
+/* Article Tile (for Blog/Reviews) */
+.article-card-horizontal {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden; /* Ensures rounded corners are respected on child images */
+}
+
+.article-card-horizontal:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+html[data-theme="dark"] .article-card-horizontal:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.article-card-horizontal .img-fluid {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Article Page Specific Styles */
+.article-hero {
+  position: relative;
+  height: 40vh;
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.article-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 3rem;
+}
+
+.article-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.article-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.article-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.article-content ul {
+  padding-left: 1.5rem;
+}
+
+.author-box {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.verdict-box {
+  background-color: var(--chip-bg);
+  border-left: 4px solid var(--brand);
+}
+
+html[data-theme="dark"] .verdict-box {
+  background-color: #0f172a; /* Slightly darker than secondary bg */
+}
+
+.figure-caption {
+  color: var(--text-secondary);
+}
+
+/* Review Page Enhancements */
+.scorecard-box, .summary-box {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.scorecard-box .progress-bar {
+  background-color: var(--brand);
+}
+
+.summary-table {
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--border-color);
+  font-size: 0.9rem;
+}
+
+.summary-table th {
+  font-weight: 600;
+  width: 45%;
+}
+
+.summary-table td, .summary-table th {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Star Rating */
+.star-rating {
+  display: inline-block;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.star-icon {
+  color: var(--border-color);
+  position: relative;
+  display: inline-block;
+}
+
+.star-icon.full {
+  color: #facc15; /* gold */
+}
+
+.star-icon.half {
+  color: #facc15;
+}
+
+.star-icon.half::before {
+  content: '★';
+  color: var(--border-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .star-icon.half::before {
+  color: #4b5563; /* A darker empty star for dark mode */
+}
+
+
 /* ==========================================================================
    4. Media Queries & Utilities
    ========================================================================== */
+
+@media (max-width: 767px) {
+  .article-card-horizontal .img-fluid {
+    height: 200px;
+    width: 100%;
+  }
+}
 
 @media (max-width: 768px) {
   .hide-sm {

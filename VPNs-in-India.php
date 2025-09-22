@@ -66,26 +66,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
 <body data-region="india">
-  <!-- NAV -->
-  <nav class="navbar navbar-expand-lg border-bottom" style="--bs-border-color: var(--border-color);">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.php">VPN Leaderboard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="VPNs-in-India.php" title="Best VPNs in India">Ranking in India</a></li>
-          <li class="nav-item"><a class="nav-link" href="VPNs-in-US.php" title="Best VPNs in the USA">Ranking in USA</a></li>
-          <li class="nav-item"><a class="nav-link" href="VPNs-in-China.php" title="Best VPNs in China">Ranking in China</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.php?region=GLOBAL" title="Global VPN Ranking">Global</a></li>
-          <li class="nav-item ms-lg-3">
-            <a href="#" id="theme-toggle" class="nav-link" title="Toggle light/dark theme">🌙</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <?php include __DIR__ . '/nav.php'; ?>
 
   <!-- HERO -->
   <header class="py-5 hero">
@@ -178,18 +159,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     </p>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer py-4 border-top" style="--bs-border-color: var(--border-color);">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-      <div>&copy; <?= date('Y') ?> VPN Leaderboard · All rights reserved.</div>
-      <div class="d-flex flex-wrap gap-3">
-        <a href="about.php" class="text-decoration-none">About</a>
-        <a href="contact.php" class="text-decoration-none">Contact</a>
-        <a href="terms.php" class="text-decoration-none">Terms</a>
-        <a href="privacy.php" class="text-decoration-none">Privacy</a>
-      </div>
-    </div>
-  </footer>
+  <?php include __DIR__ . '/footer.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="scripts/script.js"></script>
