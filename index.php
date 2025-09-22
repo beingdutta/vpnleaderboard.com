@@ -75,7 +75,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
 <body data-region="<?= strtolower($region) ?>">
-  <?php include __DIR__ . '/nav.php'; ?>
+  <?php include __DIR__ . '/navigation/nav.php'; ?>
 
   <!-- HERO -->
   <header class="py-5 hero">
@@ -168,7 +168,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     </p>
   </main>
 
-  <?php include __DIR__ . '/footer.php'; ?>
+  <?php include __DIR__ . '/navigation/footer.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="scripts/script.js"></script>

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/../db.php';
 
 // Placeholder for a single review article.
 $article = [
@@ -38,12 +38,17 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <title><?= htmlspecialchars($article['title']) ?> | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.">
+    <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
+    <meta property="og:description" content="We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
+    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/../styles/style.css') ?>" rel="stylesheet">
 </head>
 <body>
-  <?php include __DIR__ . '/nav.php'; ?>
+  <?php include __DIR__ . '/../navigation/nav.php'; ?>
 
   <header class="article-hero" style="background-image: url('<?= htmlspecialchars($article['image']) ?>');">
     <div class="article-hero-overlay">
@@ -55,7 +60,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   </header>
 
   <main class="container my-5">
-    <div class="row g-5">
+    <div class="row g-5 align-items-start">
       <div class="col-lg-8">
         <div class="p-4 mb-4 rounded verdict-box">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -79,7 +84,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         </article>
       </div>
       <div class="col-lg-4">
-        <div class="sticky-top" style="top: 2rem;">
+        <div class="sticky-sidebar">
           <div class="p-4 rounded scorecard-box mb-4">
             <h4 class="fst-italic mb-3">Scorecard</h4>
             <?php foreach ($article['scores'] as $name => $score): ?>
@@ -122,7 +127,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     </div>
   </main>
 
-  <?php include __DIR__ . '/footer.php'; ?>
+  <?php include __DIR__ . '/../navigation/footer.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/scripts/script.js"></script>

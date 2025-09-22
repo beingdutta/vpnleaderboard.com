@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/../db.php';
 
 // --- Data Fetching ---
 // In a real app, you'd fetch from a DB: SELECT * FROM blogs WHERE slug = :slug
@@ -24,6 +24,10 @@ $all_blogs = [
 ];
 
 $article = $all_blogs[$slug] ?? null;
+if (!$article) {
+    http_response_code(404);
+    die('404 Not Found');
+}
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
@@ -36,10 +40,10 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <meta name="description" content="In an increasingly digital world, protecting your privacy has never been more important. This guide covers the essential tools and practices...">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
+    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/../styles/style.css') ?>" rel="stylesheet">
 </head>
 <body>
-  <?php include __DIR__ . '/nav.php'; ?>
+  <?php include __DIR__ . '/../navigation/nav.php'; ?>
 
   <header class="article-hero" style="background-image: url('<?= htmlspecialchars($article['image']) ?>');">
     <div class="article-hero-overlay">
@@ -73,7 +77,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         </article>
       </div>
       <div class="col-lg-4">
-        <div class="sticky-top" style="top: 2rem;">
+        <div class="sticky-sidebar">
           <div class="p-4 rounded author-box">
             <h4 class="fst-italic">About the author</h4>
             <div class="d-flex align-items-center mt-3">
@@ -87,7 +91,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     </div>
   </main>
 
-  <?php include __DIR__ . '/footer.php'; ?>
+  <?php include __DIR__ . '/../navigation/footer.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/scripts/script.js"></script>

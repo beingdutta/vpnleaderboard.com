@@ -343,6 +343,12 @@ html[data-theme="dark"] .star-icon.half::before {
   color: #4b5563; /* A darker empty star for dark mode */
 }
 
+/* Sticky sidebar for articles */
+.sticky-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
 
 /* ==========================================================================
    4. Media Queries & Utilities

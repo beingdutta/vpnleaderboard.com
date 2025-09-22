@@ -1,12 +1,12 @@
 RewriteEngine On
 RewriteBase /
 
-# Redirect requests for /blogs/some-slug to blog-article.php?slug=some-slug
-RewriteRule ^blogs/([\w-]+)/?$ blog-article.php?slug=$1 [L,QSA]
+# Redirect requests for /blogs/some-slug to /blogs/blog-article.php?slug=some-slug
+RewriteRule ^blogs/([\w-]+)/?$ blogs/blog-article.php?slug=$1 [L,QSA]
 
-# Redirect requests for /reviews/some-slug to review-article.php?slug=some-slug
-RewriteRule ^reviews/([\w-]+)/?$ review-article.php?slug=$1 [L,QSA]
+# Redirect requests for /reviews/some-slug to /reviews/article.php?slug=some-slug
+RewriteRule ^reviews/([\w-]+)/?$ reviews/review-article.php?slug=$1 [L,QSA]
 
 # Prevent direct access to these template files
-RewriteCond %{THE_REQUEST} \s/+(blog-article|review-article)\.php [NC]
+RewriteCond %{THE_REQUEST} \s/+(blogs/blog-article|reviews/review-article)\.php [NC]
 RewriteRule ^ - [F]
