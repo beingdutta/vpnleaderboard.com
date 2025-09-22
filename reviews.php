@@ -11,7 +11,7 @@ $reviews = [
         'date' => 'September 12, 2025',
         'excerpt' => 'We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.',
         'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
-        'url' => 'reviews/expressvpn-review-2025' // This will now correctly map to the .php file
+        'url' => 'reviews/express-vpn-review-2025' // This will now correctly map to the .php file
     ],
     [
         'title' => 'NordVPN In-Depth Review: A Deep Dive into Features',
