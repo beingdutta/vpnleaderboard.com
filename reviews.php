@@ -11,35 +11,90 @@ $reviews = [
         'date' => 'September 12, 2025',
         'excerpt' => 'We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.',
         'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
-        'url' => 'reviews/express-vpn-review-2025' // This will now correctly map to the .php file
+        'url' => 'reviews/express-vpn-review' // This will now correctly map to the .php file
     ],
     [
         'title' => 'NordVPN In-Depth Review: A Deep Dive into Features',
-        'slug' => 'nordvpn-review-2025',
+        'slug' => 'nordvpn-review',
         'author' => 'Laura Chen',
         'date' => 'September 8, 2025',
         'excerpt' => 'Beyond the marketing, how does NordVPN hold up? We test its Threat Protection, Meshnet, and Double VPN features.',
         'image' => 'https://images.unsplash.com/photo-1611162616805-6a405b6a4a7a?q=80&w=774',
-        'url' => 'reviews/nordvpn-review-2025' // You will need to create this .php file
+        'url' => 'reviews/nord-vpn-review' // You will need to create this .php file
     ],
     [
         'title' => 'Surfshark One Review: Is the Bundle Worth It?',
-        'slug' => 'surfshark-one-review-2025',
+        'slug' => 'surfshark-one-review',
         'author' => 'David Kim',
         'date' => 'September 2, 2025',
         'excerpt' => 'Surfshark offers more than just a VPN. We review its antivirus, search, and alert features to see if the "One" bundle is a good deal.',
         'image' => 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?q=80&w=774',
-        'url' => 'reviews/surfshark-one-review-2025' // You will need to create this .php file
+        'url' => 'reviews/surfshark-vpn-review' // You will need to create this .php file
     ],
     [
         'title' => 'Proton VPN Review: The Choice for Privacy Purists',
-        'slug' => 'proton-vpn-review-2025',
+        'slug' => 'proton-vpn-review',
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
         'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
-        'url' => 'reviews/proton-vpn-review-2025' // You will need to create this .php file
+        'url' => 'reviews/proton-vpn-review' // You will need to create this .php file
     ],
+    [
+        'title' => 'TunnelBear VPN Review: The Choice for Privacy Purists',
+        'slug' => 'tunnelBear-vpn-review',
+        'author' => 'Emily White',
+        'date' => 'August 25, 2025',
+        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'url' => 'reviews/tunnelbear-vpn-review' // You will need to create this .php file
+    ],
+    [
+        'title' => 'CyberGhost VPN Review: The Choice for Privacy Purists',
+        'slug' => 'cyberGhost-vpn-review',
+        'author' => 'Emily White',
+        'date' => 'August 25, 2025',
+        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'url' => 'reviews/cyberGhost-vpn-review' // You will need to create this .php file
+    ],
+    [
+        'title' => 'Hide.me VPN Review: The Choice for Privacy Purists',
+        'slug' => 'Hideme-vpn-review',
+        'author' => 'Emily White',
+        'date' => 'August 25, 2025',
+        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'url' => 'reviews/hideme-vpn-review' // You will need to create this .php file
+    ],
+    [
+        'title' => 'Atlas VPN Review: The Choice for Privacy Purists',
+        'slug' => 'atlas-vpn-review',
+        'author' => 'Emily White',
+        'date' => 'August 25, 2025',
+        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'url' => 'reviews/Atlas-vpn-review' // You will need to create this .php file
+    ],
+    [
+        'title' => 'Avast Secureline VPN Review: The Choice for Privacy Purists',
+        'slug' => 'avast-secureline-vpn-review',
+        'author' => 'Emily White',
+        'date' => 'August 25, 2025',
+        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'url' => 'reviews/avast-secureline-vpn-review' // You will need to create this .php file
+    ],
+    [
+        'title' => 'PureVPN Review: The Choice for Privacy Purists',
+        'slug' => 'purevpn-review',
+        'author' => 'Emily White',
+        'date' => 'August 25, 2025',
+        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'url' => 'reviews/pure-vpn-review' // You will need to create this .php file
+    ],
+
 ];
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
