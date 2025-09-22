@@ -1,33 +1,14 @@
 <?php
-require_once __DIR__ . '/../db.php';
 
-// --- Data Fetching ---
-// In a real app, you'd fetch from a DB: SELECT * FROM blogs WHERE slug = :slug
-$slug = $_GET['slug'] ?? '';
-if (!$slug) {
-    http_response_code(404);
-    echo "404 Not Found";
-    exit;
-}
-
-// For this example, we'll find the article in an array.
-$all_blogs = [
-    'ultimate-guide-online-privacy-2025' => [
-        'title' => 'The Ultimate Guide to Online Privacy in 2025',
-        'author' => 'Jane Doe',
-        'author_bio' => 'Jane is a cybersecurity analyst with over a decade of experience in digital privacy and network security.',
-        'author_avatar' => 'https://i.pravatar.cc/150?u=jane',
-        'date' => 'September 15, 2025',
-        'image' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1920', // Use a high-res image
-    ]
-    // ... add other blogs here with their slugs as keys
+// This file is a self-contained article.
+$article = [
+    'title' => 'The Ultimate Guide to Online Privacy in 2025',
+    'author' => 'Jane Doe',
+    'author_bio' => 'Jane is a cybersecurity analyst with over a decade of experience in digital privacy and network security.',
+    'author_avatar' => 'https://i.pravatar.cc/150?u=jane',
+    'date' => 'September 15, 2025',
+    'image' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1920', // Use a high-res image
 ];
-
-$article = $all_blogs[$slug] ?? null;
-if (!$article) {
-    http_response_code(404);
-    die('404 Not Found');
-}
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
@@ -38,9 +19,15 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <title><?= htmlspecialchars($article['title']) ?> | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="In an increasingly digital world, protecting your privacy has never been more important. This guide covers the essential tools and practices...">
+    <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
+    <meta property="og:description" content="In an increasingly digital world, protecting your privacy has never been more important. This guide covers the essential tools and practices...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/../styles/style.css') ?>" rel="stylesheet">
+    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
+</head>
 </head>
 <body>
   <?php include __DIR__ . '/../navigation/nav.php'; ?>

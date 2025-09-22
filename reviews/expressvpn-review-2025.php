@@ -1,32 +1,22 @@
 <?php
-require_once __DIR__ . '/../db.php';
 
-// Placeholder for a single review article.
+// This file is a self-contained article.
 $article = [
-    'expressvpn-review-2025' => [
-        'title' => 'ExpressVPN Review 2025: Still the King of Speed?',
-        'author' => 'Mike Richards',
-        'author_bio' => 'Mike is a tech journalist specializing in performance testing and consumer software analysis.',
-        'author_avatar' => 'https://i.pravatar.cc/150?u=mike',
-        'date' => 'September 12, 2025',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=1920',
-        'scores' => ['Speed' => 9.5, 'Streaming' => 9.2, 'Security' => 9.8, 'UX' => 9.0, 'Support' => 9.3],
-        'summary' => [
-            'Logging Policy' => 'Strict No-Logs Policy',
-            'Headquarters' => 'British Virgin Islands',
-            'Protocols' => 'Lightway, OpenVPN, IKEv2',
-            'Simultaneous Connections' => '8',
-            'Money-Back Guarantee' => '30 Days',
-        ],
-    ]
+    'title' => 'ExpressVPN Review 2025',
+    'author' => 'Mike Richards',
+    'author_bio' => 'Mike is a tech journalist specializing in performance testing and consumer software analysis.',
+    'author_avatar' => 'https://i.pravatar.cc/150?u=mike',
+    'date' => 'September 12, 2025',
+    'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=1920',
+    'scores' => ['Speed' => 9.5, 'Streaming' => 9.2, 'Security' => 9.8, 'UX' => 9.0, 'Support' => 9.3],
+    'summary' => [
+        'Logging Policy' => 'Strict No-Logs Policy',
+        'Headquarters' => 'British Virgin Islands',
+        'Protocols' => 'Lightway, OpenVPN, IKEv2',
+        'Simultaneous Connections' => '8',
+        'Money-Back Guarantee' => '30 Days',
+    ],
 ];
-$slug = $_GET['slug'] ?? '';
-$article = $article[$slug] ?? null;
-
-if (!$article) {
-    http_response_code(404);
-    die('404 Not Found');
-}
 $overall_score = round(array_sum($article['scores']) / count($article['scores']), 1);
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');

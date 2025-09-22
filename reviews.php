@@ -11,7 +11,7 @@ $reviews = [
         'date' => 'September 12, 2025',
         'excerpt' => 'We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.',
         'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
-        'url' => 'reviews/expressvpn-review-2025'
+        'url' => 'reviews/expressvpn-review-2025' // This will now correctly map to the .php file
     ],
     [
         'title' => 'NordVPN In-Depth Review: A Deep Dive into Features',
@@ -20,7 +20,7 @@ $reviews = [
         'date' => 'September 8, 2025',
         'excerpt' => 'Beyond the marketing, how does NordVPN hold up? We test its Threat Protection, Meshnet, and Double VPN features.',
         'image' => 'https://images.unsplash.com/photo-1611162616805-6a405b6a4a7a?q=80&w=774',
-        'url' => 'reviews/nordvpn-review-2025'
+        'url' => 'reviews/nordvpn-review-2025' // You will need to create this .php file
     ],
     [
         'title' => 'Surfshark One Review: Is the Bundle Worth It?',
@@ -29,7 +29,7 @@ $reviews = [
         'date' => 'September 2, 2025',
         'excerpt' => 'Surfshark offers more than just a VPN. We review its antivirus, search, and alert features to see if the "One" bundle is a good deal.',
         'image' => 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?q=80&w=774',
-        'url' => 'reviews/surfshark-one-review-2025'
+        'url' => 'reviews/surfshark-one-review-2025' // You will need to create this .php file
     ],
     [
         'title' => 'Proton VPN Review: The Choice for Privacy Purists',
@@ -38,7 +38,7 @@ $reviews = [
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
         'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
-        'url' => 'reviews/proton-vpn-review-2025'
+        'url' => 'reviews/proton-vpn-review-2025' // You will need to create this .php file
     ],
 ];
 
