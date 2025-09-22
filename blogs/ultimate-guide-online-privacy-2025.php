@@ -16,18 +16,17 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?= htmlspecialchars($article['title']) ?> | VPN Leaderboard</title>
+    <title><?= htmlspecialchars($article['title']) ?> | VPN Leaderboard</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="In an increasingly digital world, protecting your privacy has never been more important. This guide covers the essential tools and practices...">
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="In an increasingly digital world, protecting your privacy has never been more important. This guide covers the essential tools and practices...">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>"> 
     <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
-</head>
 </head>
 <body>
   <?php include __DIR__ . '/../navigation/nav.php'; ?>

@@ -290,6 +290,58 @@ html[data-theme="dark"] .verdict-box {
   color: var(--text-secondary);
 }
 
+/* Pros and Cons Styling */
+.pros-cons h2 {
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pros-cons h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.pros-cons .col-md-6:first-child h2::after {
+  background-color: #16a34a; /* Darker Green */
+}
+
+.pros-cons .col-md-6:last-child h2::after {
+  background-color: #dc2626; /* Darker Red */
+}
+
+.pros-list, .cons-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.pros-list li, .cons-list li {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.pros-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: #16a34a; /* Green */
+}
+
+.cons-list li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: #dc2626; /* Red */
+}
+
 /* Review Page Enhancements */
 .scorecard-box, .summary-box {
   background-color: var(--background-secondary);
@@ -314,6 +366,10 @@ html[data-theme="dark"] .verdict-box {
 .summary-table td, .summary-table th {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.summary-table tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
 /* Star Rating */

@@ -66,6 +66,74 @@
             </p>
           </div>
 
+          <!-- Pros and Cons Section -->
+          <section class="pros-cons mb-5">
+            <div class="row">
+              <div class="col-md-6">
+                <h2>Pros</h2>
+                <ul class="pros-list">
+                  <li>User-friendly and secure apps across all major platforms</li>
+                  <li>Audited no-logs policy and TrustedServer (RAM-only) technology</li>
+                  <li>Consistently fast speeds with Lightway protocol</li>
+                  <li>Unblocks Netflix, Hulu, Disney+, BBC iPlayer, Amazon Prime</li>
+                  <li>Large server network in 105+ countries</li>
+                  <li>24/7 live chat and responsive customer support</li>
+                  <li>30-day money-back guarantee</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h2>Cons</h2>
+                <ul class="cons-list">
+                  <li>More expensive than many competitors</li>
+                  <li>Limited simultaneous connections (8 by default)</li>
+                  <li>No permanent free plan (only paid tiers)</li>
+                  <li>Split tunneling not supported on all platforms</li>
+                  <li>Lacks advanced extras like multi-hop or GPS spoofing</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Feature Table -->
+          <div class="table-responsive mb-5">
+            <table class="table table-bordered summary-table">
+              <tbody>
+                <tr>
+                  <th>Pricing Plans</th>
+                  <td>$12.99/mo, $6.67/mo (annual + 3 free months), ~$3.49/mo on longer promos</td>
+                </tr>
+                <tr>
+                  <th>Simultaneous Connections</th>
+                  <td>8 devices (unlimited via router)</td>
+                </tr>
+                <tr>
+                  <th>Server Network</th>
+                  <td>3,000+ servers in 105 countries</td>
+                </tr>
+                <tr>
+                  <th>Logging Policy</th>
+                  <td>No logs; independently audited, RAM-only servers</td>
+                </tr>
+                <tr>
+                  <th>Jurisdiction</th>
+                  <td>British Virgin Islands (privacy-friendly)</td>
+                </tr>
+                <tr>
+                  <th>Protocols Supported</th>
+                  <td>Lightway (open-source Rust), OpenVPN, IKEv2</td>
+                </tr>
+                <tr>
+                  <th>Local Download Speed</th>
+                  <td>~95–98 Mbps (2–5% loss in tests)</td>
+                </tr>
+                <tr>
+                  <th>Money-Back Guarantee</th>
+                  <td>30 Days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <article class="article-content">
             <p class="lead">
               We spent weeks testing ExpressVPN across a variety of networks,
@@ -86,15 +154,6 @@
               valuable in a landscape where VPNs are increasingly scrutinized.
             </p>
 
-            <p>
-              In 2024 and early 2025, additional independent audits examined both
-              its core infrastructure and its in-house Lightway protocol. Each
-              audit confirmed that ExpressVPN keeps no identifiable logs of user
-              activity. For privacy-focused users, this repeated third-party
-              verification provides peace of mind that marketing claims are backed
-              by real practices.
-            </p>
-
             <h2>Performance and Speed</h2>
             <p>
               ExpressVPN is consistently among the fastest VPNs we test. Using the
@@ -103,14 +162,6 @@
               even on distant connections. Our average download speeds across
               multiple regions remained steady enough for lag-free 4K streaming,
               video conferencing, and online gaming.
-            </p>
-
-            <p>
-              Lightway’s quick reconnection is another highlight. When switching
-              between Wi-Fi and mobile data, it reconnected nearly instantly,
-              making it ideal for mobile users who need a seamless browsing
-              experience. Whether for remote work or everyday browsing,
-              ExpressVPN’s performance remains excellent.
             </p>
 
             <h2>Security Features</h2>
@@ -123,15 +174,6 @@
               IKEv2 alongside Lightway.
             </p>
 
-            <p>
-              Features such as a reliable kill switch (called Network Lock),
-              DNS/IPv6 leak protection, and split tunneling provide additional
-              layers of protection. Lightway itself underwent multiple independent
-              security reviews, and its open-source nature lets the community
-              continue to vet it for vulnerabilities. For users who require
-              airtight security, ExpressVPN delivers.
-            </p>
-
             <h2>Streaming and Unblocking</h2>
             <p>
               ExpressVPN remains a go-to service for streaming enthusiasts. During
@@ -139,13 +181,6 @@
               U.K., Japan, and several other countries. BBC iPlayer, Hulu, Disney
               Plus, and Amazon Prime Video worked without issue. Playback was
               smooth and buffer-free, even during peak hours.
-            </p>
-
-            <p>
-              The company also offers Smart DNS (MediaStreamer) for devices that
-              don’t support native VPN apps, such as certain smart TVs and gaming
-              consoles. This makes ExpressVPN an attractive option for households
-              with diverse streaming needs.
             </p>
 
             <h2>Ease of Use and Apps</h2>
@@ -158,14 +193,6 @@
               built-in speed tests.
             </p>
 
-            <p>
-              Setup on routers is straightforward, and the dedicated router app
-              allows you to protect all devices on a network with one
-              configuration. Browser extensions for Chrome, Firefox, and Edge
-              provide additional convenience and secure your traffic with minimal
-              effort.
-            </p>
-
             <h2>Support and Customer Service</h2>
             <p>
               ExpressVPN offers 24/7 live chat and email support. In our
@@ -174,18 +201,6 @@
               and protocol troubleshooting. The support website hosts an extensive
               library of tutorials, making it easy for users to find answers
               without direct assistance.
-            </p>
-
-            <h2>Pricing and Plans</h2>
-            <p>
-              ExpressVPN remains one of the more expensive options in the VPN
-              market, with monthly plans typically higher than many competitors.
-              However, the company offers discounts for longer subscriptions and a
-              30-day money-back guarantee on all plans. The price is justified by
-              the service’s reliability, speed, and best-in-class privacy
-              features. With up to 10–14 simultaneous connections depending on
-              plan and unlimited connections via a VPN router, it offers
-              flexibility for individuals and families alike.
             </p>
 
             <h2>Bottom Line</h2>
@@ -201,6 +216,7 @@
           </article>
         </div>
 
+        <!-- Sidebar -->
         <div class="col-lg-4">
           <div class="sticky-sidebar">
             <div class="p-4 rounded scorecard-box mb-4">
@@ -212,14 +228,7 @@
                   <span><strong>9.2</strong>/10</span>
                 </div>
                 <div class="progress" style="height: 8px;">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 92%;"
-                    aria-valuenow="9.2"
-                    aria-valuemin="0"
-                    aria-valuemax="10"
-                  ></div>
+                  <div class="progress-bar" role="progressbar" style="width: 92%;"></div>
                 </div>
               </div>
 
@@ -229,14 +238,7 @@
                   <span><strong>9.4</strong>/10</span>
                 </div>
                 <div class="progress" style="height: 8px;">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 94%;"
-                    aria-valuenow="9.4"
-                    aria-valuemin="0"
-                    aria-valuemax="10"
-                  ></div>
+                  <div class="progress-bar" role="progressbar" style="width: 94%;"></div>
                 </div>
               </div>
 
@@ -246,14 +248,7 @@
                   <span><strong>9.8</strong>/10</span>
                 </div>
                 <div class="progress" style="height: 8px;">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 98%;"
-                    aria-valuenow="9.8"
-                    aria-valuemin="0"
-                    aria-valuemax="10"
-                  ></div>
+                  <div class="progress-bar" role="progressbar" style="width: 98%;"></div>
                 </div>
               </div>
 
@@ -263,14 +258,7 @@
                   <span><strong>9.6</strong>/10</span>
                 </div>
                 <div class="progress" style="height: 8px;">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 96%;"
-                    aria-valuenow="9.6"
-                    aria-valuemin="0"
-                    aria-valuemax="10"
-                  ></div>
+                  <div class="progress-bar" role="progressbar" style="width: 96%;"></div>
                 </div>
               </div>
 
@@ -280,14 +268,7 @@
                   <span><strong>9.0</strong>/10</span>
                 </div>
                 <div class="progress" style="height: 8px;">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 90%;"
-                    aria-valuenow="9.0"
-                    aria-valuemin="0"
-                    aria-valuemax="10"
-                  ></div>
+                  <div class="progress-bar" role="progressbar" style="width: 90%;"></div>
                 </div>
               </div>
             </div>
@@ -310,7 +291,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Simultaneous Connections</th>
-                    <td>10–14 depending on plan; unlimited via router</td>
+                    <td>8 devices; unlimited via router</td>
                   </tr>
                   <tr>
                     <th scope="row">Money-Back Guarantee</th>
