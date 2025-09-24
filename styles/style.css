@@ -445,6 +445,11 @@ html[data-theme="dark"] .admin-login-page .card {
   background-color: var(--background-secondary);
 }
 
+/* Fix for form labels in dark mode */
+html[data-theme="dark"] .form-label {
+    color: var(--text-primary);
+}
+
 
 @media (max-width: 768px) {
   .hide-sm {
