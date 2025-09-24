@@ -73,6 +73,11 @@ document.querySelectorAll('.vote-btn').forEach(btn => {
       // Mark as voted (MVP: one vote only)
       row.querySelector('.d-flex.justify-content-center').classList.add('voted');
 
+      // Add a specific class to the button that was clicked
+      if (type === 'up') {
+        upBtn.classList.add('voted-up');
+      }
+
       if (!json.ok && json.error) {
         // Already voted — keep buttons disabled
         console.info(json.error);
@@ -107,3 +112,28 @@ function resortTable() {
   });
   rows.forEach((r,i) => { r.querySelector('td:first-child').textContent = (i+1); tbody.appendChild(r); });
 }
+
+// --- Column Toggler ---
+(function() {
+    const controlsContainer = document.querySelector('.column-toggle-controls');
+    if (!controlsContainer) return;
+
+    const checkboxes = controlsContainer.querySelectorAll('input[type="checkbox"]');
+
+    function updateColumnVisibility() {
+        checkboxes.forEach(checkbox => {
+            const colName = checkbox.dataset.colName;
+            const cells = document.querySelectorAll(`[data-col-name="${colName}"]`);
+            cells.forEach(cell => {
+                cell.style.display = checkbox.checked ? '' : 'none';
+            });
+        });
+    }
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateColumnVisibility);
+    });
+
+    // Initial run on page load
+    updateColumnVisibility();
+})();

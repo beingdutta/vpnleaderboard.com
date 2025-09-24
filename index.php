@@ -11,7 +11,7 @@ $regionCond = $region === 'GLOBAL' ? "1=1" : "FIND_IN_SET(:region, regions)";
 $sql = "
 SELECT 
   v_reg.vpn_id, v_reg.speed_mbps, v_reg.is_promoted, v_reg.affiliate_link, v_reg.starting_price,
-  v_all.name, v_all.website_url, v_all.logo_path, v_all.suitable_for, v_all.supported_countries, v_all.features,
+  v_all.name, v_all.website_url, v_all.logo_path, v_all.suitable_for, v_all.supported_countries, v_all.features, v_all.server_count, v_all.device_limit, v_all.protocols_supported, v_all.logging_policy, v_all.based_in,
   COALESCE(SUM(vt.vote='up'),0) AS upvotes,
   COALESCE(SUM(vt.vote='down'),0) AS downvotes,
   COALESCE(SUM(vt.vote='up'),0) - COALESCE(SUM(vt.vote='down'),0) AS score
@@ -91,6 +91,51 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     </div>
   </header>
 
+  <!-- CONTROLS -->
+  <div class="container mt-2">
+    <div class="column-toggle-controls p-3 mb-3">
+        <strong>Show Columns:</strong>
+        <div class="checkbox-group">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-starting_price" data-col-name="starting_price" checked>
+                <label class="form-check-label" for="toggle-starting_price">Starting Price</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-suitable_for" data-col-name="suitable_for" checked>
+                <label class="form-check-label" for="toggle-suitable_for">Suitable For</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-countries" data-col-name="countries">
+                <label class="form-check-label" for="toggle-countries">Countries</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-features" data-col-name="features" checked>
+                <label class="form-check-label" for="toggle-features">Features</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-server_count" data-col-name="server_count">
+                <label class="form-check-label" for="toggle-server_count">Servers</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-device_limit" data-col-name="device_limit">
+                <label class="form-check-label" for="toggle-device_limit">Devices</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-protocols_supported" data-col-name="protocols_supported">
+                <label class="form-check-label" for="toggle-protocols_supported">Protocols</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-logging_policy" data-col-name="logging_policy">
+                <label class="form-check-label" for="toggle-logging_policy">Logging</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-based_in" data-col-name="based_in">
+                <label class="form-check-label" for="toggle-based_in">Based In</label>
+            </div>
+        </div>
+    </div>
+  </div>
+
   <!-- TABLE -->
   <main class="container my-4">
     <div class="table-responsive">
@@ -99,10 +144,15 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
           <tr>
             <th>#</th>
             <th>VPN</th>
-            <th class="hide-sm">Starting Price</th>
-            <th>Suitable for</th>
-            <th class="hide-sm">Countries</th>
-            <th>Features</th>
+            <th data-col-name="starting_price" class="hide-sm">Starting Price</th>
+            <th data-col-name="suitable_for">Suitable for</th>
+            <th data-col-name="countries" class="hide-sm">Countries</th>
+            <th data-col-name="features">Features</th>
+            <th data-col-name="server_count" class="hide-sm">Servers</th>
+            <th data-col-name="device_limit" class="hide-sm">Devices</th>
+            <th data-col-name="protocols_supported">Protocols</th>
+            <th data-col-name="logging_policy">Logging</th>
+            <th data-col-name="based_in" class="hide-sm">Based In</th>
             <th></th>
             <th class="text-center">Votes</th>
             <th class="text-center">Score</th>
@@ -130,14 +180,19 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
                 </div>
               </div>
             </td>
-            <td class="hide-sm">$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></td>
-            <td><?= htmlspecialchars($v['suitable_for']) ?></td>
-            <td class="hide-sm"><?= (int)$v['supported_countries'] ?></td>
-            <td>
+            <td data-col-name="starting_price" class="hide-sm">$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></td>
+            <td data-col-name="suitable_for"><?= htmlspecialchars($v['suitable_for']) ?></td>
+            <td data-col-name="countries" class="hide-sm"><?= (int)$v['supported_countries'] ?></td>
+            <td data-col-name="features">
               <?php foreach ($features as $f): ?>
                 <span class="chip me-1"><?= htmlspecialchars($f) ?></span>
               <?php endforeach; ?>
             </td>
+            <td data-col-name="server_count" class="hide-sm"><?= (int)$v['server_count'] ?></td>
+            <td data-col-name="device_limit" class="hide-sm"><?= (int)$v['device_limit'] ?></td>
+            <td data-col-name="protocols_supported"><?= htmlspecialchars($v['protocols_supported']) ?></td>
+            <td data-col-name="logging_policy"><?= htmlspecialchars($v['logging_policy']) ?></td>
+            <td data-col-name="based_in" class="hide-sm"><?= htmlspecialchars($v['based_in']) ?></td>
             <td>
               <?php if (!empty($v['affiliate_link'])): ?>
                 <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn-get-deal">Get Deal</a>
@@ -145,9 +200,9 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             </td>
             <td class="text-center">
               <div class="d-flex justify-content-center align-items-center gap-2 <?= $voted ? 'voted':'' ?>">
-                <button class="vote-btn vote-up" data-type="up" title="Upvote" <?= $voted?'disabled':'' ?>>▲</button>
+                <button class="vote-btn vote-up" data-type="up" title="Upvote" <?= $voted?'disabled':'' ?>><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
                 <span class="upcount"><?= (int)$v['upvotes'] ?></span>
-                <button class="vote-btn vote-down" data-type="down" title="Downvote" <?= $voted?'disabled':'' ?>>▼</button>
+                <button class="vote-btn vote-down" data-type="down" title="Downvote" <?= $voted?'disabled':'' ?>><svg xmlns="http://www.w_3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                 <span class="downcount"><?= (int)$v['downvotes'] ?></span>
               </div>
               <?php if ($voted): ?><small class="text-success">You voted</small><?php endif; ?>
