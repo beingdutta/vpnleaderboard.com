@@ -96,18 +96,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
             // Only save master data if not in regional-only edit mode.
             if ($mode !== 'regional') {
-                $master_params = ['name' => $_POST['name'] ?? '', 'website_url' => $_POST['website_url'] ?? '', 'logo_path' => $_POST['logo_path'] ?: null];
+                $master_params = [
+                    'name' => $_POST['name'] ?? '', 
+                    'website_url' => $_POST['website_url'] ?? '', 
+                    'logo_path' => $_POST['logo_path'] ?: null,
+                    'suitable_for' => $_POST['suitable_for'] ?? '', 
+                    'supported_countries' => (int)($_POST['supported_countries'] ?? 0), 
+                    'features' => $_POST['features'] ?? '',
+                    'server_count' => (int)($_POST['server_count'] ?? 0),
+                    'device_limit' => (int)($_POST['device_limit'] ?? 0),
+                    'protocols_supported' => $_POST['protocols_supported'] ?? '',
+                    'logging_policy' => $_POST['logging_policy'] ?? '',
+                    'based_in' => $_POST['based_in'] ?? ''
+                ];
                 
                 if ($id > 0) { // Update existing master VPN
                     $master_params['id'] = $id;
-                    $sql = "UPDATE `vpns_all` SET name=:name, website_url=:website_url, logo_path=:logo_path WHERE id=:id";
+                    $sql = "UPDATE `vpn_master_table` SET 
+                                name=:name, website_url=:website_url, logo_path=:logo_path, suitable_for=:suitable_for, supported_countries=:supported_countries, features=:features,
+                                server_count=:server_count, device_limit=:device_limit, protocols_supported=:protocols_supported, logging_policy=:logging_policy, based_in=:based_in
+                            WHERE id=:id";
                 } else { // Insert new master VPN
-                    $sql = "INSERT INTO `vpns_all` (name, website_url, logo_path) VALUES (:name, :website_url, :logo_path)";
+                    $sql = "INSERT INTO `vpn_master_table` 
+                                (name, website_url, logo_path, suitable_for, supported_countries, features, server_count, device_limit, protocols_supported, logging_policy, based_in) 
+                            VALUES (:name, :website_url, :logo_path, :suitable_for, :supported_countries, :features, :server_count, :device_limit, :protocols_supported, :logging_policy, :based_in)";
                 }
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($master_params);
             }
-            
+
             // Get the ID of the VPN we just saved
             $vpn_id = ($id > 0) ? $id : $pdo->lastInsertId();
 
@@ -119,22 +136,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 'vpn_id' => $vpn_id,
                 'is_promoted' => isset($_POST['is_promoted']) ? 1 : 0,
                 'speed_mbps' => (int)($_POST['speed_mbps'] ?? 0),
-                'suitable_for' => $_POST['suitable_for'] ?? '', 'supported_countries' => (int)($_POST['supported_countries'] ?? 0),
-                'features' => $_POST['features'] ?? '', 'starting_price' => (float)($_POST['starting_price'] ?? 0),
+                'starting_price' => (float)($_POST['starting_price'] ?? 0),
                 'affiliate_link' => $_POST['affiliate_link'] ?? ''
             ];
-            $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, suitable_for, supported_countries, features, starting_price, affiliate_link) 
-                    VALUES (:vpn_id, :is_promoted, :speed_mbps, :suitable_for, :supported_countries, :features, :starting_price, :affiliate_link)
+            $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, starting_price, affiliate_link) 
+                    VALUES (:vpn_id, :is_promoted, :speed_mbps, :starting_price, :affiliate_link)
                     ON DUPLICATE KEY UPDATE 
-                        is_promoted = VALUES(is_promoted), speed_mbps = VALUES(speed_mbps), suitable_for = VALUES(suitable_for), 
-                        supported_countries = VALUES(supported_countries), features = VALUES(features), starting_price = VALUES(starting_price), affiliate_link = VALUES(affiliate_link)";
+                        is_promoted = VALUES(is_promoted), speed_mbps = VALUES(speed_mbps), starting_price = VALUES(starting_price), affiliate_link = VALUES(affiliate_link)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute($regional_params);
             }
 
         } elseif ($_POST['action'] === 'delete_vpn' && $id > 0) {
             // Deleting from vpns_all will cascade and delete from all regional and votes tables.
-            $stmt = $pdo->prepare("DELETE FROM `vpns_all` WHERE id = ?");
+            $stmt = $pdo->prepare("DELETE FROM `vpn_master_table` WHERE id = ?");
             $stmt->execute([$id]);
         } elseif ($_POST['action'] === 'reset_votes' && $id > 0) {
             $stmt = $pdo->prepare("DELETE FROM `$action_votes_table` WHERE vpn_id = ?");
@@ -153,14 +168,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $regional_params = [
                     'vpn_id' => $vpn_id,
                     'is_promoted' => isset($_POST['is_promoted']) ? 1 : 0,
-                    'speed_mbps' => (int)($_POST['speed_mbps'] ?? 0),
-                    'suitable_for' => $_POST['suitable_for'] ?? '', 
-                    'supported_countries' => (int)($_POST['supported_countries'] ?? 0),
-                    'features' => $_POST['features'] ?? '', 
+                    'speed_mbps' => (int)($_POST['speed_mbps'] ?? 0), 
                     'starting_price' => (float)($_POST['starting_price'] ?? 0),
                     'affiliate_link' => $_POST['affiliate_link'] ?? ''
                 ];
-                $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, suitable_for, supported_countries, features, starting_price, affiliate_link) VALUES (:vpn_id, :is_promoted, :speed_mbps, :suitable_for, :supported_countries, :features, :starting_price, :affiliate_link)";
+                $sql = "INSERT INTO `$action_vpns_table` (vpn_id, is_promoted, speed_mbps, starting_price, affiliate_link) VALUES (:vpn_id, :is_promoted, :speed_mbps, :starting_price, :affiliate_link)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($regional_params);
             }
@@ -180,9 +192,9 @@ if ($view === 'vpns') {
     $sql = "
         SELECT 
             va.*, 
-            vr.is_promoted, vr.speed_mbps, vr.suitable_for, vr.supported_countries, vr.features, vr.starting_price, vr.affiliate_link,
+            vr.is_promoted, vr.speed_mbps, vr.starting_price, vr.affiliate_link,
             (SELECT COUNT(*) FROM `$votes_table` vt WHERE vt.vpn_id = va.id) as total_votes
-        FROM `vpns_all` va
+        FROM `vpn_master_table` va
         JOIN `$vpns_table` vr ON va.id = vr.vpn_id
         ORDER BY va.name ASC
     ";
@@ -190,15 +202,15 @@ if ($view === 'vpns') {
     $stmt->execute();
     $vpns = $stmt->fetchAll();
 
-    $vpns_to_add_stmt = $pdo->prepare("SELECT id, name FROM vpns_all WHERE id NOT IN (SELECT vpn_id FROM `$vpns_table`) ORDER BY name ASC");
+    $vpns_to_add_stmt = $pdo->prepare("SELECT id, name FROM vpn_master_table WHERE id NOT IN (SELECT vpn_id FROM `$vpns_table`) ORDER BY name ASC");
     $vpns_to_add_stmt->execute();
     $vpns_to_add = $vpns_to_add_stmt->fetchAll();
 } elseif ($view === 'master') {
-    $stmt = $pdo->prepare("SELECT * FROM `vpns_all` ORDER BY name ASC");
+    $stmt = $pdo->prepare("SELECT * FROM `vpn_master_table` ORDER BY name ASC");
     $stmt->execute();
     $master_vpns = $stmt->fetchAll();
 } else { // 'votes' view
-    $stmt = $pdo->prepare("SELECT vt.*, v.name as vpn_name FROM `$votes_table` vt LEFT JOIN `vpns_all` v ON vt.vpn_id = v.id ORDER BY vt.id DESC LIMIT 100");
+    $stmt = $pdo->prepare("SELECT vt.*, v.name as vpn_name FROM `$votes_table` vt LEFT JOIN `vpn_master_table` v ON vt.vpn_id = v.id ORDER BY vt.id DESC LIMIT 100");
     $stmt->execute();
     $votes = $stmt->fetchAll();
 }
@@ -406,6 +418,41 @@ if ($view === 'vpns') {
                                     <label for="vpn-logo_path" class="form-label">Logo Path</label>
                                     <input type="text" class="form-control" id="vpn-logo_path" name="logo_path" placeholder="e.g., assets/nordvpn.png">
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="vpn-suitable_for" class="form-label">Suitable For</label>
+                                    <input type="text" class="form-control" id="vpn-suitable_for" name="suitable_for">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="vpn-supported_countries" class="form-label">Countries</label>
+                                    <input type="number" class="form-control" id="vpn-supported_countries" name="supported_countries">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="vpn-features" class="form-label">Features (semicolon-separated)</label>
+                                    <input type="text" class="form-control" id="vpn-features" name="features">
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="vpn-server_count" class="form-label">Server Count</label>
+                                        <input type="number" class="form-control" id="vpn-server_count" name="server_count">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="vpn-device_limit" class="form-label">Device Limit</label>
+                                        <input type="number" class="form-control" id="vpn-device_limit" name="device_limit">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="vpn-protocols_supported" class="form-label">Protocols Supported</label>
+                                        <input type="text" class="form-control" id="vpn-protocols_supported" name="protocols_supported" placeholder="e.g., WireGuard, OpenVPN, IKEv2">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="vpn-logging_policy" class="form-label">Logging Policy</label>
+                                        <input type="text" class="form-control" id="vpn-logging_policy" name="logging_policy" placeholder="e.g., Strict No-Logs Policy">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="vpn-based_in" class="form-label">Based In (Country)</label>
+                                        <input type="text" class="form-control" id="vpn-based_in" name="based_in" placeholder="e.g., British Virgin Islands">
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
                         <hr>
@@ -420,20 +467,6 @@ if ($view === 'vpns') {
                                     <label for="vpn-starting_price" class="form-label">Starting Price ($)</label>
                                     <input type="number" step="0.01" class="form-control" id="vpn-starting_price" name="starting_price">
                                 </div>
-                            </div>
-                            <div class="row">
-                                 <div class="col-md-6 mb-3">
-                                    <label for="vpn-suitable_for" class="form-label">Suitable For</label>
-                                    <input type="text" class="form-control" id="vpn-suitable_for" name="suitable_for">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="vpn-supported_countries" class="form-label">Countries</label>
-                                    <input type="number" class="form-control" id="vpn-supported_countries" name="supported_countries">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="vpn-features" class="form-label">Features (semicolon-separated)</label>
-                                <input type="text" class="form-control" id="vpn-features" name="features">
                             </div>
                             <div class="mb-3">
                                 <label for="vpn-affiliate_link" class="form-label">Affiliate Link</label>
@@ -490,20 +523,6 @@ if ($view === 'vpns') {
                                     <label for="add-starting_price" class="form-label">Starting Price ($)</label>
                                     <input type="number" step="0.01" class="form-control" id="add-starting_price" name="starting_price">
                                 </div>
-                            </div>
-                            <div class="row">
-                                 <div class="col-md-6 mb-3">
-                                    <label for="add-suitable_for" class="form-label">Suitable For</label>
-                                    <input type="text" class="form-control" id="add-suitable_for" name="suitable_for">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="add-supported_countries" class="form-label">Countries</label>
-                                    <input type="number" class="form-control" id="add-supported_countries" name="supported_countries">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="add-features" class="form-label">Features (semicolon-separated)</label>
-                                <input type="text" class="form-control" id="add-features" name="features">
                             </div>
                             <div class="mb-3">
                                 <label for="add-affiliate_link" class="form-label">Affiliate Link</label>
@@ -567,18 +586,24 @@ if ($view === 'vpns') {
                 document.getElementById('vpn-name').value = data.name || '';
                 document.getElementById('vpn-website_url').value = data.website_url || '';
                 document.getElementById('vpn-logo_path').value = data.logo_path || '';
+                document.getElementById('vpn-suitable_for').value = data.suitable_for || '';
+                document.getElementById('vpn-supported_countries').value = data.supported_countries || '';
+                document.getElementById('vpn-features').value = data.features || '';
+
+                document.getElementById('vpn-server_count').value = data.server_count || '';
+                document.getElementById('vpn-device_limit').value = data.device_limit || '';
+                document.getElementById('vpn-protocols_supported').value = data.protocols_supported || '';
+                document.getElementById('vpn-logging_policy').value = data.logging_policy || '';
+                document.getElementById('vpn-based_in').value = data.based_in || '';
 
                 // When editing regional data, disable master fields to prevent accidental changes
                 if (mode === 'regional') {
-                    form.querySelectorAll('fieldset:nth-of-type(1) input').forEach(el => el.disabled = true);
+                    form.querySelectorAll('fieldset:nth-of-type(1) input, fieldset:nth-of-type(1) textarea').forEach(el => el.disabled = true); // This will include the new fields
                 }
 
                 // Regional data
                 document.getElementById('vpn-is_promoted').checked = data.is_promoted == 1;
                 document.getElementById('vpn-speed_mbps').value = data.speed_mbps || '';
-                document.getElementById('vpn-suitable_for').value = data.suitable_for || '';
-                document.getElementById('vpn-supported_countries').value = data.supported_countries || '';
-                document.getElementById('vpn-features').value = data.features || '';
                 document.getElementById('vpn-starting_price').value = data.starting_price || '';
                 document.getElementById('vpn-affiliate_link').value = data.affiliate_link || '';
             }

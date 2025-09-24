@@ -10,13 +10,13 @@ $regionCond = $region === 'GLOBAL' ? "1=1" : "FIND_IN_SET(:region, regions)";
 
 $sql = "
 SELECT 
-  v_reg.*,
-  v_all.name, v_all.website_url, v_all.logo_path,
+  v_reg.vpn_id, v_reg.speed_mbps, v_reg.is_promoted, v_reg.affiliate_link, v_reg.starting_price,
+  v_all.name, v_all.website_url, v_all.logo_path, v_all.suitable_for, v_all.supported_countries, v_all.features,
   COALESCE(SUM(vt.vote='up'),0) AS upvotes,
   COALESCE(SUM(vt.vote='down'),0) AS downvotes,
   COALESCE(SUM(vt.vote='up'),0) - COALESCE(SUM(vt.vote='down'),0) AS score
 FROM vpns_global v_reg
-JOIN vpns_all v_all ON v_reg.vpn_id = v_all.id
+JOIN vpn_master_table v_all ON v_reg.vpn_id = v_all.id
 LEFT JOIN votes_global vt ON vt.vpn_id = v_reg.vpn_id
 WHERE $regionCond
 GROUP BY v_reg.vpn_id
