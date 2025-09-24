@@ -61,7 +61,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <header class="py-5 hero">
     <div class="container text-center">
       <h1 class="display-5 fw-bold">VPN & Security Blog</h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">Your source for privacy news, tips, and in-depth guides.</p>
+      <p class="text-secondary">Your source for privacy news, tips, and in-depth guides.</p>
     </div>
   </header>
 

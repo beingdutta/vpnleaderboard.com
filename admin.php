@@ -38,8 +38,8 @@ if (!isset($_SESSION[ADMIN_SESSION_KEY]) || !$_SESSION[ADMIN_SESSION_KEY]):
     <meta name="robots" content="noindex, nofollow">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
-</head>
-<body>
+</head> 
+<body class="admin-login-page">
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-4">

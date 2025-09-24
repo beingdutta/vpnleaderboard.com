@@ -43,6 +43,11 @@ html[data-theme="dark"] {
    2. Base & Global Styles
    ========================================================================== */
 
+html {
+  /* Adjust base font size to make the site appear slightly smaller at 100% zoom */
+  font-size: 93.75%; /* 15px base, down from 16px */
+}
+
 body {
   background: var(--background-primary);
   color: var(--text-primary);
@@ -250,7 +255,7 @@ html[data-theme="dark"] .article-card-horizontal:hover {
 }
 
 .article-content {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.7;
 }
 
@@ -432,6 +437,14 @@ html[data-theme="dark"] .star-icon.half::before {
     width: 100%;
   }
 }
+
+/* Admin Login Page Dark Mode Fix */
+/* Target the card directly to override Bootstrap defaults */
+html[data-theme="dark"] .admin-login-page .card {
+  color: var(--text-primary);
+  background-color: var(--background-secondary);
+}
+
 
 @media (max-width: 768px) {
   .hide-sm {
