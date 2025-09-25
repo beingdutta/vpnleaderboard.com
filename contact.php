@@ -6,9 +6,9 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Feedback & Suggestions | VPN Leaderboard</title>
+    <title>Contact Us | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Have a suggestion, a feature request, or feedback? We'd love to hear from you. Help us improve the VPN Leaderboard.">
+    <meta name="description" content="Have a question, suggestion, or partnership inquiry? Contact the VPN Leaderboard team. We'd love to hear from you.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="noindex, follow">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">
@@ -18,27 +18,26 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <body>
   <?php include __DIR__ . '/navigation/nav.php'; ?>
 
-  <!-- HERO -->
   <header class="py-5 hero">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Share Your Feedback</h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">We value your input. Help us make VPN Leaderboard better.</p>
+      <h1 class="display-5 fw-bold">Get In Touch</h1>
+      <p class="text-secondary" style="font-size: 1.1rem;">We value your input. Let's connect.</p>
     </div>
   </header>
 
   <div class="container mt-4">
     <div class="alert alert-info text-center" role="alert">
-      <strong>Are you a VPN company?</strong> If you want to register your VPN with us, please email us at 
+      <strong>Are you a VPN company?</strong> To register your VPN or discuss partnerships, please email us at 
       <a href="mailto:admin@vpnleaderboard.com" class="alert-link">admin@vpnleaderboard.com</a>.
     </div>
   </div>
 
-  <!-- FORM -->
   <main class="container my-5">
     <div class="row justify-content-center">
       <div class="col-lg-7">
         <div id="feedback-card" class="card" style="background: var(--background-secondary); border-color: var(--border-color);">
           <div class="card-body p-4 p-md-5">
+            <h5 class="card-title text-center mb-4">Send us a Message</h5>
             <form id="feedback-form">
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -57,7 +56,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
                 <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
               </div>
               <div id="form-feedback" class="mt-3"></div>
-              <button type="submit" class="btn btn-primary w-100">Submit Feedback</button>
+              <button type="submit" class="btn btn-primary w-100">Submit Message</button>
             </form>
           </div>
         </div>
@@ -75,30 +74,22 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
       const form = this;
       const feedbackDiv = document.getElementById('form-feedback');
       const cardDiv = document.getElementById('feedback-card');
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+      const data = Object.fromEntries(new FormData(form).entries());
 
-      feedbackDiv.innerHTML = '<div class="alert alert-info small">Submitting...</div>';
+      feedbackDiv.innerHTML = '<div class="alert alert-info small py-2">Submitting...</div>';
 
-      fetch('submit_feedback.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
+      fetch('submit_feedback.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(res => res.json())
       .then(result => {
         if (result.ok) {
-          cardDiv.innerHTML = `<div class="card-body text-center p-5"><h3 class="text-success">Thank You!</h3><p>Your feedback has been submitted successfully.</p><p class="text-secondary">Redirecting you to the homepage in 3 seconds...</p></div>`;
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 3000);
+          cardDiv.innerHTML = `<div class="card-body text-center p-5"><h3 class="text-success">Thank You!</h3><p>Your message has been sent successfully.</p><p class="text-secondary">We'll get back to you shortly. Redirecting to homepage...</p></div>`;
+          setTimeout(() => { window.location.href = '/'; }, 3500);
         } else {
-          feedbackDiv.innerHTML = `<div class="alert alert-danger small">${result.error || 'An unknown error occurred.'}</div>`;
+          feedbackDiv.innerHTML = `<div class="alert alert-danger small py-2">${result.error || 'An unknown error occurred.'}</div>`;
         }
       })
       .catch(error => {
-        feedbackDiv.innerHTML = `<div class="alert alert-danger small">A network error occurred. Please try again.</div>`;
-        console.error('Error:', error);
+        feedbackDiv.innerHTML = `<div class="alert alert-danger small py-2">A network error occurred. Please try again.</div>`;
       });
     });
   </script>
