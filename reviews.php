@@ -107,6 +107,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Expert, hands-on reviews of the top VPN services. We test speed, security, and features to help you choose the best VPN.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
+    <link rel="icon" href="/assets/site-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>

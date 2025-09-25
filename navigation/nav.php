@@ -13,8 +13,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'VPNs-in-India.php') ? 'active' : '' ?>" href="/VPNs-in-India.php">India</a></li>
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'VPNs-in-US.php') ? 'active' : '' ?>" href="/VPNs-in-US.php">US</a></li>
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'VPNs-in-China.php') ? 'active' : '' ?>" href="/VPNs-in-China.php">China</a></li>
-                <li class="nav-item"><a class="nav-link <?= ($current_page === 'reviews.php') ? 'active' : '' ?>" href="/reviews.php">Reviews</a></li>
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'blogs.php') ? 'active' : '' ?>" href="/blogs.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link <?= ($current_page === 'reviews.php') ? 'active' : '' ?>" href="/reviews.php">Reviews</a></li>
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'feedback.php') ? 'active' : '' ?>" href="/feedback.php">Feedback</a></li>
             </ul>
             <a href="#" id="theme-toggle" class="nav-link" title="Toggle light/dark theme"></a>
