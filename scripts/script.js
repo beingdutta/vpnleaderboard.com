@@ -137,3 +137,91 @@ function resortTable() {
     // Initial run on page load
     updateColumnVisibility();
 })();
+
+// --- Hero Chip Filtering & Sorting ---
+(function() {
+    const heroChips = document.querySelectorAll('.hero-chip');
+    if (!heroChips.length) return;
+
+    const tbody = document.querySelector('#vpntable tbody');
+    if (!tbody) return;
+
+    const allRows = Array.from(tbody.querySelectorAll('tr'));
+
+    // Create a pristine copy of rows in their original order for resetting
+    const originalRows = Array.from(tbody.querySelectorAll('tr'));
+
+    function resetTableToOriginal() {
+        tbody.innerHTML = ''; // Clear the table body
+        originalRows.forEach(row => tbody.appendChild(row));
+    }
+
+    function applyFilterAndSort(filterFn, sortFn) {
+        let filteredRows = [];
+        allRows.forEach(row => {
+            const shouldShow = filterFn(row);
+            row.style.display = shouldShow ? '' : 'none';
+            if (shouldShow) {
+                filteredRows.push(row);
+            }
+        });
+
+        if (sortFn) {
+            filteredRows.sort(sortFn);
+        }
+
+        // Re-append sorted and filtered rows to the table
+        filteredRows.forEach(row => tbody.appendChild(row));
+        updateRanks();
+    }
+
+    function updateRanks() {
+        const visibleRows = Array.from(tbody.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
+        visibleRows.forEach((row, index) => {
+            const rankCell = row.querySelector('td:first-child');
+            if (rankCell) {
+                rankCell.textContent = index + 1;
+            }
+        });
+    }
+
+    heroChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const action = chip.dataset.action;
+            const value = chip.dataset.value;
+            const isActive = chip.classList.contains('active');
+
+            // Deactivate all other chips
+            heroChips.forEach(c => c.classList.remove('active'));
+
+            if (isActive) {
+                // If clicking an active chip, reset everything
+                resetTableToOriginal();
+                return;
+            }
+
+            chip.classList.add('active');
+
+            let filterFn = () => true; // Default: show all
+            // Default sort: Score (descending)
+            let sortFn = (a, b) => (parseInt(b.dataset.score, 10) || 0) - (parseInt(a.dataset.score, 10) || 0);
+
+            if (action === 'sort' && value === 'speed') {
+                // Sort by speed (descending)
+                sortFn = (a, b) => {
+                    return (parseInt(b.querySelector('[data-col-name="speed_mbps"]').textContent, 10) || 0) - (parseInt(a.querySelector('[data-col-name="speed_mbps"]').textContent, 10) || 0);
+                };
+            } else if (action === 'filter') {
+                if (value === 'free') {
+                    filterFn = row => row.querySelector('[data-col-name="free_available"]').textContent.trim() === 'Yes';
+                } else if (value === 'mobile') {
+                    filterFn = row => row.querySelector('[data-col-name="platform"]').textContent.includes('Android') && row.querySelector('[data-col-name="platform"]').textContent.includes('iOS');
+                } else { // Windows, macOS, Linux
+                    filterFn = row => row.querySelector('[data-col-name="platform"]').textContent.includes(value);
+                }
+            }
+            
+            applyFilterAndSort(filterFn, sortFn);
+        });
+    });
+})();

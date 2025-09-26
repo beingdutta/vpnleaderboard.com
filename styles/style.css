@@ -147,6 +147,16 @@ html[data-theme="dark"] .hero {
   box-shadow: 0 0 8px var(--brand-highlight);
 }
 
+.hero-chip {
+  cursor: pointer;
+}
+
+.hero-chip.active {
+  background-color: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+
 .chip-promoted {
   background: #facc15; /* Golden yellow */
   color: #422006;
