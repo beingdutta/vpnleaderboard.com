@@ -108,14 +108,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     'device_limit' => (int)($_POST['device_limit'] ?? 0),
                     'protocols_supported' => $_POST['protocols_supported'] ?? '',
                     'logging_policy' => $_POST['logging_policy'] ?? '',
-                    'based_in' => $_POST['based_in'] ?? ''
+                    'based_in' => $_POST['based_in'] ?? '',
+                    'Free_available' => isset($_POST['Free_available']) ? 1 : 0,
+                    'Platform' => $_POST['Platform'] ?? ''
                 ];
                 
                 if ($id > 0) { // Update existing master VPN
                     $master_params['id'] = $id;
                     $sql = "UPDATE `vpn_master_table` SET 
                                 name=:name, website_url=:website_url, logo_path=:logo_path, suitable_for=:suitable_for, supported_countries=:supported_countries, features=:features,
-                                server_count=:server_count, device_limit=:device_limit, protocols_supported=:protocols_supported, logging_policy=:logging_policy, based_in=:based_in
+                                server_count=:server_count, device_limit=:device_limit, protocols_supported=:protocols_supported, logging_policy=:logging_policy, based_in=:based_in,
+                                Free_available=:Free_available, Platform=:Platform
                             WHERE id=:id";
                 } else { // Insert new master VPN
                     $sql = "INSERT INTO `vpn_master_table` 
@@ -454,6 +457,16 @@ if ($view === 'vpns') {
                                         <label for="vpn-based_in" class="form-label">Based In (Country)</label>
                                         <input type="text" class="form-control" id="vpn-based_in" name="based_in" placeholder="e.g., British Virgin Islands">
                                     </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="vpn-Platform" class="form-label">Platform (comma-separated)</label>
+                                        <input type="text" class="form-control" id="vpn-Platform" name="Platform" placeholder="e.g., Windows, macOS, iOS, Android">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="1" id="vpn-Free_available" name="Free_available">
+                                            <label class="form-check-label" for="vpn-Free_available">Free Plan Available?</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>
@@ -597,6 +610,8 @@ if ($view === 'vpns') {
                 document.getElementById('vpn-protocols_supported').value = data.protocols_supported || '';
                 document.getElementById('vpn-logging_policy').value = data.logging_policy || '';
                 document.getElementById('vpn-based_in').value = data.based_in || '';
+                document.getElementById('vpn-Platform').value = data.Platform || '';
+                document.getElementById('vpn-Free_available').checked = data.Free_available == 1;
 
                 // When editing regional data, disable master fields to prevent accidental changes
                 if (mode === 'regional') {

@@ -139,89 +139,186 @@ function resortTable() {
 })();
 
 // --- Hero Chip Filtering & Sorting ---
-(function() {
-    const heroChips = document.querySelectorAll('.hero-chip');
-    if (!heroChips.length) return;
+// --- Hero Chip Filtering & Sorting (with deep logging) ---
+(function () {
+  // All logs live *inside functions / handlers* only.
+  // Helper logger (uses console.log so you always see it)
+  const TAG = 'HeroChips';
+  const log  = (...a) => console.log(`[${TAG}]`, ...a);
+  const warn = (...a) => console.warn(`[${TAG}]`, ...a);
+  const err  = (...a) => console.error(`[${TAG}]`, ...a);
 
-    const tbody = document.querySelector('#vpntable tbody');
-    if (!tbody) return;
+  const heroChips = document.querySelectorAll('.hero-chip');
+  const table = document.querySelector('#vpntable');
+  const tbody = table ? table.querySelector('tbody') : null;
 
-    const allRows = Array.from(tbody.querySelectorAll('tr'));
+  // Guard: we log this *inside the IIFE (a function)*.
+  log('init()', {
+    chipsFound: heroChips ? heroChips.length : 0,
+    hasTable: !!table,
+    hasTbody: !!tbody
+  });
+  if (!heroChips.length) { warn('init(): No .hero-chip elements found.'); return; }
+  if (!tbody) { err('init(): #vpntable tbody not found.'); return; }
 
-    // Create a pristine copy of rows in their original order for resetting
-    const originalRows = Array.from(tbody.querySelectorAll('tr'));
+  const originalRows = Array.from(tbody.querySelectorAll('tr'));
+  log('init(): captured originalRows', originalRows.length);
 
-    function resetTableToOriginal() {
-        tbody.innerHTML = ''; // Clear the table body
-        originalRows.forEach(row => tbody.appendChild(row));
+  // Identify a row in logs by something human-readable
+  function rowId(row) {
+    const nameCell =
+      row.querySelector('[data-col-name="name"]') ||
+      row.querySelector('[data-col-name="provider"]') ||
+      row.querySelector('[data-col-name="vpn"]') ||
+      row.querySelector('td:nth-child(2)') ||
+      row.querySelector('td');
+    const t = (nameCell ? nameCell.textContent : '').trim();
+    return t ? t.slice(0, 40) : `row#${Array.from(row.parentNode?.children || []).indexOf(row)}`;
+  }
+
+  function getCellText(row, colName) {
+    log('getCellText()', { row: rowId(row), colName });
+    const cell = row.querySelector(`[data-col-name="${colName}"]`);
+    if (!cell) {
+      warn('getCellText(): cell not found', { row: rowId(row), colName });
+      return '';
     }
+    const text = (cell.textContent || '').trim();
+    log('getCellText(): value', { row: rowId(row), colName, text });
+    return text;
+  }
 
-    function applyFilterAndSort(filterFn, sortFn) {
-        let filteredRows = [];
-        allRows.forEach(row => {
-            const shouldShow = filterFn(row);
-            row.style.display = shouldShow ? '' : 'none';
-            if (shouldShow) {
-                filteredRows.push(row);
-            }
-        });
+  function getCellNumber(row, colName) {
+    log('getCellNumber(): start', { row: rowId(row), colName });
+    const raw = getCellText(row, colName);
+    const n = parseFloat((raw || '').replace(/[^0-9.]+/g, ''));
+    const val = isNaN(n) ? 0 : n;
+    log('getCellNumber(): parsed', { row: rowId(row), colName, raw, number: val });
+    return val;
+  }
 
-        if (sortFn) {
-            filteredRows.sort(sortFn);
-        }
-
-        // Re-append sorted and filtered rows to the table
-        filteredRows.forEach(row => tbody.appendChild(row));
-        updateRanks();
-    }
-
-    function updateRanks() {
-        const visibleRows = Array.from(tbody.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
-        visibleRows.forEach((row, index) => {
-            const rankCell = row.querySelector('td:first-child');
-            if (rankCell) {
-                rankCell.textContent = index + 1;
-            }
-        });
-    }
-
-    heroChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-            const action = chip.dataset.action;
-            const value = chip.dataset.value;
-            const isActive = chip.classList.contains('active');
-
-            // Deactivate all other chips
-            heroChips.forEach(c => c.classList.remove('active'));
-
-            if (isActive) {
-                // If clicking an active chip, reset everything
-                resetTableToOriginal();
-                return;
-            }
-
-            chip.classList.add('active');
-
-            let filterFn = () => true; // Default: show all
-            // Default sort: Score (descending)
-            let sortFn = (a, b) => (parseInt(b.dataset.score, 10) || 0) - (parseInt(a.dataset.score, 10) || 0);
-
-            if (action === 'sort' && value === 'speed') {
-                // Sort by speed (descending)
-                sortFn = (a, b) => {
-                    return (parseInt(b.querySelector('[data-col-name="speed_mbps"]').textContent, 10) || 0) - (parseInt(a.querySelector('[data-col-name="speed_mbps"]').textContent, 10) || 0);
-                };
-            } else if (action === 'filter') {
-                if (value === 'free') {
-                    filterFn = row => row.querySelector('[data-col-name="free_available"]').textContent.trim() === 'Yes';
-                } else if (value === 'mobile') {
-                    filterFn = row => row.querySelector('[data-col-name="platform"]').textContent.includes('Android') && row.querySelector('[data-col-name="platform"]').textContent.includes('iOS');
-                } else { // Windows, macOS, Linux
-                    filterFn = row => row.querySelector('[data-col-name="platform"]').textContent.includes(value);
-                }
-            }
-            
-            applyFilterAndSort(filterFn, sortFn);
-        });
+  function updateRanks() {
+    log('updateRanks(): start');
+    const visible = Array.from(tbody.querySelectorAll('tr'));
+    visible.forEach((row, i) => {
+      const rankCell = row.querySelector('td:first-child');
+      if (rankCell) {
+        rankCell.textContent = i + 1;
+        log('updateRanks(): set', { row: rowId(row), rank: i + 1 });
+      } else {
+        warn('updateRanks(): first cell not found for rank', { row: rowId(row) });
+      }
     });
+    log('updateRanks(): end', { totalVisible: visible.length });
+  }
+
+  function rebuildBody(rows) {
+    log('rebuildBody(): start', { incoming: rows.length, beforeChildren: tbody.children.length });
+    tbody.innerHTML = '';
+    rows.forEach((r, i) => {
+      r.style.display = '';
+      tbody.appendChild(r);
+      if (i < 5) log('rebuildBody(): appended sample', { i, row: rowId(r) });
+    });
+    updateRanks();
+    log('rebuildBody(): end', { afterChildren: tbody.children.length });
+  }
+
+  function resetTable() {
+    log('resetTable(): start');
+    rebuildBody(originalRows);
+    heroChips.forEach(c => c.classList.remove('active'));
+    log('resetTable(): cleared active chips');
+  }
+
+  function applyFilter(rows, value) {
+    log('applyFilter(): start', { startCount: rows.length, value });
+    let filtered = rows;
+
+    if (value === 'free') {
+      filtered = rows.filter(r => getCellText(r, 'free_available').toLowerCase() === 'yes');
+    } else if (value === 'mobile') {
+      filtered = rows.filter(r => {
+        const t = getCellText(r, 'platform').toLowerCase();
+        const ok = t.includes('android') || t.includes('ios');
+        log('applyFilter(): mobile check', { row: rowId(r), platform: t, ok });
+        return ok;
+      });
+    } else if (value) {
+      // windows / macos / linux / other platform tokens
+      filtered = rows.filter(r => getCellText(r, 'platform').toLowerCase().includes(value));
+    }
+
+    log('applyFilter(): end', { endCount: filtered.length });
+    return filtered;
+  }
+
+  function applySort(rows, value) {
+    log('applySort(): start', { count: rows.length, value });
+    const copy = rows.slice();
+
+    if (value === 'speed') {
+      copy.sort((a, b) => {
+        const na = getCellNumber(a, 'speed_mbps');
+        const nb = getCellNumber(b, 'speed_mbps');
+        const diff = nb - na;
+        log('applySort(): compare', { a: rowId(a), na, b: rowId(b), nb, diff });
+        return diff;
+      });
+    } else {
+      log('applySort(): no matching sorter; leaving order as-is');
+    }
+
+    log('applySort(): end');
+    return copy;
+  }
+
+  // Bind clicks with detailed logging
+  heroChips.forEach(chip => {
+    chip.addEventListener('click', (ev) => {
+      log('onClick(): chip', {
+        text: chip.textContent?.trim(),
+        dataset: { action: chip.dataset.action, value: chip.dataset.value },
+        activeBefore: chip.classList.contains('active')
+      });
+
+      const action = chip.dataset.action;   // "filter" | "sort"
+      const value  = (chip.dataset.value || '').toLowerCase();
+      const isActive = chip.classList.contains('active');
+
+      if (isActive) {
+        log('onClick(): chip is active -> resetting');
+        resetTable();
+        return;
+      }
+
+      // Set this the only active chip
+      heroChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      log('onClick(): activated chip', { text: chip.textContent?.trim() });
+
+      // Start from pristine rows
+      let rows = originalRows.slice();
+      log('onClick(): start rows', rows.length);
+
+      if (action === 'filter') {
+        rows = applyFilter(rows, value);
+      } else if (action === 'sort') {
+        rows = applySort(rows, value);
+      } else {
+        warn('onClick(): unknown chip action', { action, value });
+      }
+
+      log('onClick(): rebuilding body with rows', rows.length);
+      rebuildBody(rows);
+      log('onClick(): done');
+    });
+
+    log('bind(): attached click', {
+      text: chip.textContent?.trim(),
+      dataset: { action: chip.dataset.action, value: chip.dataset.value }
+    });
+  });
+
+  log('init(): ready — waiting for clicks');
 })();
