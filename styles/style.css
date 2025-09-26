@@ -133,8 +133,18 @@ html[data-theme="dark"] .hero {
   border: 1px solid var(--chip-border);
   padding: 0.2rem 0.5rem;
   border-radius: 1rem;
-  font-size: 0.75rem;
+  font-size: 0.8rem; /* Increased font size */
+  display: inline-block;
   color: var(--chip-text);
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
+  user-select: none; /* Prevent text selection cursor */
+}
+
+.chip:hover {
+  background-color: var(--brand-highlight);
+  border-color: var(--brand);
+  box-shadow: 0 0 8px var(--brand-highlight);
 }
 
 .chip-promoted {
@@ -490,6 +500,15 @@ html[data-theme="dark"] .form-label {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
+}
+
+.column-toggle-controls .form-check-label {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.column-toggle-controls .form-check-label:hover {
+    color: var(--brand);
 }
 
 /* Fix for invisible unchecked checkboxes */

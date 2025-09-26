@@ -12,7 +12,7 @@ $sql = "
 SELECT 
   v_reg.vpn_id, v_reg.speed_mbps, v_reg.is_promoted, v_reg.affiliate_link, v_reg.starting_price,
   v_all.name, v_all.website_url, v_all.logo_path, v_all.suitable_for, v_all.supported_countries, v_all.features, v_all.server_count, v_all.device_limit, v_all.protocols_supported, v_all.logging_policy, v_all.based_in,
-  COALESCE(SUM(vt.vote='up'),0) AS upvotes,
+  v_all.Free_available, v_all.Platform, COALESCE(SUM(vt.vote='up'),0) AS upvotes,
   COALESCE(SUM(vt.vote='down'),0) AS downvotes,
   COALESCE(SUM(vt.vote='up'),0) - COALESCE(SUM(vt.vote='down'),0) AS score
 FROM vpns_global v_reg
@@ -98,6 +98,10 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         <strong>Show Columns:</strong>
         <div class="checkbox-group">
             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-speed_mbps" data-col-name="speed_mbps" checked>
+                <label class="form-check-label" for="toggle-speed_mbps">Speed</label>
+            </div>
+            <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="toggle-starting_price" data-col-name="starting_price" checked>
                 <label class="form-check-label" for="toggle-starting_price">Starting Price</label>
             </div>
@@ -119,7 +123,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="toggle-device_limit" data-col-name="device_limit">
-                <label class="form-check-label" for="toggle-device_limit">Devices</label>
+                <label class="form-check-label" for="toggle-device_limit">Device Limit</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="toggle-protocols_supported" data-col-name="protocols_supported">
@@ -133,6 +137,14 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
                 <input class="form-check-input" type="checkbox" id="toggle-based_in" data-col-name="based_in">
                 <label class="form-check-label" for="toggle-based_in">Based In</label>
             </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-free_available" data-col-name="free_available">
+                <label class="form-check-label" for="toggle-free_available">Free Plan</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="toggle-platform" data-col-name="platform">
+                <label class="form-check-label" for="toggle-platform">Platform</label>
+            </div>
         </div>
     </div>
   </div>
@@ -145,15 +157,18 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
           <tr>
             <th>#</th>
             <th>VPN</th>
+            <th data-col-name="speed_mbps">Speed</th>
             <th data-col-name="starting_price" class="hide-sm">Starting Price</th>
             <th data-col-name="suitable_for">Suitable for</th>
             <th data-col-name="countries" class="hide-sm">Countries</th>
             <th data-col-name="features">Features</th>
             <th data-col-name="server_count" class="hide-sm">Servers</th>
-            <th data-col-name="device_limit" class="hide-sm">Devices</th>
+            <th data-col-name="device_limit" class="hide-sm">Device Limit</th>
             <th data-col-name="protocols_supported">Protocols</th>
             <th data-col-name="logging_policy">Logging</th>
             <th data-col-name="based_in" class="hide-sm">Based In</th>
+            <th data-col-name="free_available" class="hide-sm">Free Plan</th>
+            <th data-col-name="platform" class="hide-sm">Platform</th>
             <th></th>
             <th class="text-center">Votes</th>
             <th class="text-center">Score</th>
@@ -181,6 +196,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
                 </div>
               </div>
             </td>
+            <td data-col-name="speed_mbps"><?= (int)$v['speed_mbps'] ?> Mbps</td>
             <td data-col-name="starting_price" class="hide-sm">$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></td>
             <td data-col-name="suitable_for"><?= htmlspecialchars($v['suitable_for']) ?></td>
             <td data-col-name="countries" class="hide-sm"><?= (int)$v['supported_countries'] ?></td>
@@ -194,6 +210,15 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             <td data-col-name="protocols_supported"><?= htmlspecialchars($v['protocols_supported']) ?></td>
             <td data-col-name="logging_policy"><?= htmlspecialchars($v['logging_policy']) ?></td>
             <td data-col-name="based_in" class="hide-sm"><?= htmlspecialchars($v['based_in']) ?></td>
+            <td data-col-name="free_available" class="hide-sm"><?= $v['Free_available'] ? 'Yes' : 'No' ?></td>
+            <td data-col-name="platform" class="hide-sm">
+              <?php 
+              $platforms = array_filter(array_map('trim', explode(',', (string)$v['Platform'])));
+              foreach ($platforms as $p):
+              ?>
+                <span class="chip me-1 mb-1"><?= htmlspecialchars($p) ?></span>
+              <?php endforeach; ?>
+            </td>
             <td>
               <?php if (!empty($v['affiliate_link'])): ?>
                 <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn-get-deal">Get Deal</a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2025 at 09:32 PM
+-- Generation Time: Sep 26, 2025 at 06:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -35,6 +35,14 @@ CREATE TABLE `feedback` (
   `message` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `NAME`, `email`, `country`, `message`, `created_at`) VALUES
+(1, 'test', 'test@gmail.com', 'India', 'Hi', '2025-09-24 19:41:26'),
+(2, 'Aritra Dutta', 'c.h.es.r.a.eb.liss.ar@gmail.com', 'India', 'ghjg', '2025-09-24 19:41:55');
 
 -- --------------------------------------------------------
 
@@ -82,7 +90,9 @@ INSERT INTO `votes_global` (`id`, `vpn_id`, `user_id`, `ip_address`, `vote`, `cr
 (20, 14, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-22 09:15:55'),
 (21, 2, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-22 09:15:58'),
 (22, 10, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-22 09:16:00'),
-(23, 20, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-23 07:39:25');
+(23, 20, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-23 07:39:25'),
+(24, 1, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-24 20:20:18'),
+(25, 6, 'dedf132325b71dfd-8ae246e7', 0x00000000000000000000000000000001, 'up', '2025-09-24 20:20:21');
 
 -- --------------------------------------------------------
 
@@ -172,7 +182,7 @@ CREATE TABLE `vpns_global` (
 INSERT INTO `vpns_global` (`vpn_id`, `speed_mbps`, `is_promoted`, `affiliate_link`, `starting_price`) VALUES
 (1, 580, 0, 'https://www.expressvpn.com/?srsltid=AfmBOorK8GTDgq751xnsKqdndaGTpXjZKPfOhLaOQWfhBj3QOxbBI0bk', 5.00),
 (2, 560, 0, '', 0.00),
-(3, 520, 1, '', 0.00),
+(3, 520, 0, '', 0.00),
 (6, 490, 0, '', 0.00),
 (10, 410, 0, NULL, NULL),
 (14, 360, 0, '', 0.00),
@@ -199,7 +209,8 @@ CREATE TABLE `vpns_india` (
 INSERT INTO `vpns_india` (`vpn_id`, `speed_mbps`, `is_promoted`, `affiliate_link`, `starting_price`) VALUES
 (1, 580, 0, NULL, NULL),
 (2, 560, 1, NULL, NULL),
-(3, 520, 0, '', 0.00);
+(3, 520, 0, '', 0.00),
+(18, 90, 0, '', 5.00);
 
 -- --------------------------------------------------------
 
@@ -243,26 +254,28 @@ CREATE TABLE `vpn_master_table` (
   `device_limit` int(11) DEFAULT NULL,
   `protocols_supported` varchar(255) DEFAULT NULL,
   `logging_policy` varchar(255) DEFAULT NULL,
-  `based_in` varchar(100) DEFAULT NULL
+  `based_in` varchar(100) DEFAULT NULL,
+  `Free_available` tinyint(1) DEFAULT NULL,
+  `Platform` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vpn_master_table`
 --
 
-INSERT INTO `vpn_master_table` (`id`, `name`, `website_url`, `logo_path`, `created_at`, `suitable_for`, `supported_countries`, `features`, `server_count`, `device_limit`, `protocols_supported`, `logging_policy`, `based_in`) VALUES
-(1, 'ExpressVPN', 'https://www.expressvpn.com', 'assets/expressvpn.png', '2025-09-16 05:33:48', 'Gaming', 11, 'fast, free-trial', 3200, 7, 'OpenVPN, IKEv2, WireGuard', 'Strict no-logs policy', 'Panama'),
-(2, 'NordVPN', 'https://nordvpn.com', 'assets\\nordvpn.png', '2025-09-16 05:33:48', 'Office Work', 89, '0 Latency, No Buffering', 5500, 5, 'OpenVPN, IKEv2, L2TP/IPsec', 'No-logs policy', 'British Virgin Islands'),
-(3, 'Surfshark', 'https://surfshark.com', 'assets\\surfsharkvpn.png', '2025-09-16 05:33:48', 'Office Work', 4, '0 Latency, No Buffering', 9700, 10, 'OpenVPN, WireGuard, SSTP', 'Keeps connection logs', 'USA'),
-(6, 'Proton VPN', 'https://protonvpn.com', 'assets\\protonvpn.png', '2025-09-16 05:33:48', 'Gaming', 23, 'Privacy Umbrella, Blazing Fast', 3000, 6, 'OpenVPN, IKEv2, WireGuard', 'Strict no-logs policy', 'Switzerland'),
-(10, 'TunnelBear', 'https://www.tunnelbear.com', 'assets\\tunnelbearvpn.png', '2025-09-16 05:33:48', 'Editing', 34, 'fast, free-trial', 6500, 10, 'WireGuard, OpenVPN, IKEv2', 'No-logs policy', 'Netherlands'),
-(14, 'Hide.me', 'https://hide.me', 'assets\\hidemevpn.png', '2025-09-16 05:33:48', 'Editing', 4, '0 Latency, No Buffering', 2900, 5, 'OpenVPN, L2TP/IPsec, PPTP', 'Keeps some logs', 'USA'),
-(16, 'CyberGhost', 'https://www.cyberghostvpn.com', 'assets/cyberghostvpn.png', '2025-09-16 10:00:26', 'Office Work', 56, '0 Latency, No Buffering', 750, 10, 'OpenVPN, IKEv2', 'No-logs policy', 'Malaysia'),
-(17, 'Atlas VPN', 'https://atlasvpn.com', 'assets/atlasvpn.png', '2025-09-16 10:00:26', 'Gaming', 23, '0 Latency, No Buffering', 2000, 8, 'WireGuard, OpenVPN', 'Strict no-logs policy', 'Romania'),
-(18, 'PureVPN', 'https://purevpn.com', 'assets\\purevpn.png', '2025-09-16 10:00:26', 'Editing', 32, 'fast, free-trial', 1600, 7, 'OpenVPN, IKEv2, WireGuard', 'No-logs policy', 'Canada'),
-(19, 'Avast SecureLine VPN', 'https://www.avast.com/secureline-vpn', 'assets/tunnelbearvpn.png', '2025-09-16 10:00:26', 'Editing', 45, 'Privacy Umbrella, Blazing Fast', 800, 5, 'OpenVPN, IKEv2', 'No-logs policy', 'Sweden'),
-(20, 'Windscribe', 'https://windscribe.com/', 'assets\\windscribevpn.png', '2025-09-23 07:38:27', 'Office Work', 12, 'Privacy Umbrella, Blazing Fast', 1800, 10, 'OpenVPN, IKEv2, WireGuard', 'Strict no-logs policy', 'Germany'),
-(21, 'PrivateVPN', 'http://privatevpn.com/', 'assets\\privatevpn.png', '2025-09-23 07:44:30', 'Gaming', 34, 'fast, free-trial', 500, 10, 'WireGuard, OpenVPN', 'No-logs policy', 'Switzerland');
+INSERT INTO `vpn_master_table` (`id`, `name`, `website_url`, `logo_path`, `created_at`, `suitable_for`, `supported_countries`, `features`, `server_count`, `device_limit`, `protocols_supported`, `logging_policy`, `based_in`, `Free_available`, `Platform`) VALUES
+(1, 'ExpressVPN', 'https://www.expressvpn.com', 'assets/expressvpn.png', '2025-09-16 05:33:48', 'Gaming', 11, 'fast, free-trial', 3200, 7, 'OpenVPN, IKEv2, WireGuard', 'Strict no-logs policy', 'Panama', 0, 'Windows, macOS, iOS, Android, Linux'),
+(2, 'NordVPN', 'https://nordvpn.com', 'assets\\nordvpn.png', '2025-09-16 05:33:48', 'Office Work', 89, '0 Latency, No Buffering', 5500, 5, 'OpenVPN, IKEv2, L2TP/IPsec', 'No-logs policy', 'British Virgin Islands', 0, 'Windows, macOS, iOS, Android, Linux, Routers'),
+(3, 'Surfshark', 'https://surfshark.com', 'assets\\surfsharkvpn.png', '2025-09-16 05:33:48', 'Office Work', 4, '0 Latency, No Buffering', 9700, 10, 'OpenVPN, WireGuard, SSTP', 'Keeps connection logs', 'USA', 1, 'Windows, macOS, iOS, Android'),
+(6, 'Proton VPN', 'https://protonvpn.com', 'assets\\protonvpn.png', '2025-09-16 05:33:48', 'Gaming', 23, 'Privacy Umbrella, Blazing Fast', 3000, 6, 'OpenVPN, IKEv2, WireGuard', 'Strict no-logs policy', 'Switzerland', 1, 'Windows, macOS, iOS, Android, Fire TV'),
+(10, 'TunnelBear', 'https://www.tunnelbear.com', 'assets\\tunnelbearvpn.png', '2025-09-16 05:33:48', 'Editing', 34, 'fast, free-trial', 6500, 10, 'WireGuard, OpenVPN, IKEv2', 'No-logs policy', 'Netherlands', 0, 'All major platforms'),
+(14, 'Hide.me', 'https://hide.me', 'assets\\hidemevpn.png', '2025-09-16 05:33:48', 'Editing', 4, '0 Latency, No Buffering', 2900, 5, 'OpenVPN, L2TP/IPsec, PPTP', 'Keeps some logs', 'USA', 1, 'Windows, macOS'),
+(16, 'CyberGhost', 'https://www.cyberghostvpn.com', 'assets/cyberghostvpn.png', '2025-09-16 10:00:26', 'Office Work', 56, '0 Latency, No Buffering', 750, 10, 'OpenVPN, IKEv2', 'No-logs policy', 'Malaysia', 1, 'Windows, macOS, iOS, Android'),
+(17, 'Atlas VPN', 'https://atlasvpn.com', 'assets/atlasvpn.png', '2025-09-16 10:00:26', 'Gaming', 23, '0 Latency, No Buffering', 2000, 8, 'WireGuard, OpenVPN', 'Strict no-logs policy', 'Romania', 0, 'Windows, macOS, Linux'),
+(18, 'PureVPN', 'https://purevpn.com', 'assets\\purevpn.png', '2025-09-16 10:00:26', 'Editing', 32, 'fast, free-trial', 1600, 7, 'OpenVPN, IKEv2, WireGuard', 'No-logs policy', 'Canada', 0, 'Windows, macOS, iOS, Android, Linux'),
+(19, 'Avast SecureLine VPN', 'https://www.avast.com/secureline-vpn', 'assets/tunnelbearvpn.png', '2025-09-16 10:00:26', 'Editing', 45, 'Privacy Umbrella, Blazing Fast', 800, 5, 'OpenVPN, IKEv2', 'No-logs policy', 'Sweden', 1, 'Windows, Android'),
+(20, 'Windscribe', 'https://windscribe.com/', 'assets\\windscribevpn.png', '2025-09-23 07:38:27', 'Office Work', 12, 'Privacy Umbrella, Blazing Fast', 1800, 10, 'OpenVPN, IKEv2, WireGuard', 'Strict no-logs policy', 'Germany', 0, 'macOS, iOS'),
+(21, 'PrivateVPN', 'http://privatevpn.com/', 'assets\\privatevpn.png', '2025-09-23 07:44:30', 'Gaming', 34, 'fast, free-trial', 500, 10, 'WireGuard, OpenVPN', 'No-logs policy', 'Switzerland', 1, 'Windows, macOS, iOS, Android');
 
 --
 -- Indexes for dumped tables
@@ -342,7 +355,7 @@ ALTER TABLE `vpn_master_table`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `votes_china`
@@ -354,7 +367,7 @@ ALTER TABLE `votes_china`
 -- AUTO_INCREMENT for table `votes_global`
 --
 ALTER TABLE `votes_global`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `votes_india`
