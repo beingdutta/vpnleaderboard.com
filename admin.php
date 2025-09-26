@@ -84,6 +84,14 @@ if ($current_view_param === 'master') {
 $vpns_table = $region ? "vpns_" . $region : null;
 $votes_table = $region ? "votes_" . $region : null;
 
+// Define currency symbol based on region
+$currency_symbol = '$';
+if ($region === 'india') {
+    $currency_symbol = '₹';
+} elseif ($region === 'china') {
+    $currency_symbol = '¥';
+}
+
 // Handle POST actions (Save, Delete, Reset)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action_region = isset($_POST['region']) && in_array($_POST['region'], $allowed_regions) ? $_POST['region'] : 'global';
@@ -298,7 +306,7 @@ if ($view === 'vpns') {
                             <?= htmlspecialchars($v['name']) ?>
                         </td>
                         <td><?= $v['is_promoted'] ? 'Yes' : 'No' ?></td>
-                        <td><?= $v['starting_price'] ? '$' . htmlspecialchars(number_format($v['starting_price'], 2)) : 'N/A' ?></td>
+                        <td><?= $v['starting_price'] ? $currency_symbol . htmlspecialchars(number_format($v['starting_price'], 2)) : 'N/A' ?></td>
                         <td><?= (int)$v['total_votes'] ?></td>
                         <td class="text-end">
                             <button class="btn btn-sm btn-secondary" onclick="prepareModal(<?= (int)$v['id'] ?>)">Edit</button>
@@ -479,7 +487,7 @@ if ($view === 'vpns') {
                                     <input type="number" class="form-control" id="vpn-speed_mbps" name="speed_mbps">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="vpn-starting_price" class="form-label">Starting Price ($)</label>
+                                    <label for="vpn-starting_price" class="form-label">Starting Price (<?= $currency_symbol ?>)</label>
                                     <input type="number" step="0.01" class="form-control" id="vpn-starting_price" name="starting_price">
                                 </div>
                             </div>
@@ -535,7 +543,7 @@ if ($view === 'vpns') {
                                     <input type="number" class="form-control" id="add-speed_mbps" name="speed_mbps">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="add-starting_price" class="form-label">Starting Price ($)</label>
+                                    <label for="add-starting_price" class="form-label">Starting Price (<?= $currency_symbol ?>)</label>
                                     <input type="number" step="0.01" class="form-control" id="add-starting_price" name="starting_price">
                                 </div>
                             </div>
