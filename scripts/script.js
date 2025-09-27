@@ -161,8 +161,23 @@ function resortTable() {
   if (!heroChips.length) { warn('init(): No .hero-chip elements found.'); return; }
   if (!tbody) { err('init(): #vpntable tbody not found.'); return; }
 
-  const originalRows = Array.from(tbody.querySelectorAll('tr'));
+  const originalRows = tbody ? Array.from(tbody.querySelectorAll('tr')) : [];
   log('init(): captured originalRows', originalRows.length);
+  // Normalize & hydrate numeric data-price from the "Starting Price" cell
+  originalRows.forEach(row => {
+    // Try existing dataset value first
+    let p = parseFloat(row.dataset.price);
+    if (isNaN(p)) {
+      // Find the price cell by data-col-name
+      const cell = row.querySelector('[data-col-name="starting_price"]');
+      const raw  = cell ? cell.textContent.trim() : '';
+      // Parse values like "$12.99", "₹1,153.12", "¥92.34", "12.99 USD"
+      const num  = parseFloat(raw.replace(/[^0-9.]/g, ''));
+      if (!isNaN(num)) {
+        row.dataset.price = String(num);
+      }
+    }
+  });
 
   // Identify a row in logs by something human-readable
   function rowId(row) {
@@ -253,25 +268,54 @@ function resortTable() {
     return filtered;
   }
 
-  function applySort(rows, value) {
-    log('applySort(): start', { count: rows.length, value });
-    const copy = rows.slice();
+function applySort(rows, value) {
+  // Normalize the incoming token so 'price', 'Price', ' starting_price ' all work
+  const token = (value || '').toString().trim().toLowerCase();
+  log('applySort(): start', { count: rows.length, value: token });
+  const copy = rows.slice();
 
-    if (value === 'speed') {
-      copy.sort((a, b) => {
-        const na = getCellNumber(a, 'speed_mbps');
-        const nb = getCellNumber(b, 'speed_mbps');
-        const diff = nb - na;
-        log('applySort(): compare', { a: rowId(a), na, b: rowId(b), nb, diff });
-        return diff;
-      });
-    } else {
-      log('applySort(): no matching sorter; leaving order as-is');
-    }
+  if (token === 'speed') {
+    copy.sort((a, b) => {
+      const na = getCellNumber(a, 'speed_mbps');
+      const nb = getCellNumber(b, 'speed_mbps');
+      const diff = nb - na; // high → low
+      log('applySort(): compare', { a: rowId(a), na, b: rowId(b), nb, diff });
+      return diff;
+    });
+  } else if (token === 'price' || token === 'starting_price' || token === 'cost') {
+    // Price: low → high
+    copy.sort((a, b) => {
+      // Prefer hydrated data-price; if missing, parse live from DOM
+      let na = parseFloat(a.dataset.price);
+      let nb = parseFloat(b.dataset.price);
 
-    log('applySort(): end');
-    return copy;
+      if (isNaN(na)) {
+        const ca = a.querySelector('[data-col-name="starting_price"]');
+        na = parseFloat(((ca && ca.textContent) || '').replace(/[^0-9.]/g, ''));
+        if (!isNaN(na)) a.dataset.price = String(na);
+      }
+      if (isNaN(nb)) {
+        const cb = b.querySelector('[data-col-name="starting_price"]');
+        nb = parseFloat(((cb && cb.textContent) || '').replace(/[^0-9.]/g, ''));
+        if (!isNaN(nb)) b.dataset.price = String(nb);
+      }
+
+      // Keep unknowns at the bottom
+      if (isNaN(na) && isNaN(nb)) return 0;
+      if (isNaN(na)) return 1;
+      if (isNaN(nb)) return -1;
+
+      const diff = na - nb;
+      log('applySort(): compare', { a: rowId(a), na, b: rowId(b), nb, diff });
+      return diff;
+    });
+  } else {
+    log('applySort(): no matching sorter; leaving order as-is');
   }
+
+  log('applySort(): end');
+  return copy;
+}
 
   // Bind clicks with detailed logging
   heroChips.forEach(chip => {
@@ -283,7 +327,7 @@ function resortTable() {
       });
 
       const action = chip.dataset.action;   // "filter" | "sort"
-      const value  = (chip.dataset.value || '').toLowerCase();
+      const value  = (chip.dataset.value || '').trim().toLowerCase();
       const isActive = chip.classList.contains('active');
 
       if (isActive) {
