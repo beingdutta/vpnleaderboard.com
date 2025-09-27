@@ -7,7 +7,8 @@ $sql = "
 SELECT 
   v_reg.vpn_id, v_reg.speed_mbps, v_reg.is_promoted, v_reg.affiliate_link, v_reg.starting_price,
   v_all.name, v_all.website_url, v_all.logo_path, v_all.suitable_for, v_all.supported_countries, v_all.features, v_all.server_count, v_all.device_limit, v_all.protocols_supported, v_all.logging_policy, v_all.based_in,
-  COALESCE(SUM(vt.vote='up'),0) AS upvotes,
+  v_all.Free_available, v_all.Platform,
+COALESCE(SUM(vt.vote='up'),0) AS upvotes,
   COALESCE(SUM(vt.vote='down'),0) AS downvotes,
   COALESCE(SUM(vt.vote='up'),0) - COALESCE(SUM(vt.vote='down'),0) AS score
 FROM vpns_india v_reg
@@ -78,9 +79,11 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
       <p class="text-secondary" style="font-size: 1.1rem;">Because Security Matters, You Matters.</p>
       <div class="d-flex flex-wrap gap-2 justify-content-center">
         <span class="chip hero-chip" data-action="sort" data-value="price">Low-Cost VPNs</span>
-        <span class="chip">Best VPN for PC</span>
-        <span class="chip">Best Free VPN</span>
-        <span class="chip">VPN for Android & iOS</span>
+        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for Windows PC</span>
+        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for MAC</span>
+        <span class="chip hero-chip" data-action="filter" data-value="Linux">Best VPN for Linux</span>
+        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN</span>
+        <span class="chip hero-chip" data-action="filter" data-value="mobile">VPN for Android & iOS</span>
       </div>
     </div>
   </header>
