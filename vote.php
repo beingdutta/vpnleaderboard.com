@@ -42,30 +42,40 @@ try {
   $pdo->beginTransaction();
 
   // Prevent multiple votes: either same user_id OR same IP for the same VPN
-  $exists = $pdo->prepare("SELECT id, vote FROM `$votes_table` WHERE vpn_id = ? AND (user_id = ? OR ip_address = ?)");
+  $exists = $pdo->prepare("SELECT id, vote, voted_at FROM `$votes_table` WHERE vpn_id = ? AND (user_id = ? OR ip_address = ?)");
   $exists->execute([$vpn_id, $user_id, $ip_bin]);
   $prev = $exists->fetch();
 
   if ($prev) {
-    // Already voted — MVP rule: only once (no switching). Return current tallies.
-    $pdo->commit();
-    $agg = $pdo->prepare("SELECT
-        SUM(vote='up') AS upvotes,
-        SUM(vote='down') AS downvotes
-      FROM `$votes_table` WHERE vpn_id = ?");
-    $agg->execute([$vpn_id]);
-    $row = $agg->fetch();
-    echo json_encode([
-      'ok'=>false,
-      'error'=>'You have already voted for this VPN.',
-      'upvotes'=>(int)($row['upvotes'] ?? 0),
-      'downvotes'=>(int)($row['downvotes'] ?? 0)
-    ]);
-    exit;
-  }
+    $voted_at = new DateTime($prev['voted_at']);
+    $now = new DateTime();
+    $interval = $now->getTimestamp() - $voted_at->getTimestamp();
+    $days_passed = $interval / (60 * 60 * 24);
 
-  $ins = $pdo->prepare("INSERT INTO `$votes_table` (vpn_id, user_id, ip_address, vote) VALUES (?,?,?,?)");
-  $ins->execute([$vpn_id, $user_id, $ip_bin, $type]);
+    if ($days_passed < 30) {
+      // Cooldown period is active, reject vote
+      $pdo->commit();
+      $agg = $pdo->prepare("SELECT SUM(vote='up') AS upvotes, SUM(vote='down') AS downvotes FROM `$votes_table` WHERE vpn_id = ?");
+      $agg->execute([$vpn_id]);
+      $row = $agg->fetch();
+      echo json_encode([
+        'ok' => false,
+        'error' => 'You can vote for this VPN again in ' . (int)(30 - $days_passed) . ' days.',
+        'upvotes' => (int)($row['upvotes'] ?? 0),
+        'downvotes' => (int)($row['downvotes'] ?? 0)
+      ]);
+      exit;
+    } else {
+      // Cooldown has passed, update the existing vote
+      $update = $pdo->prepare("UPDATE `$votes_table` SET vote = ?, voted_at = CURRENT_TIMESTAMP WHERE id = ?");
+      $update->execute([$type, $prev['id']]);
+    }
+  } else {
+    // No previous vote, insert a new one
+    $ins = $pdo->prepare("INSERT INTO `$votes_table` (vpn_id, user_id, ip_address, vote) VALUES (?,?,?,?)");
+    $ins->execute([$vpn_id, $user_id, $ip_bin, $type]);
+  }
+  
   $pdo->commit();
 
   // Return updated counts

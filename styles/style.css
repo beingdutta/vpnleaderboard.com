@@ -31,9 +31,9 @@ html[data-theme="dark"] {
   --border-color: #334155;
   --table-header-color: #9ca3af;
 
-  --chip-bg: #111827;
-  --chip-border: #1f2937;
-  --chip-text: #cbd5e1;
+  --chip-bg: #334155; /* Was too dark, now slate-700 */
+  --chip-border: #475569; /* Was too dark, now slate-600 */
+  --chip-text: #f1f5f9; /* Brighter text, slate-100 */
 
   --score-badge-bg: #1f2937;
   --score-badge-border: #334155;
@@ -242,6 +242,7 @@ html[data-theme="dark"] .vote-down { color: #fca5a5; }
   font-size: 0.875rem;
   text-decoration: none;
   display: inline-block;
+  white-space: nowrap; /* Prevent the button text from wrapping */
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
 }

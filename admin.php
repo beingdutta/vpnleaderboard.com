@@ -188,6 +188,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($regional_params);
             }
+        } elseif ($_POST['action'] === 'add_dummy_votes') {
+            $vpn_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+            $vote_count = isset($_POST['vote_count']) ? (int)$_POST['vote_count'] : 0;
+            $vote_type = in_array($_POST['vote_type'], ['up', 'down']) ? $_POST['vote_type'] : 'up';
+
+            if ($vpn_id > 0 && $vote_count > 0) {
+                $sql = "INSERT INTO `$action_votes_table` (vpn_id, user_id, ip_address, vote) VALUES (:vpn_id, :user_id, :ip_address, :vote)";
+                $stmt = $pdo->prepare($sql);
+                for ($i = 0; $i < $vote_count; $i++) {
+                    // Generate unique dummy data for each vote
+                    $dummy_user_id = 'dummy-' . bin2hex(random_bytes(8));
+                    // Generate a random private IP to ensure uniqueness for the constraint
+                    $dummy_ip = '10.' . rand(0, 255) . '.' . rand(0, 255) . '.' . rand(1, 254);
+                    $stmt->execute(['vpn_id' => $vpn_id, 'user_id' => $dummy_user_id, 'ip_address' => inet_pton($dummy_ip), 'vote' => $vote_type]);
+                }
+            }
         }
     } catch (Exception $e) {
         // In a real app, log this error
@@ -322,6 +338,19 @@ if ($view === 'vpns') {
                                 <input type="hidden" name="region" value="<?= $region ?>">
                                 <button type="submit" class="btn btn-sm btn-danger">Remove from Region</button>
                             </form>
+                            <div class="d-inline-block ms-2">
+                                <form method="POST" action="admin.php" class="d-inline-flex align-items-center gap-1" onsubmit="return confirm('Add ' + this.vote_count.value + ' dummy ' + this.vote_type.value + ' votes?');">
+                                    <input type="hidden" name="action" value="add_dummy_votes">
+                                    <input type="hidden" name="id" value="<?= (int)$v['id'] ?>">
+                                    <input type="hidden" name="region" value="<?= $region ?>">
+                                    <input type="number" name="vote_count" class="form-control form-control-sm" style="width: 70px;" value="10" min="1" max="1000" required>
+                                    <select name="vote_type" class="form-select form-select-sm" style="width: 80px;">
+                                        <option value="up">Up</option>
+                                        <option value="down">Down</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-info" title="Add Dummy Votes">Add dummy vote</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <?php endforeach; ?>
