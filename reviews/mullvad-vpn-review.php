@@ -31,7 +31,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://mullvad.net/media/uploads/2023/12/11/mullvad-logo-social.png');"
+      style="background-image: url('https://mullvad.net/press/MullvadVPN_logo_Portrait_RGB_Color_positive.png');"
     >
       <div class="article-hero-overlay">
         <div class="container">

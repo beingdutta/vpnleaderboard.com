@@ -31,7 +31,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1920');"
+      style="background-image: url('https://s3-eu-west-1.amazonaws.com/tpd/logos/6669f92f95636f88dc475e0a/0x0.png');"
     >
       <div class="article-hero-overlay">
         <div class="container">

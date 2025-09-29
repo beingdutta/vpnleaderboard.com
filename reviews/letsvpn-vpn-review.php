@@ -31,7 +31,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=1920');"
+      style="background-image: url('https://letsvpn.world/images/ietel.png');"
     >
       <div class="article-hero-overlay">
         <div class="container">

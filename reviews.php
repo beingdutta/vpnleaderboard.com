@@ -85,6 +85,51 @@ $reviews = [
         'image' => 'https://media.cybernews.com/images/featured-big/2024/09/purevpn-review.jpg',
         'url' => 'reviews/pure-vpn-review' // You will need to create this .php file
     ],
+    [
+        'title' => 'Astrill VPN Review: A Look at the Power-User Favorite',
+        'slug' => 'astrill-vpn-review',
+        'author' => 'Casey Bennett',
+        'date' => 'August 22, 2025',
+        'excerpt' => 'Known for its speed and advanced options, we test Astrill VPN to see if its premium price tag is justified for users in restrictive regions.',
+        'image' => 'https://www.security.org/app/uploads/2020/10/Astrill-VPN-Logo.png',
+        'url' => 'reviews/astrill-vpn-review'
+    ],
+    [
+        'title' => 'Mullvad VPN Review: The Gold Standard for Privacy?',
+        'slug' => 'mullvad-vpn-review',
+        'author' => 'Alex Chen',
+        'date' => 'August 20, 2025',
+        'excerpt' => 'With anonymous accounts and a no-nonsense approach, Mullvad is a favorite among privacy purists. We see how it holds up in real-world use.',
+        'image' => 'https://mullvad.net/press/MullvadVPN_logo_Portrait_RGB_Color_positive.png',
+        'url' => 'reviews/mullvad-vpn-review'
+    ],
+    [
+        'title' => 'V1VPN Review: Simplicity and Speed for Everyday Users',
+        'slug' => 'v1-vpn-review',
+        'author' => 'Riley Morgan',
+        'date' => 'August 18, 2025',
+        'excerpt' => 'V1VPN aims to make private browsing effortless with a one-tap connect experience. Is it the right choice for beginners?',
+        'image' => 'https://s3-eu-west-1.amazonaws.com/tpd/logos/6669f92f95636f88dc475e0a/0x0.png',
+        'url' => 'reviews/v1-vpn-review'
+    ],
+    [
+        'title' => 'LetsVPN Review: One-Tap Privacy for Mobile and Desktop',
+        'slug' => 'letsvpn-vpn-review',
+        'author' => 'Mike Richards',
+        'date' => 'August 15, 2025',
+        'excerpt' => 'LetsVPN focuses on a simple, auto-routing experience. We test its proprietary protocol for speed and stability in daily use.',
+        'image' => 'https://letsvpn.world/images/ietel.png',
+        'url' => 'reviews/letsvpn-vpn-review'
+    ],
+    [
+        'title' => 'Atlas VPN Review (Service Discontinued)',
+        'slug' => 'atlas-vpn-review',
+        'author' => 'Mike Richards',
+        'date' => 'August 14, 2025',
+        'excerpt' => 'Atlas VPN was a popular freemium service that shut down in April 2024. We look back at what it offered and what former users should do now.',
+        'image' => 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1920',
+        'url' => 'reviews/atlas-vpn-review'
+    ],
 
 ];
 

@@ -31,7 +31,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://www.astrill.com/images/og-astrill-vpn.png');"
+      style="background-image: url('https://www.security.org/app/uploads/2020/10/Astrill-VPN-Logo.png');"
     >
       <div class="article-hero-overlay">
         <div class="container">
