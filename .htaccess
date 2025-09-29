@@ -1,12 +1,9 @@
-Options -MultiViews
+# Use the custom 404 page
+ErrorDocument 404 /404.php
+
+# Enable URL rewriting
 RewriteEngine On
-RewriteBase /
 
-# Allow accessing .php files without the extension
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [L]
-
-# Redirect requests for /blogs/some-slug to /blogs/some-slug.php
-# This rule is now handled by the general rule above.
-# The same applies to /reviews/
+# Redirect non-www to www (optional, good for SEO)
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]

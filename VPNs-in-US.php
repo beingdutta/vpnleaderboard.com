@@ -98,7 +98,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="toggle-starting_price" data-col-name="starting_price" checked>
-                <label class="form-check-label" for="toggle-starting_price">Starting Price</label>
+                <label class="form-check-label" for="toggle-starting_price">Starts</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="toggle-suitable_for" data-col-name="suitable_for" checked>
@@ -153,7 +153,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             <th>#</th>
             <th>VPN</th>
             <th data-col-name="speed_mbps">Speed</th>
-            <th data-col-name="starting_price" class="hide-sm">Starting Price</th>
+            <th data-col-name="starting_price" class="hide-sm">Starts</th>
             <th data-col-name="suitable_for">Suitable for</th>
             <th data-col-name="countries" class="hide-sm">Countries</th>
             <th data-col-name="features">Features</th>
@@ -243,9 +243,12 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
       Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly via AJAX. Help others find the <em>best VPN</em> for streaming, gaming, torrenting, and privacy by voting above.
     </p>
 
-    <p class="text-secondary small mt-4">
-        <strong>Disclaimer:</strong> The "Speed" values are based on a combination of our own tests and data aggregated from public forums. Your actual performance may vary depending on your location, network, and server load.
-    </p>
+    <div class="p-3 mt-4 rounded" style="background-color: var(--chip-bg); border: 1px solid var(--border-color);" role="alert">
+      <div class="d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill me-3" viewBox="0 0 16 16" style="min-width: 24px;"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM8 4a.905.905 0 0 1 .9.995l.35 3.507a.552.552-0-0-1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+        <div class="small" style="color: var(--text-secondary);"><strong>Disclaimer:</strong> The "Speed" values are based on a combination of our own tests and data aggregated from public forums. Your actual performance may vary depending on your location, network, and server load.</div>
+      </div>
+    </div>
   </main>
 
   <?php include __DIR__ . '/navigation/footer.php'; ?>
