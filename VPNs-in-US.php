@@ -199,9 +199,9 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
               <?php foreach ($features as $f): ?>
                 <span class="chip me-1"><?= htmlspecialchars($f) ?></span>
               <?php endforeach; ?>
-            </td>
-            <td data-col-name="server_count" class="hide-sm"><?= (int)$v['server_count'] ?></td>
-            <td data-col-name="device_limit" class="hide-sm"><?= (int)$v['device_limit'] ?></td>
+            </td> 
+            <td data-col-name="server_count" class="hide-sm"><?= htmlspecialchars($v['server_count']) ?></td>
+            <td data-col-name="device_limit" class="hide-sm"><?= htmlspecialchars($v['device_limit']) ?></td>
             <td data-col-name="protocols_supported"><?= htmlspecialchars($v['protocols_supported']) ?></td>
             <td data-col-name="logging_policy"><?= htmlspecialchars($v['logging_policy']) ?></td>
             <td data-col-name="based_in" class="hide-sm"><?= htmlspecialchars($v['based_in']) ?></td>

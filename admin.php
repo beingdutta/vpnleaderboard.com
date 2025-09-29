@@ -111,9 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     'logo_path' => $_POST['logo_path'] ?: null,
                     'suitable_for' => $_POST['suitable_for'] ?? '', 
                     'supported_countries' => (int)($_POST['supported_countries'] ?? 0), 
-                    'features' => $_POST['features'] ?? '',
-                    'server_count' => (int)($_POST['server_count'] ?? 0),
-                    'device_limit' => (int)($_POST['device_limit'] ?? 0),
+                    'features' => $_POST['features'] ?? '', 
+                    'server_count' => $_POST['server_count'] ?? null,
+                    'device_limit' => $_POST['device_limit'] ?? null,
                     'protocols_supported' => $_POST['protocols_supported'] ?? '',
                     'logging_policy' => $_POST['logging_policy'] ?? '',
                     'based_in' => $_POST['based_in'] ?? '',
@@ -211,7 +211,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         die("An error occurred: " . $e->getMessage());
     }
     // Redirect back to the correct view after the action
-    if (($_POST['action'] === 'save_vpn' && ($_POST['mode'] ?? '') === 'master') || $view === 'master') {
+    $is_master_view_action = ($_POST['action'] === 'save_vpn' && in_array(($_POST['mode'] ?? ''), ['master', 'full'])) || $view === 'master';
+
+    if ($is_master_view_action) {
         header('Location: admin.php?view=master');
     } else {
         header('Location: admin.php?region=' . $action_region . '&view=' . $view);
@@ -480,12 +482,12 @@ if ($view === 'vpns') {
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="vpn-server_count" class="form-label">Server Count</label>
-                                        <input type="number" class="form-control" id="vpn-server_count" name="server_count">
+                                        <label for="vpn-server_count" class="form-label">Server Count (e.g., 5000 or "5000+")</label>
+                                        <input type="text" class="form-control" id="vpn-server_count" name="server_count">
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="vpn-device_limit" class="form-label">Device Limit</label>
-                                        <input type="number" class="form-control" id="vpn-device_limit" name="device_limit">
+                                        <label for="vpn-device_limit" class="form-label">Device Limit (e.g., 10 or "Unlimited")</label>
+                                        <input type="text" class="form-control" id="vpn-device_limit" name="device_limit">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="vpn-protocols_supported" class="form-label">Protocols Supported</label>
@@ -648,7 +650,7 @@ if ($view === 'vpns') {
                 document.getElementById('vpn-features').value = data.features || '';
 
                 document.getElementById('vpn-server_count').value = data.server_count || '';
-                document.getElementById('vpn-device_limit').value = data.device_limit || '';
+                document.getElementById('vpn-device_limit').value = data.device_limit || ''; // Changed from number to text
                 document.getElementById('vpn-protocols_supported').value = data.protocols_supported || '';
                 document.getElementById('vpn-logging_policy').value = data.logging_policy || '';
                 document.getElementById('vpn-based_in').value = data.based_in || '';
