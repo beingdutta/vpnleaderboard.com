@@ -243,6 +243,10 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <p class="mt-3 text-secondary small">
       Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly via AJAX. Help others find the <em>best VPN</em> for streaming, gaming, torrenting, and privacy by voting above.
     </p>
+
+    <p class="text-secondary small mt-4">
+        <strong>Disclaimer:</strong> The "Speed" values are based on a combination of our own tests and data aggregated from public forums. Your actual performance may vary depending on your location, network, and server load.
+    </p>
   </main>
 
   <?php include __DIR__ . '/navigation/footer.php'; ?>
