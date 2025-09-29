@@ -7,3 +7,13 @@ RewriteEngine On
 # Redirect non-www to www (optional, good for SEO)
 # RewriteCond %{HTTP_HOST} !^www\. [NC]
 # RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# --- Pretty URLs for Blogs & Reviews ---
+# If the request is not for an existing file or directory...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# ...and if a .php file with the same name exists...
+RewriteCond %{REQUEST_FILENAME}.php -f
+# ...then internally rewrite the request to use the .php file.
+RewriteRule ^(.*)$ $1.php [L]

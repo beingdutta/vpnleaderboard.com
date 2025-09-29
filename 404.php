@@ -16,11 +16,11 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
-<body>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
   <?php include __DIR__ . '/navigation/nav.php'; ?>
 
-  <main class="container my-5">
-    <div class="d-flex justify-content-center align-items-center text-center" style="min-height: 60vh;">
+  <main class="container my-5" style="flex-grow: 1;">
+    <div class="d-flex justify-content-center align-items-center text-center h-100">
       <div class="col-lg-6">
         <h1 class="display-1 fw-bold mb-4">404</h1>
         <h2 class="h3 mb-3">Page Not Found</h2>
