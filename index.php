@@ -186,18 +186,20 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
           <tr data-vpn-id="<?= (int)$v['vpn_id'] ?>" data-score="<?= (int)$v['score'] ?>" data-promoted="<?= (int)$v['is_promoted'] ?>">
             <td class="text-secondary"><?= (int)$v['true_rank'] ?></td>
             <td>
-              <div class="d-flex align-items-center gap-2">
-                <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded">
-                <div class="d-flex flex-column" style="min-width: 150px;">
-                  <div class="d-flex align-items-center">
-                    <span class="fw-semibold"><?= htmlspecialchars($v['name']) ?></span>
-                    <?php if (!empty($v['is_promoted'])): ?>
-                      <span class="chip chip-promoted ms-2">Promoted</span>
-                    <?php endif; ?>
+              <a href="<?= htmlspecialchars($v['website_url']) ?>" target="_blank" rel="nofollow noopener" class="text-decoration-none text-reset">
+                <div class="d-flex align-items-center gap-2">
+                  <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded">
+                  <div class="d-flex flex-column" style="min-width: 150px;">
+                    <div class="d-flex align-items-center">
+                      <span class="fw-semibold"><?= htmlspecialchars($v['name']) ?></span>
+                      <?php if (!empty($v['is_promoted'])): ?>
+                        <span class="chip chip-promoted ms-2">Promoted</span>
+                      <?php endif; ?>
+                    </div>
+                    <small class="text-secondary">Trusted VPN provider</small>
                   </div>
-                  <small class="text-secondary">Trusted VPN provider</small>
                 </div>
-              </div>
+              </a>
             </td>
             <td data-col-name="speed_mbps"><?= (int)$v['speed_mbps'] ?> Mbps</td>
             <td data-col-name="starting_price" class="hide-sm">$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></td>

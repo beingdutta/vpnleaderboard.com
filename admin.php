@@ -460,8 +460,8 @@ if ($view === 'vpns') {
                                     <input type="text" class="form-control" id="vpn-name" name="name" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="vpn-website_url" class="form-label">Website URL</label>
-                                    <input type="url" class="form-control" id="vpn-website_url" name="website_url">
+                                    <label for="vpn-website_url" class="form-label">Website URL or Local Path</label>
+                                    <input type="text" class="form-control" id="vpn-website_url" name="website_url" placeholder="e.g., https://example.com or reviews/example.php">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="vpn-logo_path" class="form-label">Logo Path</label>
