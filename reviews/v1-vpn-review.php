@@ -85,36 +85,28 @@
           </section>
 
           <!-- Feature Table -->
-          <div class="table-responsive mb-5 d-none">
+          <div class="table-responsive mb-5">
             <table class="table table-bordered summary-table">
               <tbody>
                 <tr>
-                  <th>Status</th>
-                  <td><strong>Active</strong> (consumer VPN service)</td>
-                </tr>
-                <tr>
                   <th>Platforms</th>
-                  <td>Windows, macOS, iOS, Android (and common browser environments)</td>
+                  <td>Windows, macOS, iOS, Android</td>
                 </tr>
                 <tr>
-                  <th>Ease of Use</th>
-                  <td>One-tap connect with sensible defaults; minimal learning curve</td>
+                  <th>Protocols</th>
+                  <td>Standard modern protocols (e.g., WireGuard, OpenVPN)</td>
                 </tr>
                 <tr>
-                  <th>Privacy Posture</th>
-                  <td>Designed to protect traffic inside an encrypted tunnel; provider-side details may vary by plan and region</td>
+                  <th>Logging Policy</th>
+                  <td>No activity logs claimed</td>
                 </tr>
                 <tr>
-                  <th>Performance</th>
-                  <td>Consistently quick for everyday tasks; results depend on distance and local conditions</td>
+                  <th>Simultaneous Connections</th>
+                  <td>Varies by plan</td>
                 </tr>
                 <tr>
                   <th>Best For</th>
                   <td>Beginners, travelers, and anyone who wants a set-and-forget VPN</td>
-                </tr>
-                <tr>
-                  <th>Website</th>
-                  <td><a href="https://www.v1vpn.com/" rel="nofollow noopener">v1vpn.com</a></td>
                 </tr>
               </tbody>
             </table>

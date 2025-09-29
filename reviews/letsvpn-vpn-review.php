@@ -108,10 +108,6 @@
                   <th>Server Network</th>
                   <td>Global locations with automatic best-route selection</td>
                 </tr>
-                <tr>
-                  <th>Website</th>
-                  <td><a href="https://letsvpn.world/?hl=en" rel="nofollow noopener">letsvpn.world</a></td>
-                </tr>
               </tbody>
             </table>
           </div>

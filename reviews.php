@@ -86,6 +86,24 @@ $reviews = [
         'url' => 'reviews/pure-vpn-review' // You will need to create this .php file
     ],
     [
+        'title' => 'PrivateVPN Review: A Budget-Friendly Streaming Powerhouse?',
+        'slug' => 'private-vpn-review',
+        'author' => 'Ellen Carter',
+        'date' => 'August 24, 2025',
+        'excerpt' => 'PrivateVPN is known for strong streaming support and modest pricing. We test if this budget-friendly choice can keep up with the top-tier competition.',
+        'image' => 'https://www.01net.com/en/app/uploads/2023/07/PrivateVPN-review.jpg',
+        'url' => 'reviews/private-vpn-review'
+    ],
+    [
+        'title' => 'Windscribe VPN Review: Generous Free Plan & Unlimited Devices',
+        'slug' => 'windscribe-vpn-review',
+        'author' => 'Jordan Lee',
+        'date' => 'September 23, 2025',
+        'excerpt' => 'Windscribe blends power and flexibility with a famously generous free tier, unlimited device connections, and a strong privacy stance, making it a compelling choice.',
+        'image' => 'https://m.media-amazon.com/images/I/61MBBK+vS1L.png',
+        'url' => 'reviews/windscribe-vpn-review'
+    ],
+    [
         'title' => 'Astrill VPN Review: A Look at the Power-User Favorite',
         'slug' => 'astrill-vpn-review',
         'author' => 'Casey Bennett',
@@ -109,7 +127,7 @@ $reviews = [
         'author' => 'Riley Morgan',
         'date' => 'August 18, 2025',
         'excerpt' => 'V1VPN aims to make private browsing effortless with a one-tap connect experience. Is it the right choice for beginners?',
-        'image' => 'https://s3-eu-west-1.amazonaws.com/tpd/logos/6669f92f95636f88dc475e0a/0x0.png',
+        'image' => 'https://static.wixstatic.com/media/5c8709_5c0d8b1ff6324885b06764561eca865a~mv2.jpg',
         'url' => 'reviews/v1-vpn-review'
     ],
     [
@@ -121,16 +139,6 @@ $reviews = [
         'image' => 'https://letsvpn.world/images/ietel.png',
         'url' => 'reviews/letsvpn-vpn-review'
     ],
-    [
-        'title' => 'Atlas VPN Review (Service Discontinued)',
-        'slug' => 'atlas-vpn-review',
-        'author' => 'Mike Richards',
-        'date' => 'August 14, 2025',
-        'excerpt' => 'Atlas VPN was a popular freemium service that shut down in April 2024. We look back at what it offered and what former users should do now.',
-        'image' => 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1920',
-        'url' => 'reviews/atlas-vpn-review'
-    ],
-
 ];
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');

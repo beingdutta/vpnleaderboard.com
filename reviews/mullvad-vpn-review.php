@@ -85,7 +85,7 @@
           </section>
 
           <!-- Feature Table -->
-          <div class="table-responsive mb-5 d-none">
+          <div class="table-responsive mb-5">
             <table class="table table-bordered summary-table">
               <tbody>
                 <tr>
@@ -94,23 +94,19 @@
                 </tr>
                 <tr>
                   <th>Protocols</th>
-                  <td>WireGuard (primary), OpenVPN (legacy on some platforms)</td>
+                  <td>WireGuard, OpenVPN</td>
                 </tr>
                 <tr>
-                  <th>Logging</th>
-                  <td>Designed to minimize data collection; no activity logs claimed</td>
+                  <th>Logging Policy</th>
+                  <td>No activity logs claimed; minimal data collection by design</td>
                 </tr>
                 <tr>
-                  <th>Account Model</th>
-                  <td>Random 16-digit account number; no email needed</td>
+                  <th>Simultaneous Connections</th>
+                  <td>5 devices</td>
                 </tr>
                 <tr>
                   <th>Best For</th>
                   <td>Privacy purists, developers, journalists, and travelers</td>
-                </tr>
-                <tr>
-                  <th>Website</th>
-                  <td><a href="https://mullvad.net/en" rel="nofollow noopener">mullvad.net</a></td>
                 </tr>
               </tbody>
             </table>

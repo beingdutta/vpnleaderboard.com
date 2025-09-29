@@ -269,6 +269,10 @@ html[data-theme="dark"] .article-card-horizontal:hover {
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
+.article-card-horizontal .col-md-3 {
+  max-height: 200px; /* Set a max-height for the image container */
+}
+
 .article-card-horizontal .img-fluid {
   height: 100%;
   object-fit: cover;

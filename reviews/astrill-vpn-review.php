@@ -86,7 +86,7 @@
           </section>
 
           <!-- Feature Table -->
-          <div class="table-responsive mb-5 d-none">
+          <div class="table-responsive mb-5">
             <table class="table table-bordered summary-table">
               <tbody>
                 <tr>
@@ -98,20 +98,16 @@
                   <td>WireGuard, OpenVPN, StealthVPN, and more</td>
                 </tr>
                 <tr>
-                  <th>Logging</th>
+                  <th>Logging Policy</th>
                   <td>No traffic or connection logs claimed; minimal technical diagnostics</td>
                 </tr>
                 <tr>
-                  <th>Special Features</th>
-                  <td>Multi-hop routing, app/site filters, VPN sharing, smart DNS</td>
+                  <th>Simultaneous Connections</th>
+                  <td>5 devices</td>
                 </tr>
                 <tr>
                   <th>Best For</th>
                   <td>Advanced users, travelers in restricted regions, heavy streamers</td>
-                </tr>
-                <tr>
-                  <th>Website</th>
-                  <td><a href="https://www.astrill.com/" rel="nofollow noopener">astrill.com</a></td>
                 </tr>
               </tbody>
             </table>
