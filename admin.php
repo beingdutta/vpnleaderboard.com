@@ -130,8 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                             WHERE id=:id";
                 } else { // Insert new master VPN
                     $sql = "INSERT INTO `vpn_master_table` 
-                                (name, website_url, logo_path, suitable_for, supported_countries, features, server_count, device_limit, protocols_supported, logging_policy, based_in) 
-                            VALUES (:name, :website_url, :logo_path, :suitable_for, :supported_countries, :features, :server_count, :device_limit, :protocols_supported, :logging_policy, :based_in)";
+                                (name, website_url, logo_path, suitable_for, supported_countries, features, server_count, device_limit, protocols_supported, logging_policy, based_in, Free_available, Platform) 
+                            VALUES (:name, :website_url, :logo_path, :suitable_for, :supported_countries, :features, :server_count, :device_limit, :protocols_supported, :logging_policy, :based_in, :Free_available, :Platform)";
                 }
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($master_params);
@@ -210,7 +210,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($pdo->inTransaction()) $pdo->rollBack();
         die("An error occurred: " . $e->getMessage());
     }
-    header('Location: admin.php?region=' . $action_region . '&view=' . $view);
+    // Redirect back to the correct view after the action
+    if (($_POST['action'] === 'save_vpn' && ($_POST['mode'] ?? '') === 'master') || $view === 'master') {
+        header('Location: admin.php?view=master');
+    } else {
+        header('Location: admin.php?region=' . $action_region . '&view=' . $view);
+    }
     exit;
 }
 

@@ -5,12 +5,12 @@ require_once __DIR__ . '/db.php';
 // For now, we'll use a placeholder array.
 $reviews = [
     [
-        'title' => 'ExpressVPN Review 2025: Still the King of Speed?',
+        'title' => 'ExpressVPN Quick Review 2025',
         'slug' => 'expressvpn-review-2025',
         'author' => 'Mike Richards',
         'date' => 'September 12, 2025',
         'excerpt' => 'We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://www.expressvpn.com/wp-ws/uploads-expressvpn/2023/04/expressvpn-vertical-logo-white-on-red.jpeg',
         'url' => 'reviews/express-vpn-review' // This will now correctly map to the .php file
     ],
     [
@@ -19,25 +19,25 @@ $reviews = [
         'author' => 'Laura Chen',
         'date' => 'September 8, 2025',
         'excerpt' => 'Beyond the marketing, how does NordVPN hold up? We test its Threat Protection, Meshnet, and Double VPN features.',
-        'image' => 'https://images.unsplash.com/photo-1611162616805-6a405b6a4a7a?q=80&w=774',
+        'image' => 'https://ic.nordcdn.com/v1/https://sb.nordcdn.com/transform/de3af5d2-7549-4841-a4c4-48f00c9ba1c3/logo-featured-blog-jpg?X-Nord-Credential=T4PcHqfACi8Naxvulzf4IE8XT4oypRTi0blOOGwbK2A8L4fcPw52k3qkvbkYH&X-Nord-Signature=8iqRmG595OV8ojGMfaf7BGjxl1E200Yl9nIlO2Z5P7s%3D',
         'url' => 'reviews/nord-vpn-review' // You will need to create this .php file
     ],
     [
-        'title' => 'Surfshark One Review: Is the Bundle Worth It?',
+        'title' => 'Surfshark Quick Review',
         'slug' => 'surfshark-one-review',
         'author' => 'David Kim',
         'date' => 'September 2, 2025',
         'excerpt' => 'Surfshark offers more than just a VPN. We review its antivirus, search, and alert features to see if the "One" bundle is a good deal.',
-        'image' => 'https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?q=80&w=774',
+        'image' => 'https://i.pcmag.com/imagery/reviews/04S1wwi1deiGuN21Ixcjcxv-52..v1620413332.png',
         'url' => 'reviews/surfshark-vpn-review' // You will need to create this .php file
     ],
     [
-        'title' => 'Proton VPN Review: The Choice for Privacy Purists',
+        'title' => 'Proton VPN Quick Review',
         'slug' => 'proton-vpn-review',
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://res.cloudinary.com/dbulfrlrz/images/f_auto,q_auto/v1714482718/wp-vpn/hero-vpn/hero-vpn.jpg',
         'url' => 'reviews/proton-vpn-review' // You will need to create this .php file
     ],
     [
@@ -46,7 +46,7 @@ $reviews = [
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://www.tunnelbear.com/static/images/social-meta/share_graphic.jpg',
         'url' => 'reviews/tunnelbear-vpn-review' // You will need to create this .php file
     ],
     [
@@ -55,7 +55,7 @@ $reviews = [
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://cyberinsider.com/wp-content/uploads/2024/09/CyberGhost-VPN-Review.jpg',
         'url' => 'reviews/cyberGhost-vpn-review' // You will need to create this .php file
     ],
     [
@@ -64,17 +64,8 @@ $reviews = [
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://static0.howtogeekimages.com/wordpress/wp-content/uploads/2023/01/hide-me-logo.png',
         'url' => 'reviews/hideme-vpn-review' // You will need to create this .php file
-    ],
-    [
-        'title' => 'Atlas VPN Review: The Choice for Privacy Purists',
-        'slug' => 'atlas-vpn-review',
-        'author' => 'Emily White',
-        'date' => 'August 25, 2025',
-        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
-        'url' => 'reviews/Atlas-vpn-review' // You will need to create this .php file
     ],
     [
         'title' => 'Avast Secureline VPN Review: The Choice for Privacy Purists',
@@ -82,7 +73,7 @@ $reviews = [
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuPPYqXIjsGpXp5SjQzE6XjMOccSRW1oLNvw&s',
         'url' => 'reviews/avast-secureline-vpn-review' // You will need to create this .php file
     ],
     [
@@ -91,7 +82,7 @@ $reviews = [
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=870',
+        'image' => 'https://media.cybernews.com/images/featured-big/2024/09/purevpn-review.jpg',
         'url' => 'reviews/pure-vpn-review' // You will need to create this .php file
     ],
 

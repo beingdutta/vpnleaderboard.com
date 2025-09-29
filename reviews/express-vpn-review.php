@@ -20,6 +20,7 @@
       content="https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=1920"
     />
     <link rel="canonical" href="" />
+    <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -32,7 +33,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=1920');"
+      style="background-image: url('https://www.expressvpn.com/wp-ws/uploads-expressvpn/2023/04/expressvpn-vertical-logo-white-on-red.jpeg');"
     >
       <div class="article-hero-overlay">
         <div class="container">
@@ -65,6 +66,10 @@
               <strong>Overall Score: 9.4/10</strong>
             </p>
           </div>
+
+          <p class="small text-secondary text-center fst-italic mt-n3 mb-4">
+            Disclaimer: The header image for this review is for illustrative purposes and has been sourced from the official product website or a third-party review site. It can be removed upon request from the copyright owner.
+          </p>
 
           <!-- Pros and Cons Section -->
           <section class="pros-cons mb-5">

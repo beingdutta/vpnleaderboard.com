@@ -20,6 +20,7 @@
       content="https://images.unsplash.com/photo-1588497011473-6dd8c6e10ea9?q=80&w=1920"
     />
     <link rel="canonical" href="" />
+    <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -32,7 +33,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://images.unsplash.com/photo-1588497011473-6dd8c6e10ea9?q=80&w=1920');"
+      style="background-image: url('https://res.cloudinary.com/dbulfrlrz/images/f_auto,q_auto/v1714482718/wp-vpn/hero-vpn/hero-vpn.jpg');"
     >
       <div class="article-hero-overlay">
         <div class="container">
@@ -57,6 +58,10 @@
 
             <p class="mb-0"><strong>Overall Score: 9.0/10</strong></p>
           </div>
+
+          <p class="small text-secondary text-center fst-italic mt-n3 mb-4">
+            Disclaimer: The header image for this review is for illustrative purposes and has been sourced from the official product website or a third-party review site. It can be removed upon request from the copyright owner.
+          </p>
 
           <!-- Pros and Cons Section -->
           <section class="pros-cons mb-5">

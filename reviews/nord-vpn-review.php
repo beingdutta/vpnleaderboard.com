@@ -20,6 +20,7 @@
       content="https://images.unsplash.com/photo-1600278886435-433708c9ef5e?q=80&w=1920"
     />
     <link rel="canonical" href="" />
+    <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -32,7 +33,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://images.unsplash.com/photo-1600278886435-433708c9ef5e?q=80&w=1920');"
+      style="background-image: url('https://ic.nordcdn.com/v1/https://sb.nordcdn.com/transform/de3af5d2-7549-4841-a4c4-48f00c9ba1c3/logo-featured-blog-jpg?X-Nord-Credential=T4PcHqfACi8Naxvulzf4IE8XT4oypRTi0blOOGwbK2A8L4fcPw52k3qkvbkYH&X-Nord-Signature=8iqRmG595OV8ojGMfaf7BGjxl1E200Yl9nIlO2Z5P7s%3D');"
     >
       <div class="article-hero-overlay">
         <div class="container">
@@ -68,6 +69,10 @@
               <strong>Overall Score: 9.5/10</strong>
             </p>
           </div>
+
+          <p class="small text-secondary text-center fst-italic mt-n3 mb-4">
+            Disclaimer: The header image for this review is for illustrative purposes and has been sourced from the official product website or a third-party review site. It can be removed upon request from the copyright owner.
+          </p>
 
           <!-- Pros and Cons Section -->
           <section class="pros-cons mb-5">
