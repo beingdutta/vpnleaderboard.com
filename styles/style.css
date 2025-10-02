@@ -97,6 +97,11 @@ a {
   transition: stroke 0.2s;
 }
 
+.hero h1 {
+  font-size: 2.5rem; /* Adjust this value as needed */
+}
+
+
 .footer-link {
     color: var(--text-primary);
 }
