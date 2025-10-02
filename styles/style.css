@@ -74,19 +74,31 @@ a {
   color: var(--text-primary);
 }
 
+.navbar .navbar-brand:hover {
+  color: var(--text-primary);
+}
+
 .navbar .nav-link.active {
   color: var(--brand);
   font-weight: 600;
 }
 
-.navbar .nav-link:hover,
-.navbar .navbar-brand:hover {
+
+.footer a:hover {
   color: var(--brand);
+}
+
+.navbar .navbar-brand:hover {
+  text-decoration: none; /* Remove the hover effect */
 }
 
 /* Ensure SVG inside the theme toggle transitions smoothly */
 #theme-toggle svg {
   transition: stroke 0.2s;
+}
+
+.footer-link {
+    color: var(--text-primary);
 }
 
 /* Table */

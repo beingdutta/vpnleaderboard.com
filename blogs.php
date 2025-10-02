@@ -19,7 +19,7 @@ $blogs = [
         'author' => 'John Smith',
         'date' => 'September 10, 2025',
         'excerpt' => 'Public Wi-Fi is convenient but risky. Learn how a Virtual Private Network (VPN) can encrypt your data and keep you safe from hackers.',
-        'image' => 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=870',
+        'image' => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920',
         'url' => 'blogs/how-vpns-secure-public-wifi' // You will need to create this .php file
     ],
     [
@@ -28,8 +28,8 @@ $blogs = [
         'author' => 'Alex Ray',
         'date' => 'September 5, 2025',
         'excerpt' => 'Are VPNs only for tech experts? Do they make you completely anonymous? We tackle the most common misconceptions about VPNs.',
-        'image' => 'https://images.unsplash.com/photo-1585226985133-2a64e3203a25?q=80&w=870',
-        'url' => 'blogs/debunking-common-vpn-myths' // You will need to create this .php file
+        'image' => 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=1920',
+        'url' => 'blogs\biggest-vpn-myths' // You will need to create this .php file
     ],
     [
         'title' => 'Choosing the Right VPN for Streaming',
@@ -37,8 +37,8 @@ $blogs = [
         'author' => 'Sarah Jones',
         'date' => 'August 28, 2025',
         'excerpt' => 'Tired of geo-restrictions? A good streaming VPN can unlock a world of content. Here’s what to look for when choosing one.',
-        'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=774',
-        'url' => 'blogs/choosing-right-vpn-for-streaming' // You will need to create this .php file
+        'image' => 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=1920',
+        'url' => 'blogs\right-vpn-for-streaming' // You will need to create this .php file
     ],
 ];
 
