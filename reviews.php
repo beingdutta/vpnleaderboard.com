@@ -140,6 +140,15 @@ $reviews = [
         'url' => 'reviews/letsvpn-vpn-review'
     ],
     [
+        'title' => 'VeePN Review 2025',
+        'slug' => 'veepn-vpn-review',
+        'author' => 'Mike Richards',
+        'date' => 'September 15, 2025',
+        'excerpt' => 'VeePN offers a solid feature set and decent performance, especially on nearby servers, but its kill switch is flaky.',
+        'image' => 'https://media.cybernews.com/images/750w/2021/08/VeePN-review.jpg',
+        'url' => 'reviews/veepn-review'
+    ],
+    [
         'title' => 'Private Internet Access (PIA) VPN Review',
         'slug' => 'private-internet-access-vpn-review',
         'author' => 'Mike Richards',
@@ -149,7 +158,7 @@ $reviews = [
         'url' => 'reviews/private-internet-access-vpn-review'
     ],
 ];
-
+sort($reviews);
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
 <!doctype html>
