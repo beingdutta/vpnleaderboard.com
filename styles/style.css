@@ -83,6 +83,10 @@ a {
   font-weight: 600;
 }
 
+.navbar .nav-link:hover {
+  color: var(--brand); /* Use the brand color or any blue you prefer */
+}
+
 
 .footer a:hover {
   color: var(--brand);
