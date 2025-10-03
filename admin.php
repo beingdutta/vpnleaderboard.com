@@ -4,7 +4,7 @@ require_once __DIR__ . '/db.php';
 
 // --- CONFIGURATION ---
 // IMPORTANT: Change this password to something secure!
-const ADMIN_PASSWORD = 'admin@@@18###';
+const ADMIN_PASSWORD = 'admin@@@18';
 const ADMIN_SESSION_KEY = 'is_vpn_admin';
 
 // --- LOGOUT ---
