@@ -1,9 +1,7 @@
 <?php
 // db.php — PDO connection (update credentials)
-$DB_HOST = 'localhost';
-$DB_NAME = 'vpnboard';
-$DB_USER = 'root';
-$DB_PASS = '';
+
+require_once __DIR__ . '/DB_config.php';
 
 $options = [
   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
