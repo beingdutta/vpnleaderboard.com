@@ -56,7 +56,7 @@ $reviews = [
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
         'image' => 'https://cyberinsider.com/wp-content/uploads/2024/09/CyberGhost-VPN-Review.jpg',
-        'url' => 'reviews/cyberGhost-vpn-review' // You will need to create this .php file
+        'url' => 'reviews\cyberghost-vpn-review.php' // You will need to create this .php file
     ],
     [
         'title' => 'Hide.me VPN Review: The Choice for Privacy Purists',
@@ -118,7 +118,7 @@ $reviews = [
         'author' => 'Alex Chen',
         'date' => 'August 20, 2025',
         'excerpt' => 'With anonymous accounts and a no-nonsense approach, Mullvad is a favorite among privacy purists. We see how it holds up in real-world use.',
-        'image' => 'https://mullvad.net/press/MullvadVPN_logo_Portrait_RGB_Color_positive.png',
+        'image' => 'https://play-lh.googleusercontent.com/W7lHDGmA0LTMB2tul80ezqEnnILgFM4jTxh6eSrPBqTOKWLRahEHc4uXSiE7PUHZOACM=w3840-h2160-rw',
         'url' => 'reviews/mullvad-vpn-review'
     ],
     [
