@@ -1,6 +1,6 @@
 <?php
 $DB_HOST = 'localhost'; 
 $DB_NAME = 'vpnboard'; 
-$DB_USER = 'root'; 
-$DB_PASS = ''; 
+$DB_USER = 'vpnuser'; 
+$DB_PASS = 'Vpn18##@@@'; 
 ?>
