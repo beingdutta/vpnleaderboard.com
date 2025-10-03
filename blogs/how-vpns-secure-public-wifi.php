@@ -18,7 +18,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <meta charset="utf-8">
     <title><?= htmlspecialchars($article['title']) ?> | VPN Leaderboard</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="icon" href="/assets/site-icon.png" type="image/png">
+    <link rel="icon" href="/assets/site-icon.png" type="image/png">
     
     <meta name="description" content="Public Wi-Fi is a minefield of digital threats. This exhaustive 3000+ word guide explains every risk in detail and provides the ultimate solution for staying safe.">
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
@@ -31,8 +31,17 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RMZD8BYYZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1RMZD8BYYZ');
+    </script>
+</head>
 <body>
-    <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
+  <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
   <?php include __DIR__ . '/../navigation/nav.php'; ?>
 
   <header class="article-hero" style="background-image: url('<?= htmlspecialchars($article['image']) ?>'); background-position: center;">
