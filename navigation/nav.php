@@ -1,12 +1,26 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
-?>
+
+// Function to get client IP address
+function get_client_ip() {
+    $ip = $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    // If X-Forwarded-For has multiple IPs, take the first one
+    if (strpos($ip, ',') !== false) {
+        $ip = explode(',', $ip)[0];
+    }
+    return trim($ip);
+}
+
+$user_ip = get_client_ip();
+
+ ?>
 <nav class="navbar navbar-expand-lg border-bottom" style="--bs-border-color: var(--border-color);">
     <div class="container">
         <a class="navbar-brand fw-bold" href="/">VPN Leaderboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <span class="mx-3 text-secondary small">Your IP: <?= htmlspecialchars($user_ip) ?> <span class="text-warning fw-bold">(Unprotected)</span></span>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'index.php') ? 'active' : '' ?>" href="/">Global</a></li>
