@@ -32,6 +32,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
 <body>
+    <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
   <?php include __DIR__ . '/../navigation/nav.php'; ?>
 
   <header class="article-hero" style="background-image: url('<?= htmlspecialchars($article['image']) ?>'); background-position: center;">

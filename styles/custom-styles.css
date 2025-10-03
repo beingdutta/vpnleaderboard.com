@@ -66,5 +66,76 @@
 /* Verdict Box */
 .verdict-box {
   background-color: var(--chip-bg);
+
+    /* Custom Styles for the Blog Page */
+
+    /* Author Info Box Enhancements */
+    .author-info {
+        border-bottom: 1px solid #e9ecef; /* Light border to separate author info */
+        padding-bottom: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .author-box img {
+        border: 2px solid var(--brand); /* Highlight the author avatar */
+    }
+
+    /* Article Content Improvements */
+   .article-content h2, .article-content h3, .article-content h4, .article-content h5, .article-content h6 {
+        color: var(--brand); /* Use brand color for main headings */
+        border-bottom: 2px solid var(--brand-highlight); /* Highlight heading with brand color */
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .article-content h3 {
+        color: var(--text-primary); /* Use a secondary color for sub-headings */
+    }
+
+    .article-content blockquote {
+        border-left: 0.25rem solid var(--brand); /* Highlight quote with brand color */
+        padding-left: 1rem;
+        font-style: italic;
+        color: var(--text-secondary);
+    }
+
+    .article-content figure {
+        margin: 2rem 0; /* Add more spacing around images */
+    }
+
+.article-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 3rem;
+}
+
+/* Pros and Cons Styling */
+.pros-cons h2 {
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pros-cons h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+}
+
+/* Verdict Box */
+.verdict-box {
+  background-color: var(--chip-bg);
+  border-left: 4px solid var(--brand);
+}
   border-left: 4px solid var(--brand);
 }
