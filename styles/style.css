@@ -501,6 +501,15 @@ html[data-theme="dark"] .star-icon.half::before {
   top: 2rem;
 }
 
+.article-hero {
+  position: relative;
+  height: 40vh;
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
 
 /* ==========================================================================
    4. Media Queries & Utilities

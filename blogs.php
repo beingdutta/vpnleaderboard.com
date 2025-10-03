@@ -5,15 +5,6 @@ require_once __DIR__ . '/db.php';
 // For now, we'll use a placeholder array.
 $blogs = [
     [
-        'title' => 'The Ultimate Guide to Online Privacy in 2025',
-        'slug' => 'ultimate-guide-online-privacy-2025',
-        'author' => 'Jane Doe',
-        'date' => 'September 15, 2025',
-        'excerpt' => 'In an increasingly digital world, protecting your privacy has never been more important. This guide covers the essential tools and practices...',
-        'image' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=870',
-        'url' => 'blogs/ultimate-guide-online-privacy-2025' // This will now correctly map to the .php file
-    ],
-    [
         'title' => 'How VPNs Can Secure Your Public Wi-Fi Connections',
         'slug' => 'how-vpns-secure-public-wifi',
         'author' => 'John Smith',
@@ -55,6 +46,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <link rel="icon" href="/assets/site-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
+    <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
 </head>
 <body>
   <?php include __DIR__ . '/navigation/nav.php'; ?>

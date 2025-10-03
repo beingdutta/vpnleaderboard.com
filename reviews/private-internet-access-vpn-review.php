@@ -21,6 +21,7 @@
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/../styles/style.css') ?>" rel="stylesheet" />
+   <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
   </head>
 
   <body>

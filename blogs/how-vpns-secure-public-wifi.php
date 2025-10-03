@@ -18,18 +18,19 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <meta charset="utf-8">
     <title><?= htmlspecialchars($article['title']) ?> | VPN Leaderboard</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="icon" href="/assets/site-icon.png" type="image/png">
     
     <meta name="description" content="Public Wi-Fi is a minefield of digital threats. This exhaustive 3000+ word guide explains every risk in detail and provides the ultimate solution for staying safe.">
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="Public Wi-Fi is a minefield of digital threats. This exhaustive 3000+ word guide explains every risk in detail and provides the ultimate solution for staying safe.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>"> 
+  
     <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>"> 
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
-    <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
 <body>
   <?php include __DIR__ . '/../navigation/nav.php'; ?>
 
@@ -143,51 +144,5 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/scripts/script.js"></script>
 </body>
-<style>
-
-    /* Custom Styles for the Blog Page */
-
-    /* Author Info Box Enhancements */
-    .author-info {
-        border-bottom: 1px solid #e9ecef; /* Light border to separate author info */
-        padding-bottom: 0.75rem;
-        margin-bottom: 1rem;
-    }
-
-    .author-box img {
-        border: 2px solid var(--brand); /* Highlight the author avatar */
-    }
-
-    /* Article Content Improvements */
-   .article-content h2, .article-content h3, .article-content h4, .article-content h5, .article-content h6 {
-        color: var(--brand); /* Use brand color for main headings */
-        border-bottom: 2px solid var(--brand-highlight); /* Highlight heading with brand color */
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .article-content h3 {
-        color: var(--text-primary); /* Use a secondary color for sub-headings */
-    }
-
-    .article-content blockquote {
-        border-left: 0.25rem solid var(--brand); /* Highlight quote with brand color */
-        padding-left: 1rem;
-        font-style: italic;
-        color: var(--text-secondary);
-    }
-
-    .article-content figure {
-        margin: 2rem 0; /* Add more spacing around images */
-    }
-</style>
-<style>
-    /* Custom Styles for the Blog Page */
-
-    /* Author Info Box Enhancements */
-
-    /* Article Content Improvements */
-
-</style>
 
 </html>

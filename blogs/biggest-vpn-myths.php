@@ -20,16 +20,17 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
+    <link rel="icon" href="/assets/site-icon.png" type="image/png">
     <meta name="description" content="Are VPNs only for hackers? Do they make you completely anonymous? This definitive 3000+ word guide tackles the most common and dangerous misconceptions about VPNs.">
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="Are VPNs only for hackers? Do they make you completely anonymous? This definitive 3000+ word guide tackles the most common and dangerous misconceptions about VPNs.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>"> 
+ 
     <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>">
 
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
 </head>
 <body>
@@ -43,6 +44,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
       </div>
     </div>
   </header>
+
 
   <main class="container my-5">
     <div class="row g-5">
