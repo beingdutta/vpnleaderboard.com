@@ -38,7 +38,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://mullvad.net/press/MullvadVPN_logo_Portrait_RGB_Color_positive.png');"
+      style="background-image: url('https://play-lh.googleusercontent.com/W7lHDGmA0LTMB2tul80ezqEnnILgFM4jTxh6eSrPBqTOKWLRahEHc4uXSiE7PUHZOACM=w3840-h2160-rw');"
     >
       <div class="article-hero-overlay">
         <div class="container">
