@@ -234,7 +234,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     </div>
 
     <p class="mt-3 text-secondary small">
-      Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly via AJAX. Help others find the <em>best VPN</em> for streaming, gaming, torrenting, and privacy by voting above.
+      Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly. Help others find the <em>best VPN</em> for streaming, gaming, torrenting, and privacy by voting above.
     </p>
 
     <div class="p-3 mt-4 rounded" style="background-color: var(--chip-bg); border: 1px solid var(--border-color);" role="alert">
