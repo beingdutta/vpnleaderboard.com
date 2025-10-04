@@ -536,6 +536,11 @@ html[data-theme="dark"] .star-icon.half::before {
   font-weight: 500;
 }
 
+.location-info svg {
+  color: #ef4444; /* A noticeable red color */
+  vertical-align: -0.1em; /* Better align icon with text */
+}
+
 .ip-status {
   color: #ffbf50;
   font-weight: 700;
