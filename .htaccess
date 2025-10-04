@@ -10,6 +10,9 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
 RewriteRule ^ https://www.vpnleaderboard.com%{REQUEST_URI} [L,R=301]
 
+# Handle the main /blogs/ landing page
+RewriteRule ^blogs/?$ /blogs.php [L]
+
 # Handle reviews and blogs pretty URLs
 RewriteRule ^reviews/([a-zA-Z0-9-]+)$ /reviews/$1.php [L]
 RewriteRule ^blogs/([a-zA-Z0-9-]+)$ /blogs/$1.php [L]
