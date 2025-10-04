@@ -39,6 +39,21 @@ html[data-theme="dark"] {
   --score-badge-border: #334155;
 }
 
+/* Ensure .text-secondary is always visible in dark mode */
+html[data-theme="dark"] .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Ensure outline buttons are visible in dark mode */
+html[data-theme="dark"] .btn-outline-secondary {
+  --bs-btn-color: var(--text-secondary);
+  --bs-btn-border-color: var(--border-color);
+  --bs-btn-hover-color: var(--text-primary);
+  --bs-btn-hover-bg: var(--border-color);
+  --bs-btn-hover-border-color: var(--border-color);
+  --bs-btn-active-bg: #475569; /* A slightly darker shade for active state */
+}
+
 /* ==========================================================================
    2. Base & Global Styles
    ========================================================================== */
