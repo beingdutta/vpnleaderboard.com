@@ -507,14 +507,9 @@ html[data-theme="dark"] .star-icon.half::before {
 }
 
 /* --- Navigation Bar: Brand & IP Info --- */
-.navbar-brand-stack {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
 
 .brand-text {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: var(--text-primary);
 }
@@ -545,6 +540,22 @@ html[data-theme="dark"] .star-icon.half::before {
   font-weight: 700;
   letter-spacing: 0.5px;
   margin-left: 0.5rem; /* Add space after the IP address */
+}
+
+/* On mobile, make the IP block take full width to wrap to the next line */
+@media (max-width: 991.98px) {
+  .ip-info-block {
+    flex-basis: 100%;
+    order: 3; /* Ensure it appears after the toggles in the source order */
+    margin-top: 0.25rem;
+  }
+}
+
+/* On desktop, align IP block next to the brand */
+@media (min-width: 992px) {
+  .ip-info-block {
+    margin-left: 1.5rem;
+  }
 }
 
 .article-hero {
