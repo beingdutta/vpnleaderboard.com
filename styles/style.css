@@ -514,13 +514,13 @@ html[data-theme="dark"] .star-icon.half::before {
 }
 
 .brand-text {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: var(--text-primary);
 }
 
 .ip-info-block {
-  font-size: 0.7rem; /* Base font size for the entire IP block */
+  font-size: 0.85rem; /* Base font size for the entire IP block */
   color: var(--text-secondary);
 }
 
