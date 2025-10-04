@@ -20,7 +20,7 @@ $user_ip = get_client_ip();
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <span class="mx-3 text-secondary small">Your IP: <?= htmlspecialchars($user_ip) ?> <span class="text-warning fw-bold">(Unprotected)</span></span>
+        <span class="mx-3 text-secondary small">Your IP: <span class="user-ip"><?= htmlspecialchars($user_ip) ?></span> <span class="text-warning fw-bold">(Unprotected)</span></span>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link <?= ($current_page === 'index.php') ? 'active' : '' ?>" href="/">Global</a></li>
@@ -35,3 +35,11 @@ $user_ip = get_client_ip();
         </div>
     </div>
 </nav>
+<style>
+.user-ip {
+    color: var(--text-secondary); /* Inherit default text color */
+}
+html[data-theme="dark"] .user-ip {
+    color: #fff; /* White color in dark mode */
+}
+</style>

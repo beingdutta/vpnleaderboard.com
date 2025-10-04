@@ -267,3 +267,17 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <script src="scripts/script.js"></script>
 </body>
 </html>
+<script>
+    function applyLoadingStyles(loadingOverlay) {
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+
+        if (isDarkMode) {
+            loadingOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        } else {
+            loadingOverlay.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+        }
+    }
+
+
+    // Add this function to each of the leaderboard php files for the loader to work.
+</script>
