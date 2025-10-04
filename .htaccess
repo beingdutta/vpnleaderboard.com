@@ -1,14 +1,18 @@
+Options -Indexes
+
 RewriteEngine On
 
-# Redirect /index.php to /
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
-RewriteRule ^index\.php$ / [R=301,L]
+# Redirect to www and https
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Add a trailing slash to directories
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.*[^/])$ /$1/ [R=301,L]
+# Handle reviews and blogs pretty URLs
+RewriteRule ^reviews/([a-zA-Z0-9-]+)$ /reviews/$1.php [L]
+RewriteRule ^blogs/([a-zA-Z0-9-]+)$ /blogs/$1.php [L]
 
-# Internally rewrite requests to .php files
+# If the request is not for an existing file or directory, show 404 page
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [L]
+RewriteRule . /404.php [L]
