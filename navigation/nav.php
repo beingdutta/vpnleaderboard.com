@@ -1,10 +1,15 @@
 <?php
 $current_ip = $_SERVER['REMOTE_ADDR'];
 
+// If on localhost, use a placeholder public IP for demonstration
+if ($current_ip === '127.0.0.1' || $current_ip === '::1') {
+    $current_ip = '2401:4900:1c3f:974c:9100:1a71:4765:f376';
+}
+
 // --- Fetch Geolocation from IP ---
 $location_info = '';
-// Don't query for localhost IPs
-if ($current_ip !== '127.0.0.1' && $current_ip !== '::1') {
+// The API call will now run for the placeholder IP as well.
+// The original check for localhost is no longer needed.
     try {
         // Use a timeout to prevent long page loads if the API is slow
         $context = stream_context_create(['http' => ['timeout' => 2]]);
@@ -19,7 +24,6 @@ if ($current_ip !== '127.0.0.1' && $current_ip !== '::1') {
     } catch (Exception $e) {
         // Silently fail if there's an error fetching location
     }
-}
 
 if (empty($location_info)) {
     $location_info = 'Unknown';
@@ -39,12 +43,14 @@ $nav_links = [
 ?>
 <nav class="navbar navbar-expand-lg border-bottom" style="--bs-border-color: var(--border-color);">
   <div class="container flex-wrap">
-    <a class="navbar-brand" href="/">
-      <span class="brand-text">VPN Leaderboard</span>
-    </a>
-    <span class="ip-info-block order-lg-1" title="Your public IP address and estimated location. A VPN will change this.">
-      Your IP: <span class="ip-addr"><?= htmlspecialchars($current_ip) ?></span> <span class="ip-status">(Unprotected)</span> <span class="location-info"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-geo-alt-fill me-1" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><?= $location_info ?></span>
-    </span>
+    <div class="navbar-brand-stack">
+      <a class="navbar-brand" href="/">
+        <span class="brand-text">VPN Leaderboard</span>
+      </a>
+      <span class="ip-info-block" title="Your public IP address and estimated location. A VPN will change this.">
+        <span class="ip-address-part">Your IP: <span class="ip-addr"><?= htmlspecialchars($current_ip) ?></span></span> <span class="ip-status">(Unprotected)</span> <span class="location-info"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-geo-alt-fill me-1" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><?= $location_info ?></span>
+      </span>
+    </div>
 
     <div class="d-flex align-items-center">
         <a href="#" id="theme-toggle" class="nav-link d-lg-none me-3" title="Toggle light/dark theme"></a>

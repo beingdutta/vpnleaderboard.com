@@ -87,6 +87,11 @@ a {
   color: var(--brand); /* Use the brand color or any blue you prefer */
 }
 
+/* Make navbar toggler icon visible in dark mode */
+html[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(229, 231, 235, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 
 .footer a:hover {
   color: var(--brand);
@@ -507,6 +512,12 @@ html[data-theme="dark"] .star-icon.half::before {
 }
 
 /* --- Navigation Bar: Brand & IP Info --- */
+.navbar-brand-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin-right: auto; /* Pushes other items to the right */
+}
 
 .brand-text {
   font-size: 1.25rem;
@@ -542,19 +553,10 @@ html[data-theme="dark"] .star-icon.half::before {
   margin-left: 0.5rem; /* Add space after the IP address */
 }
 
-/* On mobile, make the IP block take full width to wrap to the next line */
+/* On mobile, hide the IP address to save space */
 @media (max-width: 991.98px) {
-  .ip-info-block {
-    flex-basis: 100%;
-    order: 3; /* Ensure it appears after the toggles in the source order */
-    margin-top: 0.25rem;
-  }
-}
-
-/* On desktop, align IP block next to the brand */
-@media (min-width: 992px) {
-  .ip-info-block {
-    margin-left: 1.5rem;
+  .ip-address-part {
+    display: none;
   }
 }
 
@@ -636,6 +638,11 @@ html[data-theme="dark"] .form-label {
 html[data-theme="dark"] .dropdown-menu {
     --bs-dropdown-bg: var(--background-secondary);
     --bs-dropdown-border-color: var(--border-color);
+}
+
+/* Ensure dropdown text is visible in dark mode */
+html[data-theme="dark"] .dropdown-menu .form-check-label {
+    color: var(--text-primary);
 }
 
 /* Fix for invisible unchecked checkboxes */
