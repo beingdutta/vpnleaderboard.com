@@ -507,10 +507,10 @@ html[data-theme="dark"] .star-icon.half::before {
 }
 
 /* --- Navigation Bar: Brand & IP Info --- */
-.navbar-brand {
+.navbar-brand-stack {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .brand-text {
@@ -520,9 +520,8 @@ html[data-theme="dark"] .star-icon.half::before {
 }
 
 .ip-info-block {
-  font-size: 0.85rem; /* Base font size for the entire IP block */
+  font-size: 0.7rem; /* Base font size for the entire IP block */
   color: var(--text-secondary);
-  margin-left: 1.5rem; /* Space between brand and IP block on desktop */
 }
 
 .ip-addr {
@@ -546,14 +545,6 @@ html[data-theme="dark"] .star-icon.half::before {
   font-weight: 700;
   letter-spacing: 0.5px;
   margin-left: 0.5rem; /* Add space after the IP address */
-}
-
-/* On mobile, stack the IP info below the brand name */
-@media (max-width: 991.98px) {
-  .ip-info-block {
-    margin-left: 0; /* Remove desktop margin */
-    flex-basis: 100%; /* Make it take the full width to force a new line */
-  }
 }
 
 .article-hero {
