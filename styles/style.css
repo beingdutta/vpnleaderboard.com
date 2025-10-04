@@ -506,60 +506,47 @@ html[data-theme="dark"] .star-icon.half::before {
   white-space: nowrap;
 }
 
-/* Responsive Nav */
+/* --- Navigation Bar: Brand & IP Info --- */
 .navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.ip-text-container {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
 }
 
-.navbar-brand .brand-text {
-    font-size: 1.25rem; /* Adjust as needed */
-    font-weight: bold;
+.brand-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--text-primary);
 }
 
-.navbar-brand .ip-addr {
+.ip-info-block {
+  font-size: 0.85rem; /* Base font size for the entire IP block */
+  color: var(--text-secondary);
+  margin-left: 1.5rem; /* Space between brand and IP block on desktop */
+}
+
+.ip-addr {
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Menlo', 'Consolas', 'Liberation Mono', monospace;
   font-weight: 600;
   color: var(--text-primary);
 }
 
-.navbar-brand .location-info {
+.location-info {
   margin-left: 0.75rem;
-  color: var(--text-secondary);
   font-weight: 500;
 }
 
-.navbar-brand .ip-status {
-  color: #f59e0b;
+.ip-status {
+  color: #ffbf50;
   font-weight: 700;
   letter-spacing: 0.5px;
-  font-size: 0.8rem; /* Explicitly set to match .ip-text for consistency */
-  vertical-align: middle;
 }
 
-.navbar-brand .ip-text {
-    font-size: 0.8rem; /* Reduced font size */
-    margin-left: 0; /* Reset margin */
-}
-
-@media (min-width: 992px) {
-  .ip-text-container {
-    width: auto !important; /* Allow it to shrink on desktop */
-  }
-  .navbar-brand .ip-text {
-    margin-left: 1.5rem; /* Add space on desktop */
-  }
-}
-
+/* On mobile, stack the IP info below the brand name */
 @media (max-width: 991.98px) {
-  .ip-text-container {
-    padding-bottom: 0.5rem; /* Add some space below the IP line on mobile */
+  .ip-info-block {
+    margin-left: 0; /* Remove desktop margin */
+    flex-basis: 100%; /* Make it take the full width to force a new line */
   }
 }
 
