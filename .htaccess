@@ -14,7 +14,7 @@ RewriteRule ^ https://www.vpnleaderboard.com%{REQUEST_URI} [L,R=301]
 RewriteRule ^blogs/?$ /blogs.php [L]
 
 # Handle regional leaderboard pages
-RewriteRule ^(VPNs-in-India|VPNs-in-US|VPNs-in-China)$ /$1.php [L]
+RewriteRule ^(vpn-india-leaderboard|vpn-usa-leaderboard|vpn-china-leaderboard)$ /$1.php [L]
 
 # Handle reviews and blogs pretty URLs
 RewriteRule ^reviews/([a-zA-Z0-9-]+)$ /reviews/$1.php [L]

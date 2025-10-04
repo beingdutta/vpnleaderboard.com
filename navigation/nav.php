@@ -33,9 +33,9 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
 
 $nav_links = [
     'index.php' => 'Global',
-    'VPNs-in-India.php' => 'India',
-    'VPNs-in-US.php' => 'USA',
-    'VPNs-in-China.php' => 'China',
+    'vpn-india-leaderboard.php' => 'India',
+    'vpn-usa-leaderboard.php' => 'USA',
+    'vpn-china-leaderboard.php' => 'China',
     'blogs.php' => 'Blog',
     'reviews.php' => 'Reviews',
     'feedback.php' => 'Feedback'
