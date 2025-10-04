@@ -49,6 +49,15 @@ $blogs = [
         'image' => 'https://plus.unsplash.com/premium_photo-1663050681752-4c95effcca58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         'url' => '/blogs/free-no-logs-vpns'
     ],
+    [
+        'title' => 'Best VPN for CapCut 2025: Unblock All Features in India',
+        'slug' => 'best-free-vpn-for-capcut-in-india',
+        'author' => 'Jane Doe',
+        'date' => 'October 4, 2025',
+        'excerpt' => 'Struggling with \'No internet connection\' on CapCut in India? Unlock templates and pro features with our guide to the best free and paid VPNs for CapCut on Android & iOS.',
+        'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1920',
+        'url' => '/blogs/best-free-vpn-for-capcut-in-india'
+    ],
 ];
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
