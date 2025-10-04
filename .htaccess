@@ -13,6 +13,9 @@ RewriteRule ^ https://www.vpnleaderboard.com%{REQUEST_URI} [L,R=301]
 # Handle the main /blogs/ landing page
 RewriteRule ^blogs/?$ /blogs.php [L]
 
+# Handle simple root-level pages (feedback, contact, etc.)
+RewriteRule ^(feedback|contact|about|terms|privacy|reviews)$ /$1.php [L]
+
 # Handle regional leaderboard pages
 RewriteRule ^(vpn-india-leaderboard|vpn-usa-leaderboard|vpn-china-leaderboard)$ /$1.php [L]
 
