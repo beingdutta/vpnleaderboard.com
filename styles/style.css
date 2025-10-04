@@ -540,6 +540,7 @@ html[data-theme="dark"] .star-icon.half::before {
   color: #ffbf50;
   font-weight: 700;
   letter-spacing: 0.5px;
+  margin-left: 0.5rem; /* Add space after the IP address */
 }
 
 /* On mobile, stack the IP info below the brand name */

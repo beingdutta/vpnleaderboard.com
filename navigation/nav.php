@@ -38,11 +38,10 @@ $nav_links = [
     <a class="navbar-brand" href="index.php">
       <span class="brand-text">VPN Leaderboard</span>
       <span class="ip-info-block" title="Your public IP address and estimated location. A VPN will change this.">
-        Your IP: <span class="ip-addr"><?= htmlspecialchars($current_ip) ?></span>
+        Your IP: <span class="ip-addr"><?= htmlspecialchars($current_ip) ?></span> <span class="ip-status">(Unprotected)</span>
         <?php if ($location_info): ?>
           <span class="location-info"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-geo-alt-fill me-1" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><?= $location_info ?></span>
         <?php endif; ?>
-        <span class="ip-status">(Unprotected)</span>
       </span>
     </a>
 
@@ -50,7 +49,10 @@ $nav_links = [
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
         <?php foreach ($nav_links as $href => $text): ?>
         <li class="nav-item">
-          <a class="nav-link <?= ($current_page === $href) ? 'active' : '' ?>" href="/<?= $href ?>"><?= $text ?></a>
+          <?php
+            $link_url = ($href === 'index.php') ? '/' : '/' . pathinfo($href, PATHINFO_FILENAME);
+          ?>
+          <a class="nav-link <?= ($current_page === $href) ? 'active' : '' ?>" href="<?= $link_url ?>"><?= $text ?></a>
         </li>
         <?php endforeach; ?>
         <li class="nav-item d-none d-lg-block">
