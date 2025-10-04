@@ -96,59 +96,26 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   </header>
 
   <!-- CONTROLS -->
-  <div class="container mt-2">
-    <div class="column-toggle-controls p-3 mb-3">
-        <strong>Show Columns:</strong>
-        <div class="checkbox-group">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-speed_mbps" data-col-name="speed_mbps" checked>
-                <label class="form-check-label" for="toggle-speed_mbps">Speed</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-starting_price" data-col-name="starting_price" checked>
-                <label class="form-check-label" for="toggle-starting_price">Starts</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-suitable_for" data-col-name="suitable_for" checked>
-                <label class="form-check-label" for="toggle-suitable_for">Suitable For</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-countries" data-col-name="countries">
-                <label class="form-check-label" for="toggle-countries">Countries</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-features" data-col-name="features" checked>
-                <label class="form-check-label" for="toggle-features">Features</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-server_count" data-col-name="server_count">
-                <label class="form-check-label" for="toggle-server_count">Servers</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-device_limit" data-col-name="device_limit">
-                <label class="form-check-label" for="toggle-device_limit">Device Limit</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-protocols_supported" data-col-name="protocols_supported">
-                <label class="form-check-label" for="toggle-protocols_supported">Protocols</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-logging_policy" data-col-name="logging_policy">
-                <label class="form-check-label" for="toggle-logging_policy">Logging</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-based_in" data-col-name="based_in">
-                <label class="form-check-label" for="toggle-based_in">Based In</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-free_available" data-col-name="free_available">
-                <label class="form-check-label" for="toggle-free_available">Free Plan</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="toggle-platform" data-col-name="platform">
-                <label class="form-check-label" for="toggle-platform">Platform</label>
-            </div>
+  <div class="container my-3">
+    <div class="column-toggle-wrapper">
+      <!-- Dropdown for small screens -->
+      <div class="d-md-none">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="columnToggleDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          Show/Hide Columns
+        </button>
+        <div class="dropdown-menu p-3" aria-labelledby="columnToggleDropdown">
+          <div class="checkbox-group-mobile">
+            <!-- Checkboxes will be injected here by JS -->
+          </div>
         </div>
+      </div>
+      <!-- Inline checkboxes for large screens -->
+      <div class="column-toggle-controls d-none d-md-block">
+        <strong>Show Columns:</strong>
+        <div class="checkbox-group-desktop">
+          <!-- Checkboxes will be injected here by JS -->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -184,64 +151,72 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             $features = array_slice(array_map('trim', explode(';', str_replace([',',';'], ';', (string)$v['features']))),0,3);
           ?>
           <tr data-vpn-id="<?= (int)$v['vpn_id'] ?>" data-score="<?= (int)$v['score'] ?>" data-promoted="<?= (int)$v['is_promoted'] ?>">
-            <td class="text-secondary"><?= (int)$v['true_rank'] ?></td>
-            <td>
+            <td data-label="#" class="text-secondary"><?= (int)$v['true_rank'] ?></td>
+            <td class="vpn-info-cell">
               <a href="<?= htmlspecialchars($v['website_url']) ?>" target="_blank" rel="nofollow noopener" class="text-decoration-none text-reset">
                 <div class="d-flex align-items-center gap-2">
-                  <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded">
-                  <div class="d-flex flex-column" style="min-width: 150px;">
-                    <div class="d-flex align-items-center">
-                      <span class="fw-semibold"><?= htmlspecialchars($v['name']) ?></span>
-                      <?php if (!empty($v['is_promoted'])): ?>
-                        <span class="chip chip-promoted ms-2">Promoted</span>
-                      <?php endif; ?>
-                    </div>
+                  <img src="<?= htmlspecialchars($v['logo_path'] ?: 'assets/defaultvpn.png') ?>" alt="<?= htmlspecialchars($v['name']) ?> logo" width="28" height="28" class="rounded me-1">
+                  <div class="d-flex flex-column">
+                    <span class="fw-semibold"><?= htmlspecialchars($v['name']) ?></span>
                     <small class="text-secondary">Trusted VPN provider</small>
                   </div>
+                  <?php if (!empty($v['is_promoted'])): ?>
+                    <span class="chip chip-promoted ms-auto">Promoted</span>
+                  <?php endif; ?>
                 </div>
               </a>
             </td>
-            <td data-col-name="speed_mbps"><?= (int)$v['speed_mbps'] ?> Mbps</td>
-            <td data-col-name="starting_price" class="hide-sm">$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></td>
-            <td data-col-name="suitable_for"><?= htmlspecialchars($v['suitable_for']) ?></td>
-            <td data-col-name="countries" class="hide-sm"><?= (int)$v['supported_countries'] ?></td>
-            <td data-col-name="features">
-              <?php foreach ($features as $f): ?>
-                <span class="chip me-1"><?= htmlspecialchars($f) ?></span>
-              <?php endforeach; ?>
+            <td data-label="Speed" data-col-name="speed_mbps"><div><?= (int)$v['speed_mbps'] ?> Mbps</div></td>
+            <td data-label="Starts" data-col-name="starting_price" class="hide-sm"><div>$<?= htmlspecialchars(number_format($v['starting_price'], 2)) ?></div></td>
+            <td data-label="Suitable for" data-col-name="suitable_for"><div><?= htmlspecialchars($v['suitable_for']) ?></div></td>
+            <td data-label="Countries" data-col-name="countries" class="hide-sm"><div><?= (int)$v['supported_countries'] ?></div></td>
+            <td data-label="Features" data-col-name="features">
+              <div>
+                <?php foreach ($features as $f): ?>
+                  <span class="chip me-1"><?= htmlspecialchars($f) ?></span>
+                <?php endforeach; ?>
+              </div>
             </td> 
-            <td data-col-name="server_count" class="hide-sm"><?= htmlspecialchars($v['server_count']) ?></td>
-            <td data-col-name="device_limit" class="hide-sm"><?= htmlspecialchars($v['device_limit']) ?></td>
-            <td data-col-name="protocols_supported"><?= htmlspecialchars($v['protocols_supported']) ?></td>
-            <td data-col-name="logging_policy"><?= htmlspecialchars($v['logging_policy']) ?></td>
-            <td data-col-name="based_in" class="hide-sm"><?= htmlspecialchars($v['based_in']) ?></td>
-            <td data-col-name="free_available" class="hide-sm"><?= $v['Free_available'] ? 'Yes' : 'No' ?></td>
-            <td data-col-name="platform" class="hide-sm">
-              <?php 
-              $platforms = array_filter(array_map('trim', explode(',', (string)$v['Platform'])));
-              foreach ($platforms as $p):
-              ?>
-                <span class="chip me-1 mb-1"><?= htmlspecialchars($p) ?></span>
-              <?php endforeach; ?>
+            <td data-label="Servers" data-col-name="server_count" class="hide-sm"><div><?= htmlspecialchars($v['server_count']) ?></div></td>
+            <td data-label="Device Limit" data-col-name="device_limit" class="hide-sm"><div><?= htmlspecialchars($v['device_limit']) ?></div></td>
+            <td data-label="Protocols" data-col-name="protocols_supported"><div><?= htmlspecialchars($v['protocols_supported']) ?></div></td>
+            <td data-label="Logging" data-col-name="logging_policy"><div><?= htmlspecialchars($v['logging_policy']) ?></div></td>
+            <td data-label="Based In" data-col-name="based_in" class="hide-sm"><div><?= htmlspecialchars($v['based_in']) ?></div></td>
+            <td data-label="Free Plan" data-col-name="free_available" class="hide-sm"><div><?= $v['Free_available'] ? 'Yes' : 'No' ?></div></td>
+            <td data-label="Platform" data-col-name="platform" class="hide-sm">
+              <div>
+                <?php 
+                $platforms = array_filter(array_map('trim', explode(',', (string)$v['Platform'])));
+                foreach ($platforms as $p):
+                ?>
+                  <span class="chip me-1 mb-1"><?= htmlspecialchars($p) ?></span>
+                <?php endforeach; ?>
+              </div>
             </td>
-            <td>
-              <?php if (!empty($v['affiliate_link'])): ?>
-                <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn-get-deal">Get Deal</a>
-              <?php endif; ?>
+            <td data-label="Deal">
+              <div>
+                <?php if (!empty($v['affiliate_link'])): ?>
+                  <a href="<?= htmlspecialchars($v['affiliate_link']) ?>" target="_blank" rel="nofollow noopener" class="btn-get-deal">Get Deal</a>
+                <?php endif; ?>
+              </div>
             </td>
-            <td class="text-center">
-              <div class="d-flex justify-content-center align-items-center gap-2 <?= $voted ? 'voted':'' ?>">
+            <td data-label="Votes" class="text-center votes-cell">
+              <div>
+                <div class="d-flex justify-content-center align-items-center gap-2 <?= $voted ? 'voted':'' ?>">
                 <button class="vote-btn vote-up" data-type="up" title="Upvote" <?= $voted?'disabled':'' ?>><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
                 <span class="upcount"><?= (int)$v['upvotes'] ?></span>
                 <button class="vote-btn vote-down" data-type="down" title="Downvote" <?= $voted?'disabled':'' ?>><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                 <span class="downcount"><?= (int)$v['downvotes'] ?></span>
+                </div>
+                <?php if ($voted): ?><small class="text-success">You voted</small><?php endif; ?>
               </div>
-              <?php if ($voted): ?><small class="text-success">You voted</small><?php endif; ?>
             </td>
-            <td class="text-center">
-              <span class="badge rounded-pill score-badge px-3 py-2">
-                <span class="score"><?= (int)$v['score'] ?></span>
-              </span>
+            <td data-label="Score" class="text-center score-cell">
+              <div>
+                <span class="badge rounded-pill score-badge px-3 py-2">
+                  <span class="score"><?= (int)$v['score'] ?></span>
+                </span>
+              </div>
             </td>
           </tr>
           <?php endforeach; ?>

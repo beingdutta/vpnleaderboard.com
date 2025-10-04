@@ -501,25 +501,67 @@ html[data-theme="dark"] .star-icon.half::before {
   top: 2rem;
 }
 
+/* Prevent tagline from wrapping on desktop table view */
+.vpn-info-cell small {
+  white-space: nowrap;
+}
+
 /* Responsive Nav */
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ip-text-container {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
 .navbar-brand .brand-text {
     font-size: 1.25rem; /* Adjust as needed */
     font-weight: bold;
 }
 
+.navbar-brand .ip-addr {
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.navbar-brand .location-info {
+  margin-left: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.navbar-brand .ip-status {
+  color: #f59e0b;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem; /* Explicitly set to match .ip-text for consistency */
+  vertical-align: middle;
+}
+
 .navbar-brand .ip-text {
-    font-size: 0.75rem; /* Adjust as needed */
+    font-size: 0.8rem; /* Reduced font size */
+    margin-left: 0; /* Reset margin */
 }
 
-/* Stack brand and IP vertically on small screens */
+@media (min-width: 992px) {
+  .ip-text-container {
+    width: auto !important; /* Allow it to shrink on desktop */
+  }
+  .navbar-brand .ip-text {
+    margin-left: 1.5rem; /* Add space on desktop */
+  }
+}
+
 @media (max-width: 991.98px) {
-    .navbar-brand {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Align items to the start (left) */
-    }
+  .ip-text-container {
+    padding-bottom: 0.5rem; /* Add some space below the IP line on mobile */
+  }
 }
-
 
 .article-hero {
   position: relative;
@@ -542,6 +584,20 @@ html[data-theme="dark"] .star-icon.half::before {
   }
 }
 
+/* Reduce hero padding and font size on small screens */
+@media (max-width: 767.98px) {
+  .hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .hero h1 {
+    font-size: 2rem; /* Reduce font size from display-5/6 */
+  }
+  .hero h1 .tagline {
+    display: block; /* Force tagline to a new line on small screens */
+  }
+}
+
 /* Admin Login Page Dark Mode Fix */
 /* Target the card directly to override Bootstrap defaults */
 html[data-theme="dark"] .admin-login-page .card {
@@ -556,12 +612,18 @@ html[data-theme="dark"] .form-label {
 
 /* Column Toggle Controls */
 .column-toggle-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center; /* Vertically align "Show Columns:" text with checkboxes */
 }
 
-.column-toggle-controls .checkbox-group {
+.checkbox-group-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 200px; /* Give dropdown some width */
+}
+
+.checkbox-group-desktop {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
@@ -574,6 +636,11 @@ html[data-theme="dark"] .form-label {
 
 .column-toggle-controls .form-check-label:hover {
     color: var(--brand);
+}
+
+html[data-theme="dark"] .dropdown-menu {
+    --bs-dropdown-bg: var(--background-secondary);
+    --bs-dropdown-border-color: var(--border-color);
 }
 
 /* Fix for invisible unchecked checkboxes */
@@ -589,6 +656,93 @@ html[data-theme="dark"] .form-label {
   }
   .table-responsive {
     border: 0;
+  }
+
+  /* Card-based layout for table on small screens */
+  #vpntable {
+    border: none;
+  }
+
+  #vpntable thead {
+    display: none; /* Hide table headers */
+  }
+
+  #vpntable tr {
+    display: block;
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  html[data-theme="dark"] #vpntable tr {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  #vpntable td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  #vpntable tr td:last-child {
+    border-bottom: none;
+  }
+
+  /* Add labels using ::before pseudo-element */
+  #vpntable td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding-right: 1rem;
+  }
+  /* Ensure the content inside the TD is right-aligned */
+  #vpntable td > * {
+    text-align: right;
+    margin-left: auto; /* Pushes content to the right in a flex container */
+  }
+
+  /* --- Special handling for specific columns in card view --- */
+
+  /* VPN Name/Logo column */
+  #vpntable td.vpn-info-cell {
+    display: block; /* Override flex for this cell */
+    padding-bottom: 1rem;
+  }
+  #vpntable td.vpn-info-cell::before {
+    display: none; /* No label needed */
+  }
+
+  /* Override right-alignment for the main VPN info block */
+  #vpntable td.vpn-info-cell > * {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  /* Votes column */
+  #vpntable td.votes-cell {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  #vpntable td.votes-cell .d-flex {
+    transform: scale(1.15); /* Make buttons and counts slightly larger */
+  }
+
+  /* Score column */
+  #vpntable td.score-cell .score-badge {
+    transform: scale(1.1);
+  }
+
+  /* Hide columns that are not needed in card view */
+  #vpntable td[data-col-name="features"],
+  #vpntable td[data-col-name="platform"],
+  #vpntable td[data-label="Deal"] {
+    display: none !important; /* Use important to override inline styles from JS */
   }
 }
 

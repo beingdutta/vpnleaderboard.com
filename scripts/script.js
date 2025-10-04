@@ -114,29 +114,62 @@ function resortTable() {
 }
 
 // --- Column Toggler ---
-(function() {
-    const controlsContainer = document.querySelector('.column-toggle-controls');
-    if (!controlsContainer) return;
+function toggleColumn(colName, isVisible) {
+  const cells = document.querySelectorAll(`th[data-col-name="${colName}"], td[data-col-name="${colName}"]`);
+  cells.forEach(cell => {
+    cell.style.display = isVisible ? '' : 'none';
+  });
+}
 
-    const checkboxes = controlsContainer.querySelectorAll('input[type="checkbox"]');
+document.addEventListener('DOMContentLoaded', () => {
+  const checkboxConfig = [
+    { name: 'speed_mbps', label: 'Speed', checked: true }, // Default
+    { name: 'starting_price', label: 'Starts', checked: true }, // Default
+    { name: 'suitable_for', label: 'Suitable For', checked: true }, // Default
+    { name: 'countries', label: 'Countries', checked: false },
+    { name: 'features', label: 'Features', checked: true }, // Default
+    { name: 'server_count', label: 'Servers', checked: false },
+    { name: 'device_limit', label: 'Device Limit', checked: false },
+    { name: 'protocols_supported', label: 'Protocols', checked: false },
+    { name: 'logging_policy', label: 'Logging', checked: false },
+    { name: 'based_in', label: 'Based In', checked: false },
+    { name: 'free_available', label: 'Free Plan', checked: false },
+    { name: 'platform', label: 'Platform', checked: false },
+  ];
 
-    function updateColumnVisibility() {
-        checkboxes.forEach(checkbox => {
-            const colName = checkbox.dataset.colName;
-            const cells = document.querySelectorAll(`[data-col-name="${colName}"]`);
-            cells.forEach(cell => {
-                cell.style.display = checkbox.checked ? '' : 'none';
-            });
-        });
-    }
+  const mobileContainer = document.querySelector('.checkbox-group-mobile');
+  const desktopContainer = document.querySelector('.checkbox-group-desktop');
 
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateColumnVisibility);
+  function createCheckbox(item, type) {
+    const id = `toggle-${item.name}-${type}`;
+    const isDesktop = type === 'desktop';
+    return `
+      <div class="form-check ${isDesktop ? 'form-check-inline' : ''}">
+        <input class="form-check-input" type="checkbox" id="${id}" data-col-name="${item.name}" ${item.checked ? 'checked' : ''}>
+        <label class="form-check-label" for="${id}">${item.label}</label>
+      </div>
+    `;
+  }
+
+  checkboxConfig.forEach(item => {
+    if (mobileContainer) mobileContainer.innerHTML += createCheckbox(item, 'mobile');
+    if (desktopContainer) desktopContainer.innerHTML += createCheckbox(item, 'desktop');
+    toggleColumn(item.name, item.checked); // Set initial visibility
+  });
+
+  document.querySelectorAll('.form-check-input[data-col-name]').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const colName = e.target.dataset.colName;
+      const isChecked = e.target.checked;
+      
+      document.querySelectorAll(`input[data-col-name="${colName}"]`).forEach(cb => {
+        cb.checked = isChecked;
+      });
+
+      toggleColumn(colName, isChecked); // Call the function to hide/show column
     });
-
-    // Initial run on page load
-    updateColumnVisibility();
-})();
+  });
+});
 
 // --- Hero Chip Filtering & Sorting ---
 // --- Hero Chip Filtering & Sorting (with deep logging) ---
@@ -291,12 +324,12 @@ function applySort(rows, value) {
 
       if (isNaN(na)) {
         const ca = a.querySelector('[data-col-name="starting_price"]');
-        na = parseFloat(((ca && ca.textContent) || '').replace(/[^0-9.]/g, ''));
+        na = parseFloat(((ca && ca.textContent) || '').replace(/[^0-9.-]+/g, ''));
         if (!isNaN(na)) a.dataset.price = String(na);
       }
       if (isNaN(nb)) {
         const cb = b.querySelector('[data-col-name="starting_price"]');
-        nb = parseFloat(((cb && cb.textContent) || '').replace(/[^0-9.]/g, ''));
+        nb = parseFloat(((cb && cb.textContent) || '').replace(/[^0-9.-]+/g, ''));
         if (!isNaN(nb)) b.dataset.price = String(nb);
       }
 
