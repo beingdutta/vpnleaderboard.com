@@ -36,7 +36,7 @@ $nav_links = [
     'VPNs-in-India.php' => 'India',
     'VPNs-in-US.php' => 'USA',
     'VPNs-in-China.php' => 'China',
-    'blog.php' => 'Blog',
+    'blogs.php' => 'Blog',
     'reviews.php' => 'Reviews',
     'feedback.php' => 'Feedback'
 ];
