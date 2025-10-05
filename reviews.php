@@ -157,6 +157,15 @@ $reviews = [
         'image' => 'https://www.privateinternetaccess.com/blog/wp-content/uploads/2021/06/New-PIA-Logo.png',
         'url' => '/reviews/private-internet-access-vpn-review'
     ],
+    [
+        'title' => '12VPX VPN Review 2025 | The China Specialist?',
+        'slug' => '12vpx-vpn-review',
+        'author' => 'Mike Richards',
+        'date' => 'October 5, 2025',
+        'excerpt' => 'A human-written 2025 review of 12VPX VPN. We look at its legendary status for bypassing restrictions in China, but see how it stacks up for everyday use like streaming and privacy.',
+        'image' => 'https://12vpx.com/screenshot/en',
+        'url' => '/reviews/12vpx-vpn-review'
+    ],
 ];
 sort($reviews);
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
@@ -171,7 +180,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
+    <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RMZD8BYYZ"></script>
