@@ -3,7 +3,7 @@
 
 $host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
 
-$configFile = (strpos($host, 'localhost') !== false) ? '/DB_config_local.php' : '/DB_config_server.php';
+$configFile = (strpos($host, 'localhost') !== false) ? '/DB_config_localhost_to_server_db.php' : '/DB_config_server_only.php';
 require_once __DIR__ . $configFile;
 
 $options = [
