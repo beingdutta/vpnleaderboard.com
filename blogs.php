@@ -58,7 +58,21 @@ $blogs = [
         'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1920',
         'url' => '/blogs/best-free-vpn-for-capcut-in-india'
     ],
+    [
+        'title' => 'Best No-Log VPNs 2025: Your Guide to True Digital Privacy',
+        'slug' => 'best-no-logs-vpns',
+        'author' => 'Jane Doe',
+        'date' => 'October 18, 2025',
+        'excerpt' => 'Looking for a true no-log VPN? We review the best VPNs with audited no-log policies, RAM-only servers, and strong privacy to keep your data safe in 2025.',
+        'image' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1920',
+        'url' => '/blogs/best-no-logs-vpns'
+    ],
 ];
+
+// Sort the blogs array by date in descending order (newest first)
+usort($blogs, function($a, $b) {
+    return strtotime($b['date']) - strtotime($a['date']);
+});
 
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
