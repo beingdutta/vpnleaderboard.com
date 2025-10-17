@@ -1,5 +1,5 @@
 <?php
-// db.php — PDO connection (update credentials)
+// db.php — PDO connection
 
 $host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
 
