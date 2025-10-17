@@ -10,7 +10,7 @@ $reviews = [
         'author' => 'Mike Richards',
         'date' => 'September 12, 2025',
         'excerpt' => 'We put ExpressVPN through its paces to see if its performance, security, and features still justify its premium price tag.',
-        'image' => 'https://www.expressvpn.com/wp-ws/uploads-expressvpn/2023/04/expressvpn-vertical-logo-white-on-red.jpeg',
+        'image' => 'https://xv.imgix.net/photos/xv/Red-Logo-Horizontal-ExpressVPN-Preview-fa080bcc7c7b864b93c1613d444c36d2.png?s=fcbeb8941e9e72a5889930b7df6c7c85',
         'url' => '/reviews/express-vpn-review.php'
     ],
     [
@@ -46,7 +46,7 @@ $reviews = [
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
         'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
-        'image' => 'https://www.tunnelbear.com/static/images/social-meta/share_graphic.jpg',
+        'image' => '/assets/review-article-thumbnails/tunnebear-thumbnail.png',
         'url' => '/reviews/tunnelbear-vpn-review.php'
     ],
     [
@@ -118,7 +118,7 @@ $reviews = [
         'author' => 'Alex Chen',
         'date' => 'August 20, 2025',
         'excerpt' => 'With anonymous accounts and a no-nonsense approach, Mullvad is a favorite among privacy purists. We see how it holds up in real-world use.',
-        'image' => 'https://play-lh.googleusercontent.com/W7lHDGmA0LTMB2tul80ezqEnnILgFM4jTxh6eSrPBqTOKWLRahEHc4uXSiE7PUHZOACM=w3840-h2160-rw',
+        'image' => '/assets/review-article-thumbnails/mullvad-vpn-thumbnail.png',
         'url' => '/reviews/mullvad-vpn-review.php'
     ],
     [
@@ -136,7 +136,7 @@ $reviews = [
         'author' => 'Mike Richards',
         'date' => 'August 15, 2025',
         'excerpt' => 'LetsVPN focuses on a simple, auto-routing experience. We test its proprietary protocol for speed and stability in daily use.',
-        'image' => 'https://letsvpn.world/images/ietel.png',
+        'image' => 'https://cdn6.aptoide.com/imgs/6/0/f/60f15a30d56e3058d0c06909d6ccd194_fgraphic.png',
         'url' => '/reviews/letsvpn-review.php'
     ],
     [
@@ -154,7 +154,7 @@ $reviews = [
         'author' => 'Mike Richards',
         'date' => 'September 25, 2025',
         'excerpt' => 'PIA blends robust privacy with wallet-friendly pricing, featuring open-source apps, an audited no-logs policy, and unlimited device connections.',
-        'image' => 'https://www.privateinternetaccess.com/blog/wp-content/uploads/2021/06/New-PIA-Logo.png',
+        'image' => '/assets/review-article-thumbnails/pia-thumbnail.png',
         'url' => '/reviews/private-internet-access-vpn-review.php'
     ],
     [
@@ -163,7 +163,7 @@ $reviews = [
         'author' => 'Mike Richards',
         'date' => 'October 5, 2025',
         'excerpt' => 'A human-written 2025 review of 12VPX VPN. We look at its legendary status for bypassing restrictions in China, but see how it stacks up for everyday use like streaming and privacy.',
-        'image' => 'https://12vpx.com/screenshot/en',
+        'image' => '/assets/review-article-thumbnails/12vpx-thumbnail.png',
         'url' => '/reviews/12vpx-vpn-review.php'
     ],
     [
