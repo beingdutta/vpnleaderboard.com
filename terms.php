@@ -67,7 +67,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
           <p>We reserve the right to revise these terms and conditions at any time. By using this Website, you are expected to review these terms on a regular basis.</p>
 
           <h2>Contact Us</h2>
-          <p>If you have any questions about these Terms, please <a href="/contact.php">contact us</a>.</p>
+          <p>If you have any questions about these Terms, please <a href="/feedback.php">contact us</a>.</p>
 
         </article>
       </div>

@@ -10,7 +10,7 @@ $blogs = [
         'author' => 'John Smith',
         'date' => 'September 10, 2025',
         'excerpt' => 'Public Wi-Fi is convenient but risky. Learn how a Virtual Private Network (VPN) can encrypt your data and keep you safe from hackers.',
-        'image' => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920',
+        'image' => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920', // This should be a relative path if the image is local
         'url' => '/blogs/how-vpns-secure-public-wifi'
     ],
     [
@@ -19,7 +19,7 @@ $blogs = [
         'author' => 'Alex Ray',
         'date' => 'September 5, 2025',
         'excerpt' => 'Are VPNs only for tech experts? Do they make you completely anonymous? We tackle the most common misconceptions about VPNs.',
-        'image' => 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=1920',
+        'image' => 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=1920', // This should be a relative path if the image is local
         'url' => '/blogs/biggest-vpn-myths'
     ],
     [
@@ -28,7 +28,7 @@ $blogs = [
         'author' => 'Sarah Jones',
         'date' => 'August 28, 2025',
         'excerpt' => 'Tired of geo-restrictions? A good streaming VPN can unlock a world of content. Here’s what to look for when choosing one.',
-        'image' => 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=1920',
+        'image' => 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=1920', // This should be a relative path if the image is local
         'url' => '/blogs/right-vpn-for-streaming'
     ],
     [
@@ -36,7 +36,7 @@ $blogs = [
         'slug' => 'working-vpns-for-china',
         'author' => 'Jane Doe',
         'date' => 'October 5, 2025',
-        'excerpt' => 'An in-depth, human-narrated guide to the VPNs that actually work in China in 2025. We explore Astrill VPN, Mullvad, and LetsVPN to see how they beat the Great Firewall.',
+        'excerpt' => 'An in-depth, human-narrated guide to the VPNs that actually work in China in 2025. We explore Astrill VPN, Mullvad, and LetsVPN to see how they beat the Great Firewall.', // This should be a relative path if the image is local
         'image' => 'https://images.unsplash.com/photo-1640869429947-ace411d59d43?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         'url' => '/blogs/working-vpns-for-china'
     ],
@@ -45,7 +45,7 @@ $blogs = [
         'slug' => 'free-no-logs-vpns',
         'author' => 'Jane Doe',
         'date' => 'October 4, 2025',
-        'excerpt' => 'A brutally honest guide to the world of free VPNs that claim \'no-logs.\' We investigate the business models and review the few trustworthy options like Proton VPN and Windscribe.',
+        'excerpt' => 'A brutally honest guide to the world of free VPNs that claim \'no-logs.\' We investigate the business models and review the few trustworthy options like Proton VPN and Windscribe.', // This should be a relative path if the image is local
         'image' => 'https://plus.unsplash.com/premium_photo-1663050681752-4c95effcca58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         'url' => '/blogs/free-no-logs-vpns'
     ],
@@ -54,7 +54,7 @@ $blogs = [
         'slug' => 'best-free-vpn-for-capcut-in-india',
         'author' => 'Jane Doe',
         'date' => 'October 4, 2025',
-        'excerpt' => 'Struggling with \'No internet connection\' on CapCut in India? Unlock templates and pro features with our guide to the best free and paid VPNs for CapCut on Android & iOS.',
+        'excerpt' => 'Struggling with \'No internet connection\' on CapCut in India? Unlock templates and pro features with our guide to the best free and paid VPNs for CapCut on Android & iOS.', // This should be a relative path if the image is local
         'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1920',
         'url' => '/blogs/best-free-vpn-for-capcut-in-india'
     ],

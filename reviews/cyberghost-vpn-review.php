@@ -14,12 +14,12 @@
       content="A friendly 2025 review of CyberGhost VPN covering speed, security & audits, streaming performance, pricing, and overall day-to-day experience."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/cyberghost-vpn-review" />
     <meta
       property="og:image"
       content="https://images.unsplash.com/photo-1548095115-45697e51360b?q=80&w=1920"
     />
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/cyberghost-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
