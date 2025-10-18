@@ -369,8 +369,11 @@ html[data-theme="dark"] .article-card-vertical:hover {
   object-fit: cover;
 }
 
-/* Fix for carousel text in dark mode */
-html[data-theme="dark"] .featured-article-card .text-secondary {
+/* Fix for carousel text visibility in dark mode */
+html[data-theme="dark"] .featured-article-card .card-body {
+  color: var(--text-primary);
+}
+html[data-theme="dark"] .featured-article-card .card-body .text-secondary {
   color: var(--text-secondary) !important;
 }
 
