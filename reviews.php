@@ -216,8 +216,8 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <main class="container my-5">
     <?php if (!empty($reviews)): ?>
       <?php
-        // Take the first 3 reviews for the carousel
-        $carousel_reviews = array_slice($reviews, 0, 3);
+        // Take the first 3 reviews for the carousel and remove them from the main array
+        $carousel_reviews = array_splice($reviews, 0, 3);
       ?>
       <!-- Featured Article Carousel -->
       <div id="featuredReviewCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
