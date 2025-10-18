@@ -369,6 +369,11 @@ html[data-theme="dark"] .article-card-vertical:hover {
   object-fit: cover;
 }
 
+/* Fix for carousel text in dark mode */
+html[data-theme="dark"] .featured-article-card .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
 .article-card-horizontal .col-md-3 {
   max-height: 200px; /* Set a max-height for the image container */
 }
