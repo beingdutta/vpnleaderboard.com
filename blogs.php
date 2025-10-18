@@ -108,33 +108,77 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <body>
   <?php include __DIR__ . '/navigation/nav.php'; ?>
 
-  <header class="py-5 hero">
-    <div class="container text-center">
-      <h1 class="display-5 fw-bold">VPN & Security Blog</h1>
-      <p class="text-secondary">Your source for privacy news, tips, and in-depth guides.</p>
-    </div>
-  </header>
-
   <main class="container my-5">
-    <div class="d-grid gap-4">
-      <?php foreach ($blogs as $blog): ?>
-      <div class="card article-card-horizontal">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="<?= htmlspecialchars($blog['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($blog['title']) ?>">
+    <?php if (!empty($blogs)): ?>
+      <?php
+        // Take the first 3 blog posts for the carousel
+        $carousel_blogs = array_splice($blogs, 0, 3);
+      ?>
+      <!-- Featured Article Carousel -->
+      <div id="featuredArticleCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <?php foreach ($carousel_blogs as $index => $blog): ?>
+            <button type="button" data-bs-target="#featuredArticleCarousel" data-bs-slide-to="<?= $index ?>" class="<?= $index === 0 ? 'active' : '' ?>" aria-current="<?= $index === 0 ? 'true' : 'false' ?>" aria-label="Slide <?= $index + 1 ?>"></button>
+          <?php endforeach; ?>
+        </div>
+        <div class="carousel-inner rounded">
+          <?php foreach ($carousel_blogs as $index => $blog): ?>
+          <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+            <div class="card featured-article-card">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <img src="<?= htmlspecialchars($blog['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($blog['title']) ?>">
+                </div>
+                <div class="col-lg-6 d-flex align-items-center">
+                  <div class="card-body p-lg-5">
+                    <h2 class="card-title display-6 mb-3"><?= htmlspecialchars($blog['title']) ?></h2>
+                    <p class="card-text text-secondary mb-4"><?= htmlspecialchars($blog['excerpt']) ?></p>
+                    <p class="card-text"><small class="text-secondary">By <?= htmlspecialchars($blog['author']) ?> on <?= htmlspecialchars($blog['date']) ?></small></p>
+                    <a href="<?= htmlspecialchars($blog['url']) ?>" class="stretched-link"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-md-9">
-            <div class="card-body d-flex flex-column h-100">
-              <h5 class="card-title mb-2"><?= htmlspecialchars($blog['title']) ?></h5>
+          <?php endforeach; ?>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredArticleCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredArticleCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <hr class="my-5">
+
+      <!-- Grid of Other Articles -->
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <?php foreach ($blogs as $blog): ?>
+        <div class="col">
+          <div class="card h-100 article-card-vertical">
+            <a href="<?= htmlspecialchars($blog['url']) ?>">
+              <img src="<?= htmlspecialchars($blog['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($blog['title']) ?>">
+            </a>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-2">
+                <a href="<?= htmlspecialchars($blog['url']) ?>" class="text-decoration-none stretched-link"><?= htmlspecialchars($blog['title']) ?></a>
+              </h5>
               <p class="card-text text-secondary small flex-grow-1"><?= htmlspecialchars($blog['excerpt']) ?></p>
-              <p class="card-text"><small class="text-secondary">By <?= htmlspecialchars($blog['author']) ?> on <?= htmlspecialchars($blog['date']) ?></small></p>
-              <a href="<?= htmlspecialchars($blog['url']) ?>" class="stretched-link"></a>
+              <p class="card-text mt-auto"><small class="text-secondary">By <?= htmlspecialchars($blog['author']) ?> on <?= htmlspecialchars($blog['date']) ?></small></p>
             </div>
           </div>
         </div>
+        <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
-    </div>
+
+    <?php else: ?>
+      <div class="text-center">
+        <p>No blog posts found.</p>
+      </div>
+    <?php endif; ?>
   </main>
 
   <?php include __DIR__ . '/navigation/footer.php'; ?>

@@ -176,7 +176,12 @@ $reviews = [
         'url' => '/reviews/hotspot-shield-vpn-review'
     ],
 ];
-sort($reviews);
+
+// Sort the reviews array by date in descending order (newest first)
+usort($reviews, function($a, $b) {
+    return strtotime($b['date']) - strtotime($a['date']);
+});
+
 $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
 <!doctype html>
@@ -208,33 +213,81 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <body>
   <?php include __DIR__ . '/navigation/nav.php'; ?>
 
-  <header class="py-5 hero">
-    <div class="container text-center">
-      <h1 class="display-5 fw-bold">Expert VPN Reviews</h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">Unbiased, hands-on testing to help you choose wisely.</p>
-    </div>
-  </header>
-
   <main class="container my-5">
-    <div class="d-grid gap-4">
-      <?php foreach ($reviews as $review): ?>
-      <div class="card article-card-horizontal">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="<?= htmlspecialchars($review['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($review['title']) ?>">
+    <?php if (!empty($reviews)): ?>
+      <?php
+        // Take the first 3 reviews for the carousel
+        $carousel_reviews = array_splice($reviews, 0, 3);
+      ?>
+      <!-- Featured Article Carousel -->
+      <div id="featuredReviewCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <?php foreach ($carousel_reviews as $index => $review): ?>
+            <button type="button" data-bs-target="#featuredReviewCarousel" data-bs-slide-to="<?= $index ?>" class="<?= $index === 0 ? 'active' : '' ?>" aria-current="<?= $index === 0 ? 'true' : 'false' ?>" aria-label="Slide <?= $index + 1 ?>"></button>
+          <?php endforeach; ?>
+        </div>
+        <div class="carousel-inner rounded">
+          <?php foreach ($carousel_reviews as $index => $review): ?>
+          <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+            <div class="card featured-article-card">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <img src="<?= htmlspecialchars($review['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($review['title']) ?>">
+                </div>
+                <div class="col-lg-6 d-flex align-items-center">
+                  <div class="card-body p-lg-5">
+                    <h2 class="card-title display-6 mb-3"><?= htmlspecialchars($review['title']) ?></h2>
+                    <p class="card-text text-secondary mb-4"><?= htmlspecialchars($review['excerpt']) ?></p>
+                    <p class="card-text"><small class="text-secondary">By <?= htmlspecialchars($review['author']) ?> on <?= htmlspecialchars($review['date']) ?></small></p>
+                    <a href="<?= htmlspecialchars($review['url']) ?>" class="stretched-link"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-md-9">
-            <div class="card-body d-flex flex-column h-100">
-              <h5 class="card-title mb-2"><?= htmlspecialchars($review['title']) ?></h5>
+          <?php endforeach; ?>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredReviewCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredReviewCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="alert unbiased-review-alert text-center my-5" role="alert">
+        <h4 class="alert-heading mb-0">Only Unbiased VPN Review In The "Whole Internet"</h4>
+      </div>
+
+      <hr class="my-5">
+
+      <!-- Grid of Other Reviews -->
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <?php foreach ($reviews as $review): ?>
+        <div class="col">
+          <div class="card h-100 article-card-vertical">
+            <a href="<?= htmlspecialchars($review['url']) ?>">
+              <img src="<?= htmlspecialchars($review['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($review['title']) ?>">
+            </a>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-2">
+                <a href="<?= htmlspecialchars($review['url']) ?>" class="text-decoration-none stretched-link"><?= htmlspecialchars($review['title']) ?></a>
+              </h5>
               <p class="card-text text-secondary small flex-grow-1"><?= htmlspecialchars($review['excerpt']) ?></p>
-              <p class="card-text"><small class="text-secondary">By <?= htmlspecialchars($review['author']) ?> on <?= htmlspecialchars($review['date']) ?></small></p>
-              <a href="<?= htmlspecialchars($review['url']) ?>" class="stretched-link"></a>
+              <p class="card-text mt-auto"><small class="text-secondary">By <?= htmlspecialchars($review['author']) ?> on <?= htmlspecialchars($review['date']) ?></small></p>
             </div>
           </div>
         </div>
+        <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
-    </div>
+
+    <?php else: ?>
+      <div class="text-center">
+        <p>No reviews found.</p>
+      </div>
+    <?php endif; ?>
   </main>
 
   <?php include __DIR__ . '/navigation/footer.php'; ?>

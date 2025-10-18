@@ -325,6 +325,50 @@ html[data-theme="dark"] .article-card-horizontal:hover {
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
+.article-card-vertical {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.article-card-vertical:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+html[data-theme="dark"] .article-card-vertical:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.article-card-vertical .card-img-top {
+  height: 220px;
+  object-fit: cover;
+}
+
+.article-card-vertical .card-title a {
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+
+.article-card-vertical:hover .card-title a {
+  color: var(--brand);
+}
+
+.featured-article-card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.featured-article-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.featured-article-card .img-fluid {
+  height: 100%;
+  object-fit: cover;
+}
+
 .article-card-horizontal .col-md-3 {
   max-height: 200px; /* Set a max-height for the image container */
 }
@@ -815,4 +859,15 @@ html[data-theme="dark"] .loading-overlay {
 html[data-theme="dark"] .loader {
     border-color: #333; /* Darker grey */
     border-top-color: var(--brand);
+}
+
+/* Custom alert for unbiased review text */
+.unbiased-review-alert {
+  background-color: #fef3c7; /* A light, warm yellow */
+  border-color: #fde68a; /* A slightly deeper yellow for the border */
+  color: #92400e; /* A dark amber/brown for high contrast text */
+  padding: 1.5rem 2rem; /* More padding to make it stand out */
+}
+.unbiased-review-alert .alert-heading {
+  font-size: 1.5rem; /* Adjusted font size for balance */
 }
