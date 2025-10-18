@@ -67,6 +67,15 @@ $blogs = [
         'image' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1920',
         'url' => '/blogs/best-no-logs-vpns'
     ],
+    [
+        'title' => 'Best VPN for PUBG Mobile 2025: The Ultimate Guide to Low Ping',
+        'slug' => 'best-vpn-for-pubg',
+        'author' => 'Jane Doe',
+        'date' => 'October 18, 2025',
+        'excerpt' => 'Stop losing to lag. We tested the top VPNs to find the lowest ping for PUBG Mobile. Read our expert review of the best VPN for PUBG in India, iOS, and Android.',
+        'image' => 'https://images.unsplash.com/photo-1655802906408-0ed1bc38a6dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1331',
+        'url' => '/blogs/best-vpn-for-pubg'
+    ],
 ];
 
 // Sort the blogs array by date in descending order (newest first)
