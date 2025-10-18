@@ -232,7 +232,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
             <div class="card featured-article-card">
               <div class="row g-0">
                 <div class="col-lg-6">
-                  <img src="<?= htmlspecialchars($review['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($review['title']) ?>">
+                  <img src="<?= htmlspecialchars($review['image']) ?>" class="img-fluid rounded-start" alt="<?= htmlspecialchars($review['title']) ?>" loading="lazy">
                 </div>
                 <div class="col-lg-6 d-flex align-items-center">
                   <div class="card-body p-lg-5">
@@ -269,7 +269,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         <div class="col">
           <div class="card h-100 article-card-vertical">
             <a href="<?= htmlspecialchars($review['url']) ?>">
-              <img src="<?= htmlspecialchars($review['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($review['title']) ?>">
+              <img src="<?= htmlspecialchars($review['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($review['title']) ?>" loading="lazy">
             </a>
             <div class="card-body d-flex flex-column">
               <h5 class="card-title mb-2">
