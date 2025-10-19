@@ -49,7 +49,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https:' : 'http') . '://' . $_SERVER['HT
     <meta property="og:description" content="Stop the 'No Internet' error in CapCut. We review the only *safe* free VPNs (with unlimited data) and the fastest paid options to unblock all templates and effects in 2025.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.vpnleaderboard.com/blogs/best-free-vpn-for-capcut-in-india"> 
-    <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>">
+    <meta property="og:image" content="/assets/blog-article-thumbnails/best-free-vpn-for-capcut.webp">
     
     <link rel="canonical" href="https://www.vpnleaderboard.com/blogs/best-free-vpn-for-capcut-in-india">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
@@ -66,7 +66,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https:' : 'http') . '://' . $_SERVER['HT
 <body>
   <?php include __DIR__ . '/../navigation/nav.php'; ?>
 
-  <header class="article-hero" style="background-image: url('<?= htmlspecialchars($article['image']) ?>');">
+  <header class="article-hero" style="background-image: url('/assets/blog-article-thumbnails/best-free-vpn-for-capcut.webp');">
     <div class="article-hero-overlay">
       <div class="container">
         <h1 class="display-4 fw-bold">Best FREE VPN for CapCut: The 2025 Creator's Guide</h1>

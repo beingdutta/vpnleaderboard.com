@@ -55,7 +55,7 @@ $blogs = [
         'author' => 'Jane Doe',
         'date' => 'October 4, 2025',
         'excerpt' => 'Struggling with \'No internet connection\' on CapCut in India? Unlock templates and pro features with our guide to the best free and paid VPNs for CapCut on Android & iOS.', // This should be a relative path if the image is local
-        'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1920',
+        'image' => '/assets/blog-article-thumbnails/best-free-vpn-for-capcut.webp',
         'url' => '/blogs/best-free-vpn-for-capcut-in-india'
     ],
     [
