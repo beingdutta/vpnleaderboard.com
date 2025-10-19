@@ -14,10 +14,11 @@
       content="Windscribe offers a powerful mix: generous free plan, advanced privacy tools and cross-platform apps. Read our take on strengths and trade-offs."
     />
     <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/windscribe-vpn-review" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1532074205216-d0e1f6dba9d8?q=80&w=1920" />
     <meta name="robots" content="index, follow" />
 
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/windscribe-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

@@ -14,12 +14,12 @@
       content="An in-depth 3000+ word technical review of Hotspot Shield VPN for 2025. We test its proprietary Hydra protocol, and analyze its performance for streaming, gaming, torrenting, and its controversial privacy policy."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" /> <!-- Add your final URL here -->
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/hotspot-shield-vpn-review" /> 
     <meta
       property="og:image"
-      content="https://images.unsplash.com/photo-1550751827-4138d04d475d?q=80&w=1920"
+      content="/assets/review-article-thumbnails/hotspot-shield-thumbnail.webp"
     />
-    <link rel="canonical" href="" /> <!-- Add your final URL here -->
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/hotspot-shield-vpn-review" /> 
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -40,7 +40,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://www.hotspotshield.com/imgs/illustrations/image-3@2x.png');"
+      style="background-image: url('/assets/review-article-thumbnails/hotspot-shield-thumbnail.webp');"
     >
       <div class="article-hero-overlay">
         <div class="container">
@@ -371,7 +371,7 @@
     <?php include __DIR__ . '/../navigation/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/scripts/script.js"></script>
+    <script src="/scripts/script.js?v=<?= @filemtime(__DIR__ . '/../scripts/script.js') ?>"></script>
     <script src="/scripts/stars.js"></script>
 
     <!--
@@ -383,4 +383,3 @@
     -->
   </body>
 </html>
-

@@ -14,10 +14,11 @@
       content="PrivateVPN aims to combine simplicity and streaming support. We assess how it performs in practice and what trade-offs to expect."
     />
     <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/private-vpn-review" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1920" />
     <meta name="robots" content="index, follow" />
 
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/private-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

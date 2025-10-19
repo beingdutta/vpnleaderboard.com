@@ -14,10 +14,11 @@
       content="Astrill VPN is known for speed and advanced options. We look at real-world performance, privacy details, and who will benefit most."
     />
     <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/astrill-vpn-review" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920" />
     <meta name="robots" content="index, follow" />
 
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/astrill-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

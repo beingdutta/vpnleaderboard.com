@@ -24,11 +24,11 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="Public Wi-Fi is a minefield of digital threats. This exhaustive 3000+ word guide explains every risk in detail and provides the ultimate solution for staying safe.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>"> 
+    <meta property="og:url" content="https://www.vpnleaderboard.com/blogs/how-vpns-secure-public-wifi"> 
   
     <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>"> 
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
+    <link rel="canonical" href="https://www.vpnleaderboard.com/blogs/how-vpns-secure-public-wifi">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RMZD8BYYZ"></script>

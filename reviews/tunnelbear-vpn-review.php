@@ -14,12 +14,12 @@
       content="A friendly, no-nonsense 2025 review of TunnelBear covering speed, security audits, free plan limits, streaming performance, pricing, and everyday usability."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/tunnelbear-vpn-review" />
     <meta
       property="og:image"
-      content="https://images.unsplash.com/photo-1548873909-05b47d915f9b?q=80&w=1920"
+      content="/assets/review-article-thumbnails/tunnelbear-thumbnail.webp"
     />
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/tunnelbear-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -39,7 +39,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://www.tunnelbear.com/static/images/social-meta/share_graphic.jpg');"
+      style="background-image: url('/assets/review-article-thumbnails/tunnelbear-thumbnail.webp');"
     >
       <div class="article-hero-overlay">
         <div class="container">

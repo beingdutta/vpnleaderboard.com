@@ -14,10 +14,11 @@
       content="PIA VPN is known for transparency (open-source apps), verified no-logs audits by Deloitte, speedy WireGuard performance, DNS-level ad blocking (MACE), and unlimited device connections. Here’s how it performs in the real world, what it costs, and who it’s best for."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/private-internet-access-vpn-review" /> 
+    <meta property="og:image" content="/assets/review-article-thumbnails/private-internet-access-vpn-thumbnail.webp" />
     <meta name="robots" content="index, follow" />
 
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/private-internet-access-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/../styles/style.css') ?>" rel="stylesheet" />
@@ -42,7 +43,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://www.privateinternetaccess.com/blog/wp-content/uploads/2021/06/New-PIA-Logo.png');"
+      style="background-image: url('/assets/review-article-thumbnails/private-internet-access-vpn-thumbnail.webp');"
     >
       <div class="article-hero-overlay">
         <div class="container">

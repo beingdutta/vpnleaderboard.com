@@ -118,7 +118,7 @@ $reviews = [
         'author' => 'Alex Chen',
         'date' => 'August 20, 2025',
         'excerpt' => 'With anonymous accounts and a no-nonsense approach, Mullvad is a favorite among privacy purists. We see how it holds up in real-world use.',
-        'image' => '/assets/review-article-thumbnails/mullvad-vpn-thumbnail.png',
+        'image' => '/assets/review-article-thumbnails/mullvad-vpn-thumbnail.webp',
         'url' => '/reviews/mullvad-vpn-review'
     ],
     [
@@ -137,7 +137,7 @@ $reviews = [
         'date' => 'August 15, 2025',
         'excerpt' => 'LetsVPN focuses on a simple, auto-routing experience. We test its proprietary protocol for speed and stability in daily use.',
         'image' => 'https://cdn6.aptoide.com/imgs/6/0/f/60f15a30d56e3058d0c06909d6ccd194_fgraphic.png',
-        'url' => '/reviews/letsvpn-review'
+        'url' => '/reviews/letsvpn-vpn-review.php'
     ],
     [
         'title' => 'VeePN Review 2025',
@@ -154,7 +154,7 @@ $reviews = [
         'author' => 'Mike Richards',
         'date' => 'September 25, 2025',
         'excerpt' => 'PIA blends robust privacy with wallet-friendly pricing, featuring open-source apps, an audited no-logs policy, and unlimited device connections.',
-        'image' => '/assets/review-article-thumbnails/pia-thumbnail.png',
+        'image' => '/assets/review-article-thumbnails/private-internet-access-vpn-thumbnail.webp',
         'url' => '/reviews/private-internet-access-vpn-review'
     ],
     [
@@ -163,7 +163,7 @@ $reviews = [
         'author' => 'Mike Richards',
         'date' => 'October 5, 2025',
         'excerpt' => 'A human-written 2025 review of 12VPX VPN. We look at its legendary status for bypassing restrictions in China, but see how it stacks up for everyday use like streaming and privacy.',
-        'image' => '/assets/review-article-thumbnails/12vpx-thumbnail.png',
+        'image' => '/assets/review-article-thumbnails/12vpx-vpn-thumbnail.webp',
         'url' => '/reviews/12vpx-vpn-review'
     ],
     [
@@ -275,8 +275,12 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
         </button>
       </div>
 
-      <div class="alert unbiased-review-alert text-center my-5" role="alert">
-        <h4 class="alert-heading mb-0">Only Unbiased VPN Review In The "Whole Internet"</h4>
+      <div class="unbiased-review-alert my-4" role="alert">
+        <div class="d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-shield-check flex-shrink-0 me-3" viewBox="0 0 16 16"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.058.238.098.326.11a.74.74 0 0 0 .256 0c.088-.012.206-.052.326-.11.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.95-1.73-2.532-3.264-4.37-3.856-1.838-.592-3.73-.558-5.592.112zM6.5 5.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1.293l-3.646 3.646a.5.5 0 0 1-.708-.708L9.293 7.5H7a.5.5 0 0 1-.5-.5V5.5z"/><path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/></svg>
+          <h4 class="alert-heading mb-0">Commitment to Unbiased Reviews</h4>
+        </div>
+        <p class="mb-0 mt-2">We do not accept payment for positive reviews. Our analysis is based on independent testing to ensure you get the most honest recommendations.</p>
       </div>
 
       <hr class="my-5">
@@ -311,6 +315,6 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
   <?php include __DIR__ . '/navigation/footer.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="scripts/script.js"></script>
+  <script src="/scripts/script.js"></script>
 </body>
 </html>

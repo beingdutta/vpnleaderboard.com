@@ -364,9 +364,34 @@ html[data-theme="dark"] .article-card-vertical:hover {
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
+.featured-article-card .row {
+  min-height: 400px; /* Set a minimum height for the card content */
+}
+
+.featured-article-card .col-lg-6:first-child {
+  position: relative; /* Needed for absolute positioning of the image */
+}
+
 .featured-article-card .img-fluid {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Make the image fill the container */
   object-fit: cover;
+}
+
+/* Truncate long excerpts in featured cards to prevent overflow */
+.featured-article-card .card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Limit the excerpt to 4 lines */
+.featured-article-card .card-text.text-secondary {
+  -webkit-line-clamp: 4;
 }
 
 /* Fix for carousel text visibility in dark mode */
@@ -871,10 +896,12 @@ html[data-theme="dark"] .loader {
 
 /* Custom alert for unbiased review text */
 .unbiased-review-alert {
-  background-color: #fef3c7; /* A light, warm yellow */
-  border-color: #fde68a; /* A slightly deeper yellow for the border */
-  color: #92400e; /* A dark amber/brown for high contrast text */
-  padding: 1.5rem 2rem; /* More padding to make it stand out */
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--brand);
+  color: var(--text-primary);
+  padding: 1.25rem; /* Reduced padding */
+  border-radius: 0.5rem;
 }
 .unbiased-review-alert .alert-heading {
   font-size: 1.5rem; /* Adjusted font size for balance */

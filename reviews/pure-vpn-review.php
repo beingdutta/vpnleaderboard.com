@@ -14,12 +14,12 @@
       content="A 2025 look at PureVPN: servers, privacy, streaming, pricing, and whether it's worth using in today’s VPN landscape."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/pure-vpn-review" />
     <meta
       property="og:image"
       content="https://images.unsplash.com/photo-1581287983177-6bf68daf8cd9?q=80&w=1920"
     />
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/pure-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

@@ -14,10 +14,11 @@
       content="Mullvad VPN favors transparency, minimal data collection, and open-source apps. See if it fits your privacy needs."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/mullvad-vpn-review" />
+    <meta property="og:image" content="/assets/review-article-thumbnails/mullvad-vpn-thumbnail.webp" />
     <meta name="robots" content="index, follow" />
 
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/mullvad-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -38,7 +39,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://play-lh.googleusercontent.com/W7lHDGmA0LTMB2tul80ezqEnnILgFM4jTxh6eSrPBqTOKWLRahEHc4uXSiE7PUHZOACM=w3840-h2160-rw');"
+      style="background-image: url('/assets/review-article-thumbnails/mullvad-vpn-thumbnail.webp');"
     >
       <div class="article-hero-overlay">
         <div class="container">

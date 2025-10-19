@@ -14,10 +14,11 @@
       content="LetsVPN keeps things simple: tap to connect, browse privately. Read our human-written review covering speed, privacy, features, and value."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=1920" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/letsvpn-vpn-review" />
+    <meta property="og:image" content="https://cdn6.aptoide.com/imgs/6/0/f/60f15a30d56e3058d0c06909d6ccd194_fgraphic.png" />
     <meta name="robots" content="index, follow" />
 
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/letsvpn-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -38,7 +39,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://letsvpn.world/images/ietel.png');"
+      style="background-image: url('https://cdn6.aptoide.com/imgs/6/0/f/60f15a30d56e3058d0c06909d6ccd194_fgraphic.png');"
     >
       <div class="article-hero-overlay">
         <div class="container">

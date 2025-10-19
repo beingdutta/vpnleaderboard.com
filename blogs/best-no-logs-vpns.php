@@ -51,9 +51,10 @@ $canonical = (isset($_SERVER['HTTPS'])?'https:' : 'http') . '://' . $_SERVER['HT
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="Looking for a true no-log VPN? We review the best VPNs with audited no-log policies, RAM-only servers, and strong privacy to keep your data safe in 2025.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>"> 
+    <meta property="og:url" content="https://www.vpnleaderboard.com/blogs/best-no-logs-vpns"> 
     <meta property="og:image" content="<?= htmlspecialchars($article['image']) ?>">
-    <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
+    
+    <link rel="canonical" href="https://www.vpnleaderboard.com/blogs/best-no-logs-vpns">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
     <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">

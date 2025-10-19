@@ -14,12 +14,12 @@
       content="An honest 2025 review of Avast SecureLine VPN: speed, privacy, server coverage, streaming, usability, and whether it makes sense for you."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/avast-secureline-vpn-review" />
     <meta
       property="og:image"
       content="https://images.unsplash.com/photo-1517430816045-df4b7de01a33?q=80&w=1920"
     />
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/avast-secureline-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

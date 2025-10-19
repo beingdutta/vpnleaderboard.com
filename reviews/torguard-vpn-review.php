@@ -14,12 +14,12 @@
       content="An in-depth 3000+ word global technical review of TorGuard VPN for 2025. We analyze its powerful features for streaming, gaming, and torrenting, its complex interface, and the critical implications of its US jurisdiction."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" /> <!-- Add your final URL here -->
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/torguard-vpn-review" />
     <meta
       name="og:image"
       content="https://images.unsplash.com/photo-1614850523011-8f495a764ac3?q=80&w=1920"
     />
-    <link rel="canonical" href="" /> <!-- Add your final URL here -->
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/torguard-vpn-review" /> 
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

@@ -14,12 +14,12 @@
       content="A detailed 2025 review of ExpressVPN covering speed, security, privacy audits, streaming performance, pricing, and overall user experience."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/express-vpn-review" />
     <meta
       property="og:image"
-      content="https://images.unsplash.com/photo-1614027164847-1b28accfbdf1?q=80&w=1920"
+      content="https://xv.imgix.net/photos/xv/Red-Logo-Horizontal-ExpressVPN-Preview-fa080bcc7c7b864b93c1613d444c36d2.png?s=fcbeb8941e9e72a5889930b7df6c7c85"
     />
-    <link rel="canonical" href="" />
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/express-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -40,7 +40,7 @@
 
     <header
       class="article-hero"
-      style="background-image: url('https://www.expressvpn.com/wp-ws/uploads-expressvpn/2023/04/expressvpn-vertical-logo-white-on-red.jpeg');"
+      style="background-image: url('https://xv.imgix.net/photos/xv/Red-Logo-Horizontal-ExpressVPN-Preview-fa080bcc7c7b864b93c1613d444c36d2.png?s=fcbeb8941e9e72a5889930b7df6c7c85');"
     >
       <div class="article-hero-overlay">
         <div class="container">
