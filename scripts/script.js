@@ -399,3 +399,58 @@ function applySort(rows, value) {
 
   log('init(): ready — waiting for clicks');
 })();
+
+// --- Vote Prompt Modal (Exit-Intent & Timed) ---
+(function() {
+  // Only run this logic on pages with the VPN table
+  if (!document.getElementById('vpntable')) {
+    return;
+  }
+
+  const modalElement = document.getElementById('votePromptModal');
+  if (!modalElement) return;
+
+  const voteModal = new bootstrap.Modal(modalElement);
+  const sessionKey = 'voteModalShown';
+
+  // Function to show the modal and set the session flag
+  const showVoteModal = () => {
+    if (sessionStorage.getItem(sessionKey)) {
+      return; // Don't show if already shown in this session
+    }
+    voteModal.show();
+    sessionStorage.setItem(sessionKey, 'true');
+    // Clear the timer if the modal was triggered by exit-intent first
+    if (timedTrigger) {
+      clearTimeout(timedTrigger);
+    }
+  };
+
+  // 1. Timed Trigger (after 8.5 seconds)
+  const timedTrigger = setTimeout(showVoteModal, 8500);
+
+  // 2. Exit-Intent Trigger
+  const handleExitIntent = (e) => {
+    // Check if mouse is near the top of the viewport
+    if (e.clientY < 10) {
+      showVoteModal();
+      // Once triggered, remove the listener to prevent it from firing again
+      document.removeEventListener('mouseout', handleExitIntent);
+    }
+  };
+
+  document.addEventListener('mouseout', handleExitIntent);
+
+  // Handle the "Vote Now" button click to scroll to the table
+  const voteNowBtn = document.getElementById('voteNowBtn');
+  if (voteNowBtn) {
+    voteNowBtn.addEventListener('click', () => {
+      const vpnTable = document.getElementById('vpntable');
+      if (vpnTable) {
+        vpnTable.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      voteModal.hide(); // Manually hide the modal
+    });
+  }
+
+})();

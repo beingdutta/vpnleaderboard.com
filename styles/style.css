@@ -906,3 +906,13 @@ html[data-theme="dark"] .loader {
 .unbiased-review-alert .alert-heading {
   font-size: 1.5rem; /* Adjusted font size for balance */
 }
+
+/* Vote Prompt Modal Icon Color */
+.vote-modal-icon {
+  color: var(--brand);
+}
+
+/* Make the modal icon theme-aware for dark mode */
+html[data-theme="dark"] .vote-modal-icon {
+  color: var(--text-primary);
+}
