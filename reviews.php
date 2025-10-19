@@ -45,7 +45,7 @@ $reviews = [
         'slug' => 'tunnelBear-vpn-review',
         'author' => 'Emily White',
         'date' => 'August 25, 2025',
-        'excerpt' => 'From the creators of ProtonMail, this VPN promises unmatched privacy. We verify its claims and test its Secure Core servers.',
+        'excerpt' => 'A friendly, no-nonsense 2025 review of TunnelBear covering speed, security audits, free plan limits, streaming performance, pricing, and everyday usability.',
         'image' => '/assets/review-article-thumbnails/tunnebear-thumbnail.png',
         'url' => '/reviews/tunnelbear-vpn-review'
     ],
@@ -174,6 +174,24 @@ $reviews = [
         'excerpt' => 'Known for its blazing-fast Hydra protocol, we review Hotspot Shield to see if its top-tier streaming performance is worth the privacy trade-offs of its US jurisdiction and logging policy.',
         'image' => 'https://i.pcmag.com/imagery/reviews/03Zv0ZUOeqGtbYk612UMWbg-18.fit_lim.size_1050x591.v1593116274.png',
         'url' => '/reviews/hotspot-shield-vpn-review'
+    ],
+    [
+        'title' => 'VyprVPN Review for China 2025 | The GFW Veteran',
+        'slug' => 'vypr-vpn-review',
+        'author' => 'Mike Richards',
+        'date' => 'October 19, 2025',
+        'excerpt' => 'An in-depth review of VyprVPN\'s performance in China. We analyze its proprietary Chameleon protocol, its strong privacy stance, and its inconsistent reliability against the Great Firewall.',
+        'image' => 'https://i.pcmag.com/imagery/reviews/01AAItLyGOpAOEEjiPeOknK-13..v1569482971.png',
+        'url' => '/reviews/vypr-vpn-review'
+    ],
+    [
+        'title' => 'TorGuard VPN Review 2025 | A Power User\'s Paradise',
+        'slug' => 'torguard-vpn-review',
+        'author' => 'Mike Richards',
+        'date' => 'October 19, 2025',
+        'excerpt' => 'An in-depth global technical review of TorGuard VPN. We analyze its powerful features for streaming, gaming, and torrenting, its complex interface, and the critical implications of its US jurisdiction.',
+        'image' => '/assets/review-article-thumbnails/torguard-vpn-thumbnail.webp',
+        'url' => '/reviews/torguard-vpn-review'
     ],
 ];
 
