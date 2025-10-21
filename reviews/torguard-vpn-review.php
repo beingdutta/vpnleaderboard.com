@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="An in-depth 3000+ word global technical review of TorGuard VPN for 2025. We analyze its powerful features for streaming, gaming, and torrenting, its complex interface, and the critical implications of its US jurisdiction."
+      content="TorGuard VPN review: A deep dive into its P2P torrenting with port forwarding, dedicated IP for streaming, and the risks of its US (Five Eyes) jurisdiction."
     />
     <meta property="og:title" content="TorGuard VPN Review <?php echo date("Y"); ?> | A Power User's Paradise" />
     <meta
-      name="description"
-      content="An in-depth 3000+ word global technical review of TorGuard VPN for 2025. We analyze its powerful features for streaming, gaming, and torrenting, its complex interface, and the critical implications of its US jurisdiction."
+      property="og:description"
+      content="TorGuard VPN review: A deep dive into its P2P torrenting with port forwarding, dedicated IP for streaming, and the risks of its US (Five Eyes) jurisdiction."
     />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/torguard-vpn-review" />
