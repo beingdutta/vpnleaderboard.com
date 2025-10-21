@@ -9,7 +9,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
     <title>Terms and Conditions | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Read the terms and conditions for using the VPN Leaderboard website and its services.">
-    <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
+    <link rel="canonical" href="https://www.vpnleaderboard.com/terms">
     <meta name="robots" content="noindex, follow">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
