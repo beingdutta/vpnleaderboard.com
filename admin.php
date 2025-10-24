@@ -17,7 +17,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
 // --- LOGIN ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-    if (password_verify($_POST['password'], password_hash(ADMIN_PASSWORD, PASSWORD_DEFAULT))) {
+    if (hash_equals(ADMIN_PASSWORD, $_POST['password'])) {
         $_SESSION[ADMIN_SESSION_KEY] = true;
         header('Location: admin.php');
         exit;
