@@ -19,6 +19,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
     if (ADMIN_PASSWORD === $_POST['password']) {
         $_SESSION[ADMIN_SESSION_KEY] = true;
+        session_write_close(); // Ensure session is saved before redirect
         header('Location: admin.php');
         exit;
     } else {
