@@ -137,7 +137,7 @@ $reviews = [
         'date' => 'August 15, 2025',
         'excerpt' => 'LetsVPN focuses on a simple, auto-routing experience. We test its proprietary protocol for speed and stability in daily use.',
         'image' => 'https://cdn6.aptoide.com/imgs/6/0/f/60f15a30d56e3058d0c06909d6ccd194_fgraphic.png',
-        'url' => '/reviews/letsvpn-vpn-review.php'
+        'url' => '/reviews/letsvpn-vpn-review'
     ],
     [
         'title' => 'VeePN Review 2025',
