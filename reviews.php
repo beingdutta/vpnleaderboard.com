@@ -200,7 +200,7 @@ usort($reviews, function($a, $b) {
     return strtotime($b['date']) - strtotime($a['date']);
 });
 
-$canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
 <!doctype html>
 <html lang="en">

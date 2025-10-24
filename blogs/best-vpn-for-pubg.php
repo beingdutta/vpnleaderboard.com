@@ -31,7 +31,7 @@ $article = [
     'image' => 'https://images.unsplash.com/photo-1655802906408-0ed1bc38a6dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1331', // Image of a mobile gaming e-sports event
 ];
 
-$canonical = (isset($_SERVER['HTTPS'])?'httpsD:' : 'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,7 +56,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'httpsD:' : 'http') . '://' . $_SERVER['H
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
     <link href="/styles/style.css?v=<?= @filemtime(__DIR__ . '/styles/style.css') ?>" rel="stylesheet">
     <link href="/styles/custom-styles.css?v=<?= time() ?>" rel="stylesheet">
-    <script async src="https://www.goog.letagmanager.com/gtag/js?id=G-1RMZD8BYYZ"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RMZD8BYYZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -176,7 +176,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'httpsD:' : 'http') . '://' . $_SERVER['H
           </div>
 
           <div class="d-flex align-items-center mt-4">
-            <img src="<?= htmlspecialchars('/' . ltrim($compared_vpns['NordVPN']['logo_path'] ?? 'assets/nordvpn.png', '/')) ?>" alt="NordVPN Logo" width="30" height="30" class="rounded me-3">
+            <img src="<?= htmlspecialchars('/' . ($compared_vpns['NordVPN']['logo_path'] ?? 'assets/nordvpn.png')) ?>" alt="NordVPN Logo" width="30" height="30" class="rounded me-3">
             <span class="h3 mb-0">
               1. NordVPN - The Ping Killer
             </span>
@@ -212,7 +212,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'httpsD:' : 'http') . '://' . $_SERVER['H
           </div>
 
           <div class="d-flex align-items-center mt-4">
-            <img src="<?= htmlspecialchars('/' . ltrim($compared_vpns['ExpressVPN']['logo_path'] ?? 'assets/expressvpn.png', '/')) ?>" alt="ExpressVPN Logo" width="30" height="30" class="rounded me-3">
+            <img src="<?= htmlspecialchars('/' . ($compared_vpns['ExpressVPN']['logo_path'] ?? 'assets/expressvpn.png')) ?>" alt="ExpressVPN Logo" width="30" height="30" class="rounded me-3">
             <span class="h3 mb-0">
               2. ExpressVPN - The Rock-Solid Stabilizer
             </span>
@@ -248,7 +248,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'httpsD:' : 'http') . '://' . $_SERVER['H
           </div>
 
           <div class="d-flex align-items-center mt-4">
-            <img src="<?= htmlspecialchars('/' . ltrim($compared_vpns['Surfshark']['logo_path'] ?? 'assets/surfsharkvpn.png', '/')) ?>" alt="Surfshark Logo" width="30" height="30" class="rounded me-3">
+            <img src="<?= htmlspecialchars('/' . ($compared_vpns['Surfshark']['logo_path'] ?? 'assets/surfsharkvpn.png')) ?>" alt="Surfshark Logo" width="30" height="30" class="rounded me-3">
             <span class="h3 mb-0">
               3. Surfshark - The Best Value Squad Leader
             </span>
@@ -284,7 +284,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'httpsD:' : 'http') . '://' . $_SERVER['H
           </div>
           
           <div class="d-flex align-items-center mt-4">
-            <img src="<?= htmlspecialchars('/' . ltrim($compared_vpns['Private Internet Access']['logo_path'] ?? 'assets/pia.png', '/')) ?>" alt="Private Internet Access Logo" width="30" height="30" class="rounded me-3">
+            <img src="<?= htmlspecialchars('/' . ($compared_vpns['Private Internet Access']['logo_path'] ?? 'assets/pia.png')) ?>" alt="Private Internet Access Logo" width="30" height="30" class="rounded me-3">
             <span class="h3 mb-0">
               4. Private Internet Access (PIA) - The Server Hopper's Dream
             </span>

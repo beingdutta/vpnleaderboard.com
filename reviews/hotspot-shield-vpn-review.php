@@ -19,7 +19,7 @@
       property="og:image"
       content="/assets/review-article-thumbnails/hotspot-shield-thumbnail.webp"
     />
-    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/hotspot-shield-vpn-review" /> 
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/hotspot-shield-vpn-review" />
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

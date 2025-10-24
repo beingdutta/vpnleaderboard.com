@@ -37,7 +37,7 @@ $blogs = [
         'author' => 'Jane Doe',
         'date' => 'October 5, 2025',
         'excerpt' => 'An in-depth, human-narrated guide to the VPNs that actually work in China in 2025. We explore Astrill VPN, Mullvad, and LetsVPN to see how they beat the Great Firewall.', // This should be a relative path if the image is local
-        'image' => 'https://images.unsplash.com/photo-1640869429947-ace411d59d43?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'image' => '/assets/blog-article-thumbnails/working-vpns-in-china.webp',
         'url' => '/blogs/working-vpns-for-china'
     ],
     [
@@ -46,7 +46,7 @@ $blogs = [
         'author' => 'Jane Doe',
         'date' => 'October 4, 2025',
         'excerpt' => 'A brutally honest guide to the world of free VPNs that claim \'no-logs.\' We investigate the business models and review the few trustworthy options like Proton VPN and Windscribe.', // This should be a relative path if the image is local
-        'image' => 'https://plus.unsplash.com/premium_photo-1663050681752-4c95effcca58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'image' => '/assets/blog-article-thumbnails/free-no-logs-vpns.webp',
         'url' => '/blogs/free-no-logs-vpns'
     ],
     [
@@ -64,7 +64,7 @@ $blogs = [
         'author' => 'Jane Doe',
         'date' => 'October 18, 2025',
         'excerpt' => 'Looking for a true no-log VPN? We review the best VPNs with audited no-log policies, RAM-only servers, and strong privacy to keep your data safe in 2025.',
-        'image' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1920',
+        'image' => '/assets/blog-article-thumbnails/best-no-logs-vpns.webp',
         'url' => '/blogs/best-no-logs-vpns'
     ],
     [
@@ -73,7 +73,7 @@ $blogs = [
         'author' => 'Jane Doe',
         'date' => 'October 18, 2025',
         'excerpt' => 'Stop losing to lag. We tested the top VPNs to find the lowest ping for PUBG Mobile. Read our expert review of the best VPN for PUBG in India, iOS, and Android.',
-        'image' => 'https://images.unsplash.com/photo-1655802906408-0ed1bc38a6dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1331',
+        'image' => '/assets/blog-article-thumbnails/best-vpn-for-pubg.webp',
         'url' => '/blogs/best-vpn-for-pubg'
     ],
 ];
@@ -83,7 +83,7 @@ usort($blogs, function($a, $b) {
     return strtotime($b['date']) - strtotime($a['date']);
 });
 
-$canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
 ?>
 <!doctype html>
 <html lang="en">

@@ -2,41 +2,28 @@ Options -Indexes
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-RewriteEngine On
-  # Redirect /reviews/ to reviews.php
-  RewriteRule ^reviews/?$ reviews.php [L,NC]
-
 # --- Production Redirects (www and https) ---
 # Only apply these rules if the host is NOT localhost
 RewriteCond %{HTTP_HOST} !^localhost [NC]
-RewriteCond %{HTTP_HOST} !^www\. [NC,OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.vpnleaderboard.com/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} !^localhost [NC]
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
-RewriteRule ^ https://www.vpnleaderboard.com%{REQUEST_URI} [L,R=301]
-  # Redirect /reviews/some-review-name to /reviews/some-review-name.php
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^reviews/([a-zA-Z0-9-]+)/?$ /reviews/$1.php [L,NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
 
-# Handle the main /blogs/ landing page
-RewriteRule ^blogs/?$ /blogs.php [L]
+# --- Remove .php extension from URL ---
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ %1 [R=301,L]
 
-# Handle simple root-level pages (feedback, contact, etc.)
-RewriteRule ^(feedback|contact|about|terms|privacy|reviews)$ /$1.php [L]
-
-# Handle regional leaderboard pages
-RewriteRule ^(vpn-india-leaderboard|vpn-usa-leaderboard|vpn-china-leaderboard)$ /$1.php [L]
-
-# Handle reviews and blogs pretty URLs
-RewriteRule ^reviews/([a-zA-Z0-9-]+)$ /reviews/$1.php [L]
-RewriteRule ^blogs/([a-zA-Z0-9-]+)$ /blogs/$1.php [L]
+# --- Rewrite clean URLs to .php files ---
+# Rewrite for files in subdirectories (e.g., /reviews/some-review)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2.php [L]
 
 # If the request is not for an existing file or directory, show 404 page
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /404.php [L]
-  # Redirect any other clean URL to its .php file
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME}.php -f
-  RewriteRule ^(.*)$ $1.php [L]
+RewriteCond %{REQUEST_FILENAME}.php !-f
+RewriteRule ^(.*)$ /404.php [L]
 </IfModule>
