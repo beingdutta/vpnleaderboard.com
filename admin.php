@@ -1,4 +1,10 @@
 <?php
+// Ensure secure session settings
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    ini_set('session.cookie_secure', 1);
+}
 session_start();
 require_once __DIR__ . '/db.php';
 
@@ -17,13 +23,30 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
 // --- LOGIN ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-    if (ADMIN_PASSWORD === $_POST['password']) {
+    $entered_password = $_POST['password'];
+    $expected_password = ADMIN_PASSWORD;
+    
+    // Add debug information
+    $debug_info = '';
+    if (!session_id()) {
+        $debug_info .= 'Session ID not created. ';
+    }
+    
+    if ($entered_password === $expected_password) {
         $_SESSION[ADMIN_SESSION_KEY] = true;
+        if (!isset($_SESSION[ADMIN_SESSION_KEY])) {
+            $debug_info .= 'Session variable not set. ';
+        }
         session_write_close(); // Ensure session is saved before redirect
-        header('Location: admin.php');
-        exit;
+        
+        if ($debug_info) {
+            $login_error = "Debug info: " . $debug_info;
+        } else {
+            header('Location: admin.php');
+            exit;
+        }
     } else {
-        $login_error = 'Invalid password.';
+        $login_error = 'Invalid password. ' . ($debug_info ? "Debug: " . $debug_info : "");
     }
 }
 
