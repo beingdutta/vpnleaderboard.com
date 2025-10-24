@@ -1,11 +1,30 @@
 <?php
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Start session with debug info
+$session_dir = session_save_path();
+$writable = is_writable($session_dir);
+
 // Ensure secure session settings
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
 if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
     ini_set('session.cookie_secure', 1);
 }
+
+// Start the session
 session_start();
+
+// Debug information
+$debug = [
+    'session_dir' => $session_dir,
+    'session_dir_writable' => $writable ? 'Yes' : 'No',
+    'session_id' => session_id(),
+    'post_data' => $_POST,
+    'session_data' => $_SESSION
+];
 require_once __DIR__ . '/db.php';
 
 // --- CONFIGURATION ---
@@ -26,27 +45,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
     $entered_password = $_POST['password'];
     $expected_password = ADMIN_PASSWORD;
     
-    // Add debug information
-    $debug_info = '';
-    if (!session_id()) {
-        $debug_info .= 'Session ID not created. ';
-    }
+    $debug['submitted_password_length'] = strlen($entered_password);
+    $debug['expected_password_length'] = strlen($expected_password);
+    $debug['passwords_match'] = $entered_password === $expected_password ? 'Yes' : 'No';
     
     if ($entered_password === $expected_password) {
+        // Set session variable
         $_SESSION[ADMIN_SESSION_KEY] = true;
-        if (!isset($_SESSION[ADMIN_SESSION_KEY])) {
-            $debug_info .= 'Session variable not set. ';
-        }
-        session_write_close(); // Ensure session is saved before redirect
         
-        if ($debug_info) {
-            $login_error = "Debug info: " . $debug_info;
-        } else {
+        // Verify session was set
+        $debug['session_set'] = isset($_SESSION[ADMIN_SESSION_KEY]) ? 'Yes' : 'No';
+        
+        // Force session write
+        session_write_close();
+        
+        // Check if session persisted
+        session_start();
+        $debug['session_persisted'] = isset($_SESSION[ADMIN_SESSION_KEY]) ? 'Yes' : 'No';
+        
+        if (isset($_SESSION[ADMIN_SESSION_KEY]) && $_SESSION[ADMIN_SESSION_KEY] === true) {
+            // Success - redirect
             header('Location: admin.php');
             exit;
+        } else {
+            $login_error = 'Session not persisting. Debug info: ' . print_r($debug, true);
         }
     } else {
-        $login_error = 'Invalid password. ' . ($debug_info ? "Debug: " . $debug_info : "");
+        $login_error = 'Invalid password. Debug info: ' . print_r($debug, true);
     }
 }
 
@@ -78,6 +103,12 @@ if (!isset($_SESSION[ADMIN_SESSION_KEY]) || !$_SESSION[ADMIN_SESSION_KEY]):
                             </div>
                             <?php if (isset($login_error)): ?>
                                 <div class="alert alert-danger small py-2"><?= htmlspecialchars($login_error) ?></div>
+                            <?php endif; ?>
+                            
+                            <?php if (isset($debug)): ?>
+                                <div class="alert alert-info small py-2">
+                                    <pre><?= htmlspecialchars(print_r($debug, true)) ?></pre>
+                                </div>
                             <?php endif; ?>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
