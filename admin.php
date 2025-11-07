@@ -36,7 +36,7 @@ const ADMIN_SESSION_KEY = 'is_vpn_admin';
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     unset($_SESSION[ADMIN_SESSION_KEY]);
     session_destroy();
-    header('Location: admin.php');
+    header('Location: /admin.php');
     exit;
 }
 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
         
         if (isset($_SESSION[ADMIN_SESSION_KEY]) && $_SESSION[ADMIN_SESSION_KEY] === true) {
             // Success - redirect
-            header('Location: admin.php');
+            header('Location: /admin.php');
             exit;
         } else {
             $login_error = 'Session not persisting. Debug info: ' . print_r($debug, true);
@@ -96,7 +96,7 @@ if (!isset($_SESSION[ADMIN_SESSION_KEY]) || !$_SESSION[ADMIN_SESSION_KEY]):
                 <div class="card" style="background: var(--background-secondary); border-color: var(--border-color);">
                     <div class="card-body p-4">
                         <h3 class="card-title text-center mb-4">Admin Login</h3>
-                        <form method="POST" action="admin.php">
+                        <form method="POST" action="/admin.php">
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
@@ -267,12 +267,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
     // Redirect back to the correct view after the action
     $is_master_view_action = ($_POST['action'] === 'save_vpn' && in_array(($_POST['mode'] ?? ''), ['master', 'full'])) || $view === 'master';
-
-    if ($is_master_view_action) {
-        header('Location: admin.php?view=master');
-    } else {
-        header('Location: admin.php?region=' . $action_region . '&view=' . $view);
-    }
+    $redirect_url = $is_master_view_action ? '/admin.php?view=master' : '/admin.php?region=' . $action_region . '&view=' . $view;
+    header('Location: ' . $redirect_url);
     exit;
 }
 
@@ -324,6 +320,7 @@ if ($view === 'vpns') {
             <a class="navbar-brand fw-bold" href="admin.php">Admin Panel</a>
             <div class="ms-auto d-flex align-items-center">
                 <a href="#" id="theme-toggle" class="nav-link me-3" title="Toggle light/dark theme"></a>
+                <a href="admin_readme.php" class="nav-link me-3" target="_blank">Help/Guide</a>
                 <a href="index.php" class="nav-link me-3" target="_blank">View Site</a>
                 <a href="admin.php?action=logout" class="btn btn-sm btn-outline-secondary">Logout</a>
             </div>

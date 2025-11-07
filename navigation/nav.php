@@ -63,10 +63,25 @@ $nav_links = [
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
         <?php foreach ($nav_links as $href => $text): ?>
         <li class="nav-item">
-          <?php
-            $link_url = ($href === 'index.php') ? '/' : '/' . pathinfo($href, PATHINFO_FILENAME);
+          <?php 
+            $base_name = pathinfo($href, PATHINFO_FILENAME);
+            $link_url = ($href === 'index.php') ? '/' : '/' . $base_name;
+            $request_uri = strtok($_SERVER['REQUEST_URI'], '?'); // Get URL without query string
+
+            $is_active = false;
+            if ($href === 'index.php') {
+                // Only highlight 'Global' if we are on the exact homepage.
+                $is_active = ($request_uri === '/');
+            } else {
+                // Highlight if it's an exact match (e.g., /blogs)
+                $is_active = ($request_uri === '/' . $base_name);
+            }
+            // Additionally, highlight parent if we are on a sub-page (e.g., /blogs/some-post)
+            if (!$is_active && in_array($base_name, ['blogs', 'reviews']) && strpos($request_uri, '/' . $base_name . '/') === 0) {
+              $is_active = true;
+            }
           ?>
-          <a class="nav-link <?= ($current_page === $href) ? 'active' : '' ?>" href="<?= $link_url ?>"><?= $text ?></a>
+          <a class="nav-link <?= $is_active ? 'active' : '' ?>" href="<?= $link_url ?>"><?= $text ?></a>
         </li>
         <?php endforeach; ?>
         <li class="nav-item d-none d-lg-block">

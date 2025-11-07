@@ -1,35 +1,19 @@
-Options -Indexes
+# --- Apache Rewrite Rules for vpnleaderboard.com ---
+
 <IfModule mod_rewrite.c>
-  RewriteEngine On
+    RewriteEngine On
 
-# --- Production Redirects (www and https) ---
-# Only apply these rules if the host is NOT localhost
-RewriteCond %{HTTP_HOST} !^localhost [NC]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ https://www.vpnleaderboard.com/$1 [L,R=301]
-RewriteCond %{HTTP_HOST} !^localhost [NC]
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+    # Set the base for all rewrite rules to the web root.
+    # This is CRITICAL for preventing file-path redirect issues on some servers.
+    RewriteBase /
 
-# --- Remove .php extension from URL ---
-RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
-RewriteRule ^ %1 [R=301,L]
+    # Remove .php extension from URLs
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php [L]
 
-# --- Rewrite clean URLs to .php files ---
-# Rewrite for files in subdirectories (e.g., /reviews/some-review)
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^/]+)/([^/]+)/?$ $1/$2.php [L]
-
-# Rewrite for files in the root directory (e.g., /admin)
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^/]+)/?$ $1.php [L]
-
-# If the request is not for an existing file or directory, show 404 page
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php !-f
-RewriteRule ^(.*)$ /404.php [L]
+    # Route non-existent files/directories to the 404 page
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /404.php [L]
 </IfModule>
