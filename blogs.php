@@ -76,6 +76,15 @@ $blogs = [
         'image' => '/assets/blog-article-thumbnails/best-vpn-for-pubg.webp',
         'url' => '/blogs/best-vpn-for-pubg'
     ],
+    [
+        'title' => 'Best VPN for PC 2025: The Ultimate Free & Paid Guide (Windows 11/10)',
+        'slug' => 'best-free-vpn-for-pc',
+        'author' => 'Jane Doe',
+        'date' => 'October 18, 2025',
+        'excerpt' => 'Searching for the best free VPN for PC in 2025? We review the only safe free VPNs (like Proton and Windscribe) and the top paid VPN software for Windows.',
+        'image' => 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1920',
+        'url' => '/blogs/best-free-vpn-for-pc'
+    ],
 ];
 
 // Sort the blogs array by date in descending order (newest first)

@@ -153,6 +153,14 @@
               With WireGuard enabled, PIA delivered consistently smooth browsing and HD streaming in our tests, and handled video calls without drops. Like any VPN,
               speeds depend on distance to server and network congestion — the wide selection of regions (91 countries) makes it easy to find responsive routes.
             </p>
+            
+            <h2>PIA Subscription Key & Account Management</h2>
+            <p>
+              Users searching for a "Private Internet Access subscription key" should know that PIA uses a standard username and password system for authentication rather than a long, complex subscription key. After signing up, you receive login credentials that you can use across unlimited devices. This simplifies account management and avoids the need to handle cumbersome keys.
+            </p>
+            <p>
+              Your subscription is tied to your account, and all features are unlocked upon logging in. There is no separate "PIA VPN subscription key" to enter into the app.
+            </p>
 
             <h2>Streaming, P2P & Torrenting</h2>
             <p>

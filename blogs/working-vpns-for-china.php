@@ -88,6 +88,13 @@ $canonical = (isset($_SERVER['HTTPS'])?'https:' : 'http') . '://' . $_SERVER['HT
           </blockquote>
           <p>The key to survival is <strong>obfuscation</strong> technology that disguises the VPN "car" to look like a boring, everyday delivery truck. This is the secret sauce. Only a few providers have mastered it, and they are the only ones we're going to discuss today.</p>
 
+          <div class="alert alert-light article-link-box d-flex align-items-center" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle-fill flex-shrink-0 me-3" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/></svg>
+            <div>
+              <strong>Related:</strong> For a live ranking of the most reliable services, see our <a href="/vpn-china-leaderboard" class="alert-link">VPN Leaderboard for China</a>.
+            </div>
+          </div>
+
           <h2 class="mt-5">The Unstoppable Force: Astrill VPN – The Expat's Lifeline</h2>
           <p>Walk into any expat bar in Shanghai and ask for the Wi-Fi password, and the next question you'll likely hear is, "Got Astrill?" For over a decade, this service has been the undisputed, heavyweight champion of connectivity in China. It is the service that foreign journalists, corporate executives, and long-term residents stake their careers and sanity on. Astrill has built its entire reputation not on slick marketing, but on a single, powerful promise: it works, even when everything else has gone silent.</p>
           

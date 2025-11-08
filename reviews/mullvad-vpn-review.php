@@ -161,6 +161,14 @@
               that explicitly targets content platforms. For general use, though, it holds up well.
             </p>
 
+            <h2>Does Mullvad Work in China in 2025?</h2>
+            <p>
+              Yes, Mullvad VPN can work in China in 2025, but it requires manual configuration. Unlike some VPNs that are blocked, Mullvad's effectiveness stems from its support for obfuscation through <strong>Shadowsocks bridges</strong>. To make it work, users in China must enable "Bridge mode" in the app's settings and use a bridge server to bypass the Great Firewall.
+            </p>
+            <p>
+              While this setup is highly effective for privacy, the multi-hop connection can result in slower speeds compared to other specialized services. It's a powerful option for technical users who prioritize Mullvad's anonymity, but it's not a simple one-click solution for China.
+            </p>
+
             <h2>Pricing & value</h2>
             <p>
               The pricing model is straightforward with no confusing tiers. You pay for time, not

@@ -330,24 +330,24 @@
     <!--
       SOURCES (checked Sep 23, 2025):
 
-      Unlimited devices (official): https://www.tunnelbear.com/pricing — “There is no limit on the number of devices…” :contentReference[oaicite:0]{index=0}
+      Unlimited devices (official): https://www.tunnelbear.com/pricing — “There is no limit on the number of devices…”
 
-      Server count & countries (recent editor tests): Tom’s Guide 2025 review — 8,000+ servers in 47 countries. :contentReference[oaicite:1]{index=1}
-      (Official site also states “Browse 46+ countries”.) :contentReference[oaicite:2]{index=2}
+      Server count & countries (recent editor tests): Tom’s Guide 2025 review — 8,000+ servers in 47 countries.
+      (Official site also states “Browse 46+ countries”.)
 
-      Annual public security audits (Cure53): TunnelBear blog (7th annual audit, 2023 engagement published Feb 2024). :contentReference[oaicite:3]{index=3}
+      Annual public security audits (Cure53): TunnelBear blog (e.g., their 5th, 6th, 7th annual audits).
 
-      Free plan data: TunnelBear help — free limit increased to 2GB/month. :contentReference[oaicite:4]{index=4}
+      Free plan data: TunnelBear help — free limit increased to 2GB/month.
 
-      Refund policy: TunnelBear help article + Terms — refunds reviewed case-by-case; no standard money-back guarantee. :contentReference[oaicite:5]{index=5}
+      Refund policy: TunnelBear help article + Terms — refunds reviewed case-by-case; no standard money-back guarantee.
 
-      Pricing ballpark & Teams pricing: Cloudwards review 2025 + Security.org overview. :contentReference[oaicite:6]{index=6}
+      Pricing ballpark & Teams pricing: Cloudwards review 2025 + Security.org overview.
 
-      Protocols & feature names (VigilantBear, GhostBear, SplitBear): Tom’s Guide 2025 review + TunnelBear feature pages. :contentReference[oaicite:7]{index=7}
+      Protocols & feature names (VigilantBear, GhostBear, SplitBear): Tom’s Guide 2025 review + TunnelBear feature pages.
 
-      Ownership / HQ: Tom’s Guide notes McAfee acquisition; official pages show “Grizzly regards from Toronto, Canada.” :contentReference[oaicite:8]{index=8}
+      Ownership / HQ: Tom’s Guide notes McAfee acquisition; official pages show “Grizzly regards from Toronto, Canada.”
 
-      Streaming reliability context: Tom’s Guide 2025 review; CyberNews 2025 review. :contentReference[oaicite:9]{index=9}
+      Streaming reliability context: Tom’s Guide 2025 review; CyberNews 2025 review.
     -->
   </body>
 </html>

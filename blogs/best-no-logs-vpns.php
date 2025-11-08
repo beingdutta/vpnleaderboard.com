@@ -46,7 +46,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https:' : 'http') . '://' . $_SERVER['HT
     <meta name="description" content="Looking for a true no-log VPN? We review the best VPNs with audited no-log policies, RAM-only servers, and strong privacy to keep your data safe in 2025.">
     <meta
       name="keywords"
-      content="best no-log vpn, no-log vpn, zero-log vpn, audited vpn, vpn privacy, ram-only servers, expressvpn, nordvpn, surfshark, proton vpn, free no-log vpn"
+      content="best no-log vpn, no-log vpn, zero-log vpn, audited vpn, vpn privacy, ram-only servers, expressvpn, nordvpn, surfshark, proton vpn, free no logs vpn"
     />
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="Looking for a true no-log VPN? We review the best VPNs with audited no-log policies, RAM-only servers, and strong privacy to keep your data safe in 2025.">
