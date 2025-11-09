@@ -6,8 +6,8 @@ require_once __DIR__ . '/db.php';
 <head>
     <meta charset="utf-8">
     <title>Privacy Policy | VPN Leaderboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Read the privacy policy for VPN Leaderboard to understand how we collect, use, and protect your data.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    <meta name="description" content="Read the privacy policy for VPN Leaderboard to understand how we collect, use, and protect your data for our community-driven VPN ranking and review platform.">
     <link rel="canonical" href="https://www.vpnleaderboard.com/privacy">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">

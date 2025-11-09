@@ -6,8 +6,8 @@ require_once __DIR__ . '/db.php';
 <head>
     <meta charset="utf-8">
     <title>Terms and Conditions | VPN Leaderboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Read the terms and conditions for using the VPN Leaderboard website and its services.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="description" content="Review the Terms and Conditions for using VPN Leaderboard. Understand the rules for our community-driven VPN rankings, user conduct, and affiliate disclosures.">
     <link rel="canonical" href="https://www.vpnleaderboard.com/terms">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">

@@ -7,8 +7,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <head>
     <meta charset="utf-8">
     <title>About VPN Leaderboard | Our Mission & Values</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Learn about the mission of VPN Leaderboard: to provide transparent, community-driven rankings of VPN services to help users make informed decisions.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    <meta name="description" content="Learn about VPN Leaderboard's mission to provide transparent, community-driven VPN rankings. We help users find the best VPN for privacy, security, and streaming.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">

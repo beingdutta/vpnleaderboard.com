@@ -8,8 +8,7 @@ $canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_
 <head>
     <meta charset="utf-8">
     <title>404 Page Not Found | VPN Leaderboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Oops! The page you are looking for could not be found. Let's get you back on track.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    <meta name="description" content="Oops! The page you're looking for on VPN Leaderboard could not be found. Let us help you find the best community-ranked VPNs for privacy, streaming, and security.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="noindex, follow">
     <link rel="icon" href="/assets/site-icon.png" type="image/png">
