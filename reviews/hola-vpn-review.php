@@ -14,12 +14,12 @@
       content="An in-depth 3000+ word global technical review of Hola VPN for 2025. We analyze its unique P2P architecture, free chrome extension, streaming capabilities, and critical security concerns."
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" /> <!-- Add your final URL here -->
+    <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/hola-vpn-review" /> <!-- Add your final URL here -->
     <meta
       property="og:image"
       content="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1920"
     />
-    <link rel="canonical" href="" /> <!-- Add your final URL here -->
+    <link rel="canonical" href="https://www.vpnleaderboard.com/reviews/hola-vpn-review" /> <!-- Add your final URL here -->
     <link rel="icon" href="/assets/site-icon.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
