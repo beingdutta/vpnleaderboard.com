@@ -36,7 +36,7 @@ $votedStmt = $pdo->prepare("SELECT vpn_id FROM votes_us WHERE user_id = ? OR ip_
 $votedStmt->execute([$user_id, client_ip_bin()]);
 $votedIds = array_column($votedStmt->fetchAll(), 'vpn_id');
 
-$canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://www.vpnleaderboard.com/vpn-usa-leaderboard';
 ?>
 <!doctype html>
 <html lang="en">

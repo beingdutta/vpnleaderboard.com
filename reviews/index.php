@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../db.php'; // For header/footer includes
 $page_title = "VPN Reviews";
-$canonical = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/reviews/';
+$canonical = 'https://www.vpnleaderboard.com/reviews/';
 ?>
 <!doctype html>
 <html lang="en">

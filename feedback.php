@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/db.php';
-$canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://www.vpnleaderboard.com/feedback';
 ?>
 <!doctype html>
 <html lang="en">

@@ -200,7 +200,7 @@ usort($reviews, function($a, $b) {
     return strtotime($b['date']) - strtotime($a['date']);
 });
 
-$canonical = 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://www.vpnleaderboard.com/reviews';
 ?>
 <!doctype html>
 <html lang="en">

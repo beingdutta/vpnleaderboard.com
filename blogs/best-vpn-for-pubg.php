@@ -31,7 +31,7 @@ $article = [
     'image' => 'https://images.unsplash.com/photo-1655802906408-0ed1bc38a6dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1331', // Image of a mobile gaming e-sports event
 ];
 
-$canonical = 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://www.vpnleaderboard.com/blogs/best-vpn-for-pubg';
 ?>
 <!doctype html>
 <html lang="en">

@@ -37,7 +37,7 @@ $votedStmt = $pdo->prepare("SELECT vpn_id FROM votes_india WHERE user_id = ? OR 
 $votedStmt->execute([$user_id, client_ip_bin()]);
 $votedIds = array_column($votedStmt->fetchAll(), 'vpn_id');
 
-$canonical = (isset($_SERVER['HTTPS'])?'https':'http') . '://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'],'?');
+$canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
 ?>
 <!doctype html>
 <html lang="en">

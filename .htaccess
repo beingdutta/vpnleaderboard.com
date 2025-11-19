@@ -7,6 +7,12 @@
     # This is CRITICAL for preventing file-path redirect issues on some servers.
     RewriteBase /
 
+    # --- Permanent Redirects for 404s ---
+    Redirect 301 /VPNs-in-India.php /vpn-india-leaderboard
+    Redirect 301 /VPNs-in-US.php /vpn-usa-leaderboard
+    Redirect 301 /blogs/privacy.php /privacy
+    Redirect 301 /reviews/terms.php /terms
+
     # Remove .php extension from URLs
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
