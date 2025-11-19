@@ -43,26 +43,73 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Best VPN for China 2025: Free & Paid VPNs That Work</title>
+    <title>Best VPN for China (2025): The Top VPN Services That Work</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Looking for the best VPN for China that actually works? Compare community-voted rankings for free and paid VPNs to bypass the Great Firewall in 2025.">
+    <meta name="description" content="What is the best VPN for China that actually works? Compare community-voted rankings for the best free and paid VPN services to bypass the Great Firewall in 2025.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="index,follow">
-    <meta name="keywords" content="best vpn in china, best vpn china, free VPN for China, best VPN for china free, Astrill VPN China, Best VPN for China Reddit, vpn ranking china">
+    <meta name="keywords" content="best vpn for china, vpn for china, best vpn china, free vpn for china, best vpn for china reddit, what is the best vpn for china, vpn best for china">
     <meta property="og:title" content="Best VPN for China 2025: Community-Voted Rankings">
     <meta property="og:description" content="Find the best VPN for China. Our real-time leaderboard is powered by community votes for free and paid services.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
     <meta property="og:image" content="<?= htmlspecialchars((isset($_SERVER['HTTPS'])?'https':'http').'://'.$_SERVER['HTTP_HOST']) ?>/og-image.jpg">
-    <script type="application/ld+json">
-    {
-
-        "@context":"https://schema.org",
-        "@type":"WebSite",
-        "name":"VPN Leaderboard - China",
-        "url":"<?= htmlspecialchars($canonical) ?>",
-        "about":"Community-powered rankings of the best VPN providers for China"
-    }
+    <script type="application/ld+json"> 
+    [
+      {
+          "@context":"https://schema.org",
+          "@type":"WebPage",
+          "name":"Best VPN for China (2025): The Top VPN Services That Work",
+          "url":"<?= htmlspecialchars($canonical) ?>",
+          "description":"What is the best VPN for China that actually works? Compare community-voted rankings for the best free and paid VPN services to bypass the Great Firewall in 2025."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.vpnleaderboard.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Best VPN for China",
+            "item": "<?= htmlspecialchars($canonical) ?>"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Best VPNs for China Leaderboard",
+        "description": "A community-voted list of the best VPN services that work in China for 2025.",
+        "itemListElement": [
+          <?php foreach ($vpns as $index => $vpn): ?>
+          {
+            "@type": "ListItem",
+            "position": <?= (int)$vpn['true_rank'] ?>,
+            "item": {
+              "@type": "Service",
+              "name": "<?= htmlspecialchars($vpn['name']) ?>",
+              "url": "<?= htmlspecialchars($vpn['website_url']) ?>",
+              "provider": {
+                "@type": "Organization",
+                "name": "<?= htmlspecialchars($vpn['name']) ?>"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "<?= (int)$vpn['score'] ?>",
+                "reviewCount": "<?= (int)$v['upvotes'] + (int)$v['downvotes'] ?>"
+              }
+            }
+          }<?= $index < count($vpns) - 1 ? ',' : '' ?>
+          <?php endforeach; ?>
+        ]
+      }
+    ]
   </script>
   <link rel="icon" href="/assets/site-icon.png" type="image/png">
   <!-- Bootstrap 5 (CDN) -->
@@ -83,15 +130,15 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
   <!-- HERO -->
   <header class="py-5 hero">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Best VPN for China: 2025 Community Ranking</h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">Because Security Matters, You Matters.</p>
+      <h1 class="display-5 fw-bold">Best VPN for China (2025 Community Ranking)</h1>
+      <p class="text-secondary" style="font-size: 1.1rem;">Find the <strong>best VPN service</strong> that reliably works in China. Voted by users like you.</p>
       <div class="d-flex flex-wrap gap-2 justify-content-center">
-        <span class="chip hero-chip" data-action="sort" data-value="price">Low-Cost VPNs</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for Windows PC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for MAC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Linux">Best VPN for Linux</span>
-        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN</span>
-        <span class="chip hero-chip" data-action="filter" data-value="mobile">VPN for Android & iOS</span>
+        <span class="chip hero-chip" data-action="sort" data-value="price">Best Cheap VPN</span>
+        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN for China</span>
+        <span class="chip hero-chip" data-action="filter" data-value="Windows">VPN for Windows</span>
+        <span class="chip hero-chip" data-action="filter" data-value="macOS">VPN for Mac</span>
+        <span class="chip hero-chip" data-action="filter" data-value="mobile">VPN for Android & iPhone</span>
+        <a href="/reviews" class="chip hero-chip" style="text-decoration: none;">In-Depth Reviews</a>
       </div>
     </div>
   </header>
@@ -226,7 +273,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
     </div>
 
     <p class="mt-4 text-secondary small">
-      This leaderboard helps you find the <strong>best VPN in China</strong> based on real user votes. The rankings are calculated by subtracting downvotes from upvotes and update instantly. Help our community find a reliable VPN for bypassing the Great Firewall by casting your vote above.
+      This leaderboard helps you find the <strong>best VPN for China</strong> based on real user votes. The rankings are calculated by subtracting downvotes from upvotes and update instantly. Help our community find a reliable VPN for bypassing the Great Firewall by casting your vote.
     </p>
 
     <div class="p-3 mt-4 rounded" style="background-color: var(--chip-bg); border: 1px solid var(--border-color);" role="alert">
@@ -238,10 +285,10 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
 
     <!-- FAQ Section -->
     <section class="my-5 pt-4">
-      <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+      <h2 class="text-center mb-4">Best VPN for China: Frequently Asked Questions</h2>
       <div class="accordion" id="faqAccordion">
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingOne">
+          <h3 class="accordion-header" id="headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Which VPN is best for China?
             </button>
@@ -253,7 +300,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
           </div>
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingTwo">
+          <h3 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Which VPN is allowed in China?
             </button>
@@ -265,7 +312,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
           </div>
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingThree">
+          <h3 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Why is VPN blocked in China?
             </button>
@@ -277,7 +324,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
           </div>
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingFour">
+          <h3 class="accordion-header" id="headingFour">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Do tourists need VPN in China?
             </button>
@@ -289,7 +336,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-china-leaderboard';
           </div>
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingFive">
+          <h3 class="accordion-header" id="headingFive">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Can the government detect VPN usage in China?
             </button>

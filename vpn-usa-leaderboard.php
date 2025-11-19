@@ -42,26 +42,73 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-usa-leaderboard';
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Best VPNs in USA 2025: Your VPN, Your Vote</title>
+    <title>Best VPN for USA (2025): Top VPN Services Ranked</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Compare and vote for the best VPN services in the USA. Live community ranking of top VPNs for users in the United States.">
+    <meta name="description" content="Compare and vote for the best VPN services in the USA. Live community ranking of the top VPN providers for streaming, torrenting, and privacy in the United States.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="index,follow">
-    <meta name="keywords" content="best vpn usa, vpn for us, fastest vpn usa, secure vpn, vpn comparison, vpn ranking usa">
+    <meta name="keywords" content="best vpn usa, vpn for us, fastest vpn usa, best vpn for streaming, best vpn for torrenting, vpn ranking usa, best vpn providers">
     <meta property="og:title" content="Best VPNs in USA 2025: Your VPN, Your Vote">
     <meta property="og:description" content="Real-time VPN leaderboard for the USA, powered by community votes. Upvote or downvote your favorite VPNs.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
     <meta property="og:image" content="<?= htmlspecialchars((isset($_SERVER['HTTPS'])?'https':'http').'://'.$_SERVER['HTTP_HOST']) ?>/og-image.jpg">
-    <script type="application/ld+json">
-    {
-
-        "@context":"https://schema.org",
-        "@type":"WebSite",
-        "name":"VPN Leaderboard - USA",
-        "url":"<?= htmlspecialchars($canonical) ?>",
-        "about":"Community-powered rankings of the best VPN providers for the USA"
-    }
+    <script type="application/ld+json"> 
+    [
+      {
+          "@context":"https://schema.org",
+          "@type":"WebPage",
+          "name":"Best VPN for USA (2025): Top VPN Services Ranked",
+          "url":"<?= htmlspecialchars($canonical) ?>",
+          "description":"Compare and vote for the best VPN services in the USA. Live community ranking of the top VPN providers for streaming, torrenting, and privacy in the United States."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.vpnleaderboard.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Best VPN for USA",
+            "item": "<?= htmlspecialchars($canonical) ?>"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Best VPNs for USA Leaderboard",
+        "description": "A community-voted list of the best VPN services for the USA in 2025.",
+        "itemListElement": [
+          <?php foreach ($vpns as $index => $vpn): ?>
+          {
+            "@type": "ListItem",
+            "position": <?= (int)$vpn['true_rank'] ?>,
+            "item": {
+              "@type": "Service",
+              "name": "<?= htmlspecialchars($vpn['name']) ?>",
+              "url": "<?= htmlspecialchars($vpn['website_url']) ?>",
+              "provider": {
+                "@type": "Organization",
+                "name": "<?= htmlspecialchars($vpn['name']) ?>"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "<?= (int)$vpn['score'] ?>",
+                "reviewCount": "<?= (int)$v['upvotes'] + (int)$v['downvotes'] ?>"
+              }
+            }
+          }<?= $index < count($vpns) - 1 ? ',' : '' ?>
+          <?php endforeach; ?>
+        ]
+      }
+    ]
   </script>
   <link rel="icon" href="/assets/site-icon.png" type="image/png">
   <!-- Bootstrap 5 (CDN) -->
@@ -82,15 +129,15 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-usa-leaderboard';
   <!-- HERO -->
   <header class="py-5 hero">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">USA Ranking 2025: <span class="tagline">Your VPN, Your Vote</span></h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">Because Security Matters, You Matters.</p>
+      <h1 class="display-5 fw-bold">Best VPN for USA (2025 Community Ranking)</h1>
+      <p class="text-secondary" style="font-size: 1.1rem;">Find the <strong>best VPN service</strong> for the US, ranked by real users for speed, streaming, and security.</p>
       <div class="d-flex flex-wrap gap-2 justify-content-center">
-        <span class="chip hero-chip" data-action="sort" data-value="price">Low-Cost VPNs</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for Windows PC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for MAC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Linux">Best VPN for Linux</span>
-        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN</span>
-        <span class="chip hero-chip" data-action="filter" data-value="mobile">VPN for Android & iOS</span>
+        <span class="chip hero-chip" data-action="sort" data-value="price">Best Cheap VPN</span>
+        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN for USA</span>
+        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for PC</span>
+        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for Mac</span>
+        <span class="chip hero-chip" data-action="filter" data-value="mobile">Best VPN for Android & iPhone</span>
+        <a href="/reviews" class="chip hero-chip" style="text-decoration: none;">In-Depth Reviews</a>
       </div>
     </div>
   </header>
@@ -225,7 +272,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-usa-leaderboard';
     </div>
 
     <p class="mt-3 text-secondary small">
-      Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly via AJAX. Help others find the <em>best VPN</em> for streaming, gaming, torrenting, and privacy by voting above.
+      Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly. Help others find the <strong>best VPN for the USA</strong> for streaming, gaming, torrenting, and privacy by voting above.
     </p>
 
     <div class="p-3 mt-4 rounded" style="background-color: var(--chip-bg); border: 1px solid var(--border-color);" role="alert">
@@ -234,6 +281,49 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-usa-leaderboard';
         <div class="small" style="color: var(--text-secondary);"><strong>Disclaimer:</strong> The "Speed" values are based on a combination of our own tests and data aggregated from public forums. Your actual performance may vary depending on your location, network, and server load.</div>
       </div>
     </div>
+
+    <!-- FAQ Section -->
+    <section class="my-5 pt-4">
+      <h2 class="text-center mb-4">Best VPN for USA: Frequently Asked Questions</h2>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              What is the best VPN for the USA?
+            </button>
+          </h3>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              The <strong>best VPN for the USA</strong> should offer fast speeds for streaming, a strong no-logs policy, and a large network of US-based servers. Services that are headquartered outside of the US (and the Five Eyes alliance) are often preferred for privacy. Use our community-voted list to see which <strong>VPN providers</strong> are most trusted by users for performance and security in the United States.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              Is it legal to use a VPN in the USA?
+            </button>
+          </h3>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, it is completely legal to use a VPN in the United States for legitimate purposes like enhancing your privacy, securing your connection on public Wi-Fi, and accessing geo-restricted content. Using a VPN for illegal activities, however, remains illegal.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              What is the best VPN for streaming US content?
+            </button>
+          </h3>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              The <strong>best VPN for streaming</strong> US content (like Netflix, Hulu, and HBO Max) is one with fast servers located in the US and a proven track record of unblocking these platforms. Many users find that VPNs offering dedicated or residential IP addresses are the most reliable for avoiding streaming service blocks.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <?php include __DIR__ . '/navigation/footer.php'; ?>

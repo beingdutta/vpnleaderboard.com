@@ -50,28 +50,69 @@ $canonical = 'https://www.vpnleaderboard.com/';
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>VPN Leaderboard 2025: Your VPN, Your Vote</title>
+    <title>Best VPN 2025: Community-Voted Best VPN Services</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Compare and vote the best VPN services for streaming, gaming, privacy & work. Live community ranking of top VPNs in India, USA, China & worldwide.">
+    <meta name="description" content="What is the best VPN of 2025? Compare our community-voted list of the best VPN services for streaming, torrenting, and privacy. Find the best free VPN for PC, Mac, and Android, backed by Reddit user votes.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="index,follow">
-    <meta name="keywords" content="best vpn, vpn for pc, vpn for android, fastest vpn, secure vpn, vpn india, vpn usa, vpn china, vpn comparison, vpn ranking">
-    <meta property="og:title" content="VPN Global Ranking 2025: Your VPN, Your Vote">
+    <meta name="keywords" content="best vpn, best vpn 2025, best vpn services, best vpn reddit, best free vpn, best vpn for streaming, best vpn for torrenting, what is the best vpn, best vpn providers, vpn best">
+    <meta property="og:title" content="Best VPN 2025: Community-Voted Rankings of the Best VPN Services">
     <meta property="og:description" content="Real-time VPN leaderboard powered by community votes. Upvote or downvote your favorite VPNs.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
     <meta property="og:image" content="<?= htmlspecialchars((isset($_SERVER['HTTPS'])?'https':'http').'://'.$_SERVER['HTTP_HOST']) ?>/og-image.jpg">
-    <script type="application/ld+json">
-    {
-        "@context":"https://schema.org",
-        "@type":"WebSite",
-        "name":"VPN Leaderboard",
-        "url":"<?= htmlspecialchars($canonical) ?>",
-        "potentialAction":{"@type":"SearchAction","target":"<?= htmlspecialchars($canonical) ?>?q={search_term_string}","query-input":"required name=search_term_string"},
-        "about":"Community-powered rankings of the best VPN providers"
-    }
+    <script type="application/ld+json"> 
+    [
+      {
+          "@context":"https://schema.org",
+          "@type":"WebSite",
+          "name":"VPN Leaderboard",
+          "url":"<?= htmlspecialchars($canonical) ?>",
+          "potentialAction":{"@type":"SearchAction","target":"<?= htmlspecialchars($canonical) ?>?q={search_term_string}","query-input":"required name=search_term_string"},
+          "about":"Community-powered rankings of the best VPN providers"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "<?= htmlspecialchars($canonical) ?>"
+        }]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Best VPN Services Leaderboard",
+        "description": "A community-voted list of the best VPN services for 2025, ranked by real users.",
+        "itemListElement": [
+          <?php foreach ($vpns as $index => $vpn): ?>
+          {
+            "@type": "ListItem",
+            "position": <?= (int)$vpn['true_rank'] ?>,
+            "item": {
+              "@type": "Service",
+              "name": "<?= htmlspecialchars($vpn['name']) ?>",
+              "url": "<?= htmlspecialchars($vpn['website_url']) ?>",
+              "provider": {
+                "@type": "Organization",
+                "name": "<?= htmlspecialchars($vpn['name']) ?>"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "<?= (int)$vpn['score'] ?>",
+                "reviewCount": "<?= (int)$v['upvotes'] + (int)$v['downvotes'] ?>"
+              }
+            }
+          }<?= $index < count($vpns) - 1 ? ',' : '' ?>
+          <?php endforeach; ?>
+        ]
+      }
+    ]
   </script>
   <link rel="icon" href="/assets/site-icon.png" type="image/png">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RMZD8BYYZ"></script>
   <script>
@@ -85,21 +126,22 @@ $canonical = 'https://www.vpnleaderboard.com/';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css?v=<?= @filemtime('styles/style.css') ?>" rel="stylesheet">
 </head>
+
 <body data-region="<?= strtolower($region) ?>">
   <?php include __DIR__ . '/navigation/nav.php'; ?>
 
   <!-- HERO -->
   <header class="py-5 hero">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Global Ranking 2025: <span class="tagline">Your VPN, Your Vote</span></h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">Because Security Matters, You Matters.</p>
+      <h1 class="display-5 fw-bold">The Best VPN Services of 2025: A Live Ranking</h1>
+      <p class="text-secondary" style="font-size: 1.1rem;">Tired of biased reviews? This leaderboard is powered by you. Vote for the best VPN service based on real-world performance.</p>
       <div class="d-flex flex-wrap gap-2 justify-content-center">
-        <span class="chip hero-chip" data-action="sort" data-value="price">Low-Cost VPNs</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for Windows PC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for MAC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Linux">Best VPN for Linux</span>
+        <span class="chip hero-chip" data-action="sort" data-value="price">Best Cheap VPN</span>
         <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN</span>
-        <span class="chip hero-chip" data-action="filter" data-value="mobile">VPN for Android & iOS</span>
+        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for PC</span>
+        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for Mac</span>
+        <span class="chip hero-chip" data-action="filter" data-value="mobile">Best VPN for Android & iPhone</span>
+        <a href="/reviews" class="chip hero-chip" style="text-decoration: none;">In-Depth Reviews</a>
       </div>
     </div>
   </header>
@@ -234,7 +276,7 @@ $canonical = 'https://www.vpnleaderboard.com/';
     </div>
 
     <p class="mt-3 text-secondary small">
-      Rankings are computed by community <strong>Upvotes − Downvotes</strong>. Data updates instantly. Help others find the <em>best VPN</em> for streaming, gaming, torrenting, and privacy by voting above.
+      This leaderboard helps you find the <strong>best VPN</strong> based on real user votes. The rankings are calculated by subtracting downvotes from upvotes and update instantly. Help our community find the <strong>best VPN for streaming</strong>, gaming, and privacy by casting your vote.
     </p>
 
     <div class="p-3 mt-4 rounded" style="background-color: var(--chip-bg); border: 1px solid var(--border-color);" role="alert">
@@ -243,6 +285,49 @@ $canonical = 'https://www.vpnleaderboard.com/';
         <div class="small" style="color: var(--text-secondary);"><strong>Disclaimer:</strong> The "Speed" values are based on a combination of our own tests and data aggregated from public forums. Your actual performance may vary depending on your location, network, and server load.</div>
       </div>
     </div>
+
+    <!-- FAQ Section -->
+    <section class="my-5 pt-4">
+      <h2 class="text-center mb-4">Finding the Best VPN in 2025: FAQs</h2>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              What is the best VPN overall?
+            </button>
+          </h3>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              The <strong>best VPN</strong> depends on your primary need. For streaming, you need a VPN with fast servers and a proven ability to unblock platforms. For privacy, the <strong>best VPN service</strong> is one with a strict, audited no-logs policy and a headquarters in a privacy-friendly jurisdiction. Our community-voted list helps you see which <strong>VPN providers</strong> are most trusted by users like you for a balance of speed, security, and reliability.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              What is the best free VPN?
+            </button>
+          </h3>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Finding the <strong>best free VPN</strong> is challenging, as many have security risks or severe limitations. The <strong>best free VPN for PC</strong>, Mac, or mobile is typically a "freemium" service from a reputable paid provider. These offer limited data or servers but maintain a strict no-logs policy. Use our "Best Free VPN" filter above to see community-ranked options. According to many <strong>Reddit</strong> users, the best free VPNs are those that don't sell your data.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              What is the best VPN for streaming and torrenting?
+            </button>
+          </h3>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              The <strong>best VPN for streaming</strong> is one with high-speed servers and dedicated IPs that can reliably unblock geo-restricted content on platforms like Netflix. For P2P, the <strong>best VPN for torrenting</strong> offers features like a kill switch and port forwarding, combined with a proven no-logs policy to protect your privacy. Check our leaderboard for services that users rank highly for these specific tasks.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <?php include __DIR__ . '/navigation/footer.php'; ?>

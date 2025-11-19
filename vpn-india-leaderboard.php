@@ -43,26 +43,73 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Best VPN in India 2025: Find the Fastest & Most Secure</title>
+    <title>Best VPN in India (2025): Find the Fastest & Most Secure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Looking for the best VPN in India? Compare the fastest VPNs for streaming, gaming, and privacy on our live, community-voted leaderboard for 2025.">
+    <meta name="description" content="Looking for the best VPN in India? Compare the fastest VPN services for streaming, gaming, and privacy on our live, community-voted leaderboard for 2025.">
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
     <meta name="robots" content="index,follow">
-    <meta name="keywords" content="best vpn in india, best vpn india, vpn for india, fastest vpn india, secure vpn india, vpn ranking india">
+    <meta name="keywords" content="best vpn in india, best vpn india, vpn for india, fastest vpn india, best free vpn for android, best vpn for streaming, vpn ranking india">
     <meta property="og:title" content="Best VPN in India 2025: Community-Voted Rankings">
     <meta property="og:description" content="Find the best and fastest VPN in India. Our real-time leaderboard is powered by community votes.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
     <meta property="og:image" content="<?= htmlspecialchars((isset($_SERVER['HTTPS'])?'https':'http').'://'.$_SERVER['HTTP_HOST']) ?>/og-image.jpg">
-    <script type="application/ld+json">
-    {
-
-        "@context":"https://schema.org",
-        "@type":"WebSite",
-        "name":"VPN Leaderboard - India",
-        "url":"<?= htmlspecialchars($canonical) ?>",
-        "about":"Community-powered rankings of the best VPN providers for India"
-    }
+    <script type="application/ld+json"> 
+    [
+      {
+          "@context":"https://schema.org",
+          "@type":"WebPage",
+          "name":"Best VPN in India (2025): Find the Fastest & Most Secure",
+          "url":"<?= htmlspecialchars($canonical) ?>",
+          "description":"Looking for the best VPN in India? Compare the fastest VPN services for streaming, gaming, and privacy on our live, community-voted leaderboard for 2025."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.vpnleaderboard.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Best VPN in India",
+            "item": "<?= htmlspecialchars($canonical) ?>"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Best VPNs for India Leaderboard",
+        "description": "A community-voted list of the best VPN services for India in 2025.",
+        "itemListElement": [
+          <?php foreach ($vpns as $index => $vpn): ?>
+          {
+            "@type": "ListItem",
+            "position": <?= (int)$vpn['true_rank'] ?>,
+            "item": {
+              "@type": "Service",
+              "name": "<?= htmlspecialchars($vpn['name']) ?>",
+              "url": "<?= htmlspecialchars($vpn['website_url']) ?>",
+              "provider": {
+                "@type": "Organization",
+                "name": "<?= htmlspecialchars($vpn['name']) ?>"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "<?= (int)$vpn['score'] ?>",
+                "reviewCount": "<?= (int)$v['upvotes'] + (int)$v['downvotes'] ?>"
+              }
+            }
+          }<?= $index < count($vpns) - 1 ? ',' : '' ?>
+          <?php endforeach; ?>
+        ]
+      }
+    ]
   </script>
   <link rel="icon" href="/assets/site-icon.png" type="image/png">
   <!-- Bootstrap 5 (CDN) -->
@@ -83,15 +130,15 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
   <!-- HERO -->
   <header class="py-5 hero">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Best VPN in India: 2025 Community Ranking</h1>
-      <p class="text-secondary" style="font-size: 1.1rem;">Because Security Matters, You Matters.</p>
+      <h1 class="display-5 fw-bold">Best VPN in India (2025 Community Ranking)</h1>
+      <p class="text-secondary" style="font-size: 1.1rem;">Find the <strong>best VPN service</strong> for India. Voted on by real users for speed, streaming, and security.</p>
       <div class="d-flex flex-wrap gap-2 justify-content-center">
-        <span class="chip hero-chip" data-action="sort" data-value="price">Low-Cost VPNs</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for Windows PC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for MAC</span>
-        <span class="chip hero-chip" data-action="filter" data-value="Linux">Best VPN for Linux</span>
-        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN</span>
-        <span class="chip hero-chip" data-action="filter" data-value="mobile">VPN for Android & iOS</span>
+        <span class="chip hero-chip" data-action="sort" data-value="price">Best Cheap VPN</span>
+        <span class="chip hero-chip" data-action="filter" data-value="free">Best Free VPN for India</span>
+        <span class="chip hero-chip" data-action="filter" data-value="Windows">Best VPN for PC</span>
+        <span class="chip hero-chip" data-action="filter" data-value="macOS">Best VPN for Mac</span>
+        <span class="chip hero-chip" data-action="filter" data-value="mobile">Best VPN for Android & iPhone</span>
+        <a href="/reviews" class="chip hero-chip" style="text-decoration: none;">In-Depth Reviews</a>
       </div>
     </div>
   </header>
@@ -226,7 +273,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
     </div>
 
     <p class="mt-4 text-secondary small">
-      This leaderboard helps you find the <strong>best VPN in India</strong> based on real user votes. The rankings are calculated by subtracting downvotes from upvotes and update instantly. Help our community find the <strong>fastest VPN in India</strong> for streaming, gaming, and privacy by casting your vote above.
+      This leaderboard helps you find the <strong>best VPN in India</strong> based on real user votes. The rankings are calculated by subtracting downvotes from upvotes and update instantly. Help our community find the <strong>fastest VPN service in India</strong> for streaming, gaming, and privacy by casting your vote.
     </p>
 
     <div class="p-3 mt-4 rounded" style="background-color: var(--chip-bg); border: 1px solid var(--border-color);" role="alert">
@@ -238,10 +285,10 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
 
     <!-- FAQ Section -->
     <section class="my-5 pt-4">
-      <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+      <h2 class="text-center mb-4">Best VPN for India: Frequently Asked Questions</h2>
       <div class="accordion" id="faqAccordion">
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingOne">
+          <h3 class="accordion-header" id="headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Which VPN is best in India?
             </button>
@@ -253,9 +300,9 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
           </div>
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingTwo">
+          <h3 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: var(--background-secondary); color: var(--text-primary);">
-              Which is the best VPN for Android?
+              Which is the best free VPN for Android in India?
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
@@ -265,7 +312,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
           </div>
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
-          <h2 class="accordion-header" id="headingThree">
+          <h3 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: var(--background-secondary); color: var(--text-primary);">
               Which is the best free VPN?
             </button>
