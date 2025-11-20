@@ -1,4 +1,4 @@
-<?php
+do<?php
 require_once __DIR__ . '/db.php';
 
 $user_id = ensure_user_cookie();
@@ -102,7 +102,7 @@ $canonical = 'https://www.vpnleaderboard.com/vpn-india-leaderboard';
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "<?= (int)$vpn['score'] ?>",
-                "reviewCount": "<?= (int)$v['upvotes'] + (int)$v['downvotes'] ?>"
+                "reviewCount": "<?= (int)$vpn['upvotes'] + (int)$vpn['downvotes'] ?>"
               }
             }
           }<?= $index < count($vpns) - 1 ? ',' : '' ?>
