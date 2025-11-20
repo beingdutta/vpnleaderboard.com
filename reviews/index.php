@@ -31,6 +31,16 @@ $canonical = 'https://www.vpnleaderboard.com/reviews/';
         <p class="lead mb-5 text-center text-secondary">We go hands-on to test speed, security, and streaming so you can choose with confidence. No marketing fluff, just the facts.</p>
         
         <?php
+          // Helper function to truncate text to a specific word count
+          function truncate_words($text, $limit) {
+            if (str_word_count($text, 0) > $limit) {
+                $words = str_word_count($text, 2);
+                $pos = array_keys($words);
+                $text = substr($text, 0, $pos[$limit]) . '...';
+            }
+            return $text;
+          }
+
           $files = glob(__DIR__ . '/*.php');
           $reviews = [];
 
@@ -93,7 +103,7 @@ $canonical = 'https://www.vpnleaderboard.com/reviews/';
               <div class="col-md-5 d-flex align-items-center">
                 <div class="card-body">
                   <h3 class="card-title mb-2"><a href="/reviews/<?= htmlspecialchars($featured_review['slug']) ?>" class="text-decoration-none stretched-link"><?= htmlspecialchars($featured_review['title']) ?></a></h3>
-                  <p class="card-text text-secondary d-none d-md-block"><?= htmlspecialchars($featured_review['excerpt'] ?? '') ?></p>
+                  <p class="card-text text-secondary d-none d-md-block"><?= htmlspecialchars(truncate_words($featured_review['excerpt'] ?? '', 14)) ?></p>
                   <p class="card-text mt-3"><small class="text-secondary">Updated on <?= htmlspecialchars($featured_review['date']) ?></small></p>
                 </div>
               </div>
@@ -110,7 +120,7 @@ $canonical = 'https://www.vpnleaderboard.com/reviews/';
                 <a href="/reviews/<?= htmlspecialchars($review['slug']) ?>"><img src="<?= htmlspecialchars($review['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($review['title']) ?>" loading="lazy"></a>
                 <div class="card-body d-flex flex-column p-3">
                   <h5 class="card-title mb-2"><a href="/reviews/<?= htmlspecialchars($review['slug']) ?>" class="text-decoration-none stretched-link"><?= htmlspecialchars($review['title']) ?></a></h5>
-                  <p class="card-text text-secondary small flex-grow-1"><?= htmlspecialchars($review['excerpt'] ?? '') ?></p>
+                  <p class="card-text text-secondary small flex-grow-1"><?= htmlspecialchars(truncate_words($review['excerpt'] ?? '', 14)) ?></p>
                   <p class="card-text mt-auto pt-2"><small class="text-secondary">Updated on <?= htmlspecialchars($review['date']) ?></small></p>
                 </div>
               </div>

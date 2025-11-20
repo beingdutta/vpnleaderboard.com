@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>PrivateVPN Review <?php echo date("Y"); ?> – Affordable, Streaming-Focused, Transparent | VPN Leaderboard</title>
+    <title>PrivateVPN Review <?= date("Y") ?> – Affordable, Streaming-Focused, Transparent | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="An in-depth, human-written review of PrivateVPN: performance, privacy, streaming support, pros and cons, and whether it’s right for you."
     />
-    <meta property="og:title" content="PrivateVPN Review <?php echo date('Y'); ?> – Affordable, Streaming-Focused, Transparent" />
+    <meta property="og:title" content="PrivateVPN Review <?= date('Y') ?> – Affordable, Streaming-Focused, Transparent" />
     <meta
       property="og:description"
       content="PrivateVPN aims to combine simplicity and streaming support. We assess how it performs in practice and what trade-offs to expect."
@@ -43,8 +43,8 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">PrivateVPN Quick Review <?php echo date("Y"); ?></h1>
-          <p class="lead">Last updated on <?php echo date("F j, Y"); ?></p>
+          <h1 class="display-4 fw-bold">PrivateVPN Quick Review <?= date("Y") ?></h1>
+          <p class="lead">Last updated on <?= date("F j, Y") ?></p>
         </div>
       </div>
     </header>

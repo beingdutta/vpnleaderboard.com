@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Astrill VPN Review <?php echo date("Y"); ?> – Power, Speed, and Plenty of Features | VPN Leaderboard</title>
+    <title>Astrill VPN Review <?= date("Y") ?> – Power, Speed, and Plenty of Features | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A human-written review of Astrill VPN covering performance, privacy stance, standout features, and everyday usability for <?php echo date('Y'); ?>."
+      content="A human-written review of Astrill VPN covering performance, privacy stance, standout features, and everyday usability for <?= date('Y') ?>."
     />
-    <meta property="og:title" content="Astrill VPN Review <?php echo date('Y'); ?> – Power, Speed, and Plenty of Features" />
+    <meta property="og:title" content="Astrill VPN Review <?= date('Y') ?> – Power, Speed, and Plenty of Features" />
     <meta
       property="og:description"
       content="Astrill VPN is known for speed and advanced options. We look at real-world performance, privacy details, and who will benefit most."
@@ -44,8 +44,8 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">Astrill VPN Quick Review <?php echo date("Y"); ?></h1>
-          <p class="lead">Last updated on <?php echo date("F j, Y"); ?></p>
+          <h1 class="display-4 fw-bold">Astrill VPN Quick Review <?= date("Y") ?></h1>
+          <p class="lead">Last updated on <?= date("F j, Y") ?></p>
         </div>
       </div>
     </header>

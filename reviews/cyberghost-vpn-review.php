@@ -44,7 +44,7 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">CyberGhost VPN Quick Review <?php echo date("Y"); ?></h1>
+          <h1 class="display-4 fw-bold">CyberGhost VPN Quick Review <?= date("Y") ?></h1>
           <p class="lead">Last updated on September 23, 2025</p>
         </div>
       </div>

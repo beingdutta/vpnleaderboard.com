@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Windscribe VPN Review <?php echo date("Y"); ?> – Feature-Rich & Generous Free Plan | VPN Leaderboard</title>
+    <title>Windscribe VPN Review <?= date("Y") ?> – Feature-Rich & Generous Free Plan | VPN Leaderboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="An honest, human review of Windscribe VPN: its features, privacy policy, performance, free tier, and whether it’s a solid pick for 2025."
     />
-    <meta property="og:title" content="Windscribe VPN Review <?php echo date('Y'); ?> – Feature-Rich & Generous Free Plan" />
+    <meta property="og:title" content="Windscribe VPN Review <?= date('Y') ?> – Feature-Rich & Generous Free Plan" />
     <meta
       property="og:description"
       content="Windscribe offers a powerful mix: generous free plan, advanced privacy tools and cross-platform apps. Read our take on strengths and trade-offs."
@@ -42,8 +42,8 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">Windscribe VPN Quick Review <?php echo date("Y"); ?></h1>
-          <p class="lead">Last updated on <?php echo date("F j, Y"); ?></p>
+          <h1 class="display-4 fw-bold">Windscribe VPN Quick Review <?= date("Y") ?></h1>
+          <p class="lead">Last updated on <?= date("F j, Y") ?></p>
         </div>
       </div>
     </header>

@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>TorGuard VPN Review <?php echo date("Y"); ?> | A Power User's Paradise</title>
+    <title>TorGuard VPN Review <?= date("Y") ?> | A Power User's Paradise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="TorGuard VPN review: A deep dive into its P2P torrenting with port forwarding, dedicated IP for streaming, and the risks of its US (Five Eyes) jurisdiction."
     />
-    <meta property="og:title" content="TorGuard VPN Review <?php echo date("Y"); ?> | A Power User's Paradise" />
+    <meta property="og:title" content="TorGuard VPN Review <?= date("Y") ?> | A Power User's Paradise" />
     <meta
       property="og:description"
       content="TorGuard VPN review: A deep dive into its P2P torrenting with port forwarding, dedicated IP for streaming, and the risks of its US (Five Eyes) jurisdiction."
@@ -44,7 +44,7 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">TorGuard VPN Global Review <?php echo date("Y"); ?></h1>
+          <h1 class="display-4 fw-bold">TorGuard VPN Global Review <?= date("Y") ?></h1>
           <p class="lead">Last updated on October 19, 2025</p>
         </div>
       </div>

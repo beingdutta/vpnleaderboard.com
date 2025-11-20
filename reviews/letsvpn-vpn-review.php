@@ -47,8 +47,8 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">LetsVPN Quick Review <?php echo date("Y"); ?></h1>
-          <p class="lead">Last updated on <?php echo date("F j, Y"); ?></p>
+          <h1 class="display-4 fw-bold">LetsVPN Quick Review <?= date("Y") ?></h1>
+          <p class="lead">Last updated on <?= date("F j, Y") ?></p>
         </div>
       </div>
     </header>

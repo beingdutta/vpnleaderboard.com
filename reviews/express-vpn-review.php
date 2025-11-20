@@ -44,7 +44,7 @@
     >
       <div class="article-hero-overlay">
         <div class="container">
-          <h1 class="display-4 fw-bold">ExpressVPN Quick Review <?php echo date("Y"); ?></h1>
+          <h1 class="display-4 fw-bold">ExpressVPN Quick Review <?= date("Y") ?></h1>
           <p class="lead">Last updated on September 12, 2025</p>
         </div>
       </div>
