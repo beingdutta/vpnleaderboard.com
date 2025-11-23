@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A comprehensive technical review of Mullvad VPN. We analyze its account anonymity, DAITA traffic obfuscation, quantum-resistant encryption, and performance in restrictive regions like China."
+      content="A deep technical review of Mullvad VPN. We test its anonymous accounts, DAITA obfuscation, post-quantum crypto, and its performance for use in China."
     />
     <meta 
       name="keywords" 
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Mullvad VPN Review <?= date('Y') ?> | The Privacy Purist's Gold Standard" />
     <meta 
       property="og:description"
-      content="Mullvad VPN isn't for everyone. It ditches affiliate marketing and streaming promises for pure, unadulterated privacy. Read our deep dive into its DAITA tech, China performance, and Linux mastery."
+      content="Mullvad VPN isn't for everyone. It ditches marketing for pure privacy. Read our deep dive into its DAITA tech, China performance, and Linux mastery."
     />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/mullvad-vpn-review" /> 
