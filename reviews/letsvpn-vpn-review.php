@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="An exhaustive 3000+ word technical review of LetsVPN. We analyze its proprietary obfuscation technology, its mysterious origins, and answer the ultimate question: does LetsVPN work in China in 2025?"
+      content="An exhaustive technical review of LetsVPN. We analyze its proprietary obfuscation technology, its mysterious origins, and answer the ultimate question: does LetsVPN work in China in 2025?"
     />
     <meta 
       name="keywords" 
