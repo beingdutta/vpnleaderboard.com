@@ -111,7 +111,7 @@ $canonical = 'https://www.vpnleaderboard.com/reviews/';
         </div>
         <?php endif; ?>
 
-        <h2 class="section-title"><span>Top Reviews</span></h2>
+        <h2 class="section-title mt-5"><span>Top Reviews</span></h2>
 
         <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
           <?php foreach ($top_reviews as $review): ?>
@@ -129,7 +129,7 @@ $canonical = 'https://www.vpnleaderboard.com/reviews/';
         </div>
 
         <?php if (!empty($reviews)): ?>
-        <h2 class="section-title"><span>From The Archives</span></h2>
+        <h2 class="section-title mt-5"><span>From The Archives</span></h2>
         <div class="list-group">
           <?php foreach ($reviews as $review): ?>
           <a href="/reviews/<?= htmlspecialchars($review['slug']) ?>" class="list-group-item list-group-item-action d-flex gap-3 py-3" style="background: var(--background-secondary); border-color: var(--border-color);">

@@ -286,17 +286,134 @@ $canonical = 'https://www.vpnleaderboard.com/';
       </div>
     </div>
 
+    <!-- How It Works Section -->
+    <section class="py-5 mt-4 rounded" style="background-color: var(--background-secondary); border: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title"><span>How Our Rankings Work</span></h2>
+          <p class="text-secondary">Our leaderboard is built on transparency and community trust.</p>
+        </div>
+        <div class="row text-center g-4">
+          <div class="col-md-4">
+            <div class="mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-people-fill text-primary" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+              </svg>
+            </div>
+            <h4 class="h5">Community-Driven</h4>
+            <p class="text-secondary">Scores are determined by real user upvotes and downvotes, not by us. The most helpful VPNs naturally rise to the top.</p>
+          </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-card-checklist text-primary" viewBox="0 0 16 16">
+                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+              </svg>
+            </div>
+            <h4 class="h5">Objective Data</h4>
+            <p class="text-secondary">We complement user scores with factual data points on pricing, features, server counts, and logging policies so you have the full picture.</p>
+          </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-pencil-square text-primary" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+              </svg>
+            </div>
+            <h4 class="h5">Expert Analysis</h4>
+            <p class="text-secondary">Our team provides in-depth reviews and guides to explain complex topics, helping you understand what matters most in a VPN.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Content Section -->    
+    <section class="my-5 pt-4">
+      <div class="text-center mb-5">
+        <h2 class="section-title"><span>From Our Review Desk</span></h2>
+        <p class="text-secondary">Explore our latest hands-on reviews and guides.</p>
+      </div>
+      <?php
+        // Helper function to truncate text to a specific word count
+        function truncate_words($text, $limit) {
+          if (str_word_count($text, 0) > $limit) {
+              $words = str_word_count($text, 2);
+              $pos = array_keys($words);
+              $text = substr($text, 0, $pos[$limit]) . '...';
+          }
+          return $text;
+        }
+
+        // Fetch and combine articles from reviews and blogs
+        $review_files = glob(__DIR__ . '/reviews/*.php');
+        $blog_files = glob(__DIR__ . '/blogs/*.php');
+        $all_articles = [];
+
+        foreach (array_merge($review_files, $blog_files) as $file) {
+            if (basename($file) === 'index.php') continue;
+
+            $content = file_get_contents($file);
+            $article_data = ['title' => '', 'excerpt' => '', 'image' => '', 'date' => '', 'url' => ''];
+
+            // Check if the file uses the new PHP $article array structure
+            if (strpos($content, '$article = [') !== false) {
+                // This logic is for files like article.php that define a PHP array
+                if (preg_match("/'title'\s*=>\s*'(.*?)'/", $content, $m)) $article_data['title'] = $m[1];
+                if (preg_match("/'excerpt'\s*=>\s*'(.*?)'/", $content, $m)) $article_data['excerpt'] = $m[1];
+                if (preg_match("/'image'\s*=>\s*'(.*?)'/", $content, $m)) $article_data['image'] = $m[1]; // Corrected key from 'image_path' to 'image'
+                if (preg_match("/'date'\s*=>\s*'(.*?)'/", $content, $m)) $article_data['date'] = $m[1];
+                else $article_data['date'] = date("F j, Y", filemtime($file));
+            } else {
+                // Fallback for files that use HTML tags (reviews.php, blogs.php, etc.)
+                if (preg_match('/<h2 class="card-title[^>]*>(.*?)<\/h2>/is', $content, $m)) { // For carousel items
+                    $article_data['title'] = $m[1];
+                } else if (preg_match('/<h5 class="card-title[^>]*>.*?<a[^>]*>(.*?)<\/a>.*?<\/h5>/is', $content, $m)) { // For grid items
+                    $article_data['title'] = $m[1];
+                }
+                if (preg_match('/<p class="card-text text-secondary[^>]*>(.*?)<\/p>/is', $content, $m)) $article_data['excerpt'] = $m[1];
+                if (preg_match('/<img src="([^"]+)"/is', $content, $m)) $article_data['image'] = $m[1];
+                if (preg_match('/<small class="text-secondary">.*?on (.*?)<\/small>/is', $content, $m)) $article_data['date'] = $m[1];
+                else if (preg_match('/<p class="lead">Last updated on (.*?)<\/p>/', $content, $m)) $article_data['date'] = $m[1];
+                else $article_data['date'] = date("F j, Y", filemtime($file));
+            }
+
+            $article_data['title'] = trim($article_data['title']);
+            $article_data['url'] = '/' . str_replace(str_replace('\\', '/', __DIR__), '', str_replace('\\', '/', pathinfo($file, PATHINFO_DIRNAME))) . '/' . pathinfo($file, PATHINFO_FILENAME);
+
+            if (!empty($article_data['title'])) $all_articles[] = $article_data;
+        }
+
+        shuffle($all_articles);
+        $featured_articles = array_slice($all_articles, 0, 6);
+      ?>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <?php foreach ($featured_articles as $article): ?>
+          <div class="col">
+            <div class="card article-card-vertical h-100">
+              <a href="<?= htmlspecialchars($article['url']) ?>"><img src="<?= htmlspecialchars($article['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($article['title']) ?>" loading="lazy"></a>
+              <div class="card-body d-flex flex-column p-3">
+                <h5 class="card-title mb-2"><a href="<?= htmlspecialchars($article['url']) ?>" class="text-decoration-none stretched-link"><?= htmlspecialchars($article['title']) ?></a></h5>
+                <p class="card-text text-secondary small flex-grow-1"><?= htmlspecialchars(truncate_words($article['excerpt'] ?? '', 20)) ?></p>
+                <p class="card-text mt-auto pt-2"><small class="text-secondary">Updated on <?= htmlspecialchars($article['date']) ?></small></p>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="my-5 pt-4">
       <h2 class="text-center mb-4">Finding the Best VPN in 2025: FAQs</h2>
       <div class="accordion" id="faqAccordion">
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
           <h3 class="accordion-header" id="headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color: var(--background-secondary); color: var(--text-primary);">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaqOne" aria-expanded="false" aria-controls="collapseFaqOne" style="background-color: var(--background-secondary); color: var(--text-primary);">
               What is the best VPN overall?
             </button>
           </h3>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+          <div id="collapseFaqOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
             <div class="accordion-body">
               The <strong>best VPN</strong> depends on your primary need. For streaming, you need a VPN with fast servers and a proven ability to unblock platforms. For privacy, the <strong>best VPN service</strong> is one with a strict, audited no-logs policy and a headquarters in a privacy-friendly jurisdiction. Our community-voted list helps you see which <strong>VPN providers</strong> are most trusted by users like you for a balance of speed, security, and reliability.
             </div>
@@ -304,11 +421,11 @@ $canonical = 'https://www.vpnleaderboard.com/';
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
           <h3 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: var(--background-secondary); color: var(--text-primary);">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaqTwo" aria-expanded="false" aria-controls="collapseFaqTwo" style="background-color: var(--background-secondary); color: var(--text-primary);">
               What is the best free VPN?
             </button>
           </h3>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+          <div id="collapseFaqTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
             <div class="accordion-body">
               Finding the <strong>best free VPN</strong> is challenging, as many have security risks or severe limitations. The <strong>best free VPN for PC</strong>, Mac, or mobile is typically a "freemium" service from a reputable paid provider. These offer limited data or servers but maintain a strict no-logs policy. Use our "Best Free VPN" filter above to see community-ranked options. According to many <strong>Reddit</strong> users, the best free VPNs are those that don't sell your data.
             </div>
@@ -316,13 +433,37 @@ $canonical = 'https://www.vpnleaderboard.com/';
         </div>
         <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
           <h3 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: var(--background-secondary); color: var(--text-primary);">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaqThree" aria-expanded="false" aria-controls="collapseFaqThree" style="background-color: var(--background-secondary); color: var(--text-primary);">
               What is the best VPN for streaming and torrenting?
             </button>
           </h3>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+          <div id="collapseFaqThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
             <div class="accordion-body">
               The <strong>best VPN for streaming</strong> is one with high-speed servers and dedicated IPs that can reliably unblock geo-restricted content on platforms like Netflix. For P2P, the <strong>best VPN for torrenting</strong> offers features like a kill switch and port forwarding, combined with a proven no-logs policy to protect your privacy. Check our leaderboard for services that users rank highly for these specific tasks.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaqFour" aria-expanded="false" aria-controls="collapseFaqFour" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              What should I look for when choosing a VPN?
+            </button>
+          </h3>
+          <div id="collapseFaqFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Key factors include a strict <strong>no-logs policy</strong> (preferably independently audited), strong encryption (AES-256), modern protocols (like WireGuard or Lightway), and a kill switch. Also consider the server locations you need, the number of simultaneous connections allowed, and the quality of customer support.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" style="background-color: var(--background-secondary); border-color: var(--border-color);">
+          <h3 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaqFive" aria-expanded="false" aria-controls="collapseFaqFive" style="background-color: var(--background-secondary); color: var(--text-primary);">
+              Why does server location matter?
+            </button>
+          </h3>
+          <div id="collapseFaqFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Server location is crucial for two reasons: speed and content access. For the best speeds, connect to a server that is geographically close to you. To access content from a specific country (like BBC iPlayer in the UK or Netflix Japan), you must connect to a server located in that country.
             </div>
           </div>
         </div>
