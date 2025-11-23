@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A comprehensive technical review of Private Internet Access (PIA) VPN. We analyze its open-source code, port forwarding for torrenting, WireGuard speeds, and its unique court-proven privacy record."
+      content="Our deep-dive review of Private Internet Access (PIA) VPN analyzes its open-source code, port forwarding for torrenting, and its unique court-proven privacy."
     />
     <meta 
       name="keywords" 
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Private Internet Access (PIA) VPN Review <?= date('Y') ?> | The Technical Standard" />
     <meta 
       property="og:description"
-      content="PIA VPN is known for transparency (open-source apps), verified no-logs audits by Deloitte, speedy WireGuard performance, and advanced port forwarding. Here is the deep dive."
+      content="PIA VPN is known for its open-source apps, verified no-logs audits, fast WireGuard performance, and advanced port forwarding. Here is our deep dive."
     />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://www.vpnleaderboard.com/reviews/private-internet-access-vpn-review" /> 
