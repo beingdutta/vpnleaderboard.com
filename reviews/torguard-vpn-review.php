@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A comprehensive technical review of TorGuard VPN for 2025. We analyze its port forwarding capabilities, dedicated IP streaming performance, and why it remains the top choice for torrenters despite its US jurisdiction."
+      content="Our 2025 TorGuard VPN review analyzes its port forwarding, dedicated IP streaming, and why it's the top choice for torrenting, despite its US jurisdiction."
     />
     <meta 
       name="keywords" 
